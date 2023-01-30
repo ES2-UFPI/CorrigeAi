@@ -1,9 +1,9 @@
-import { Layout } from "./components/Layout";
+import { CreateTaskOrExam } from "./Pages/CreateTaskOrExam"; 
 
 function App() {
   return (
     <div className="App">
-      <Layout />
+      <CreateTaskOrExam />
     </div>
   );
 }
