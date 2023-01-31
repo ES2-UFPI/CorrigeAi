@@ -1,4 +1,4 @@
-import { Form } from "./Styles"
+import { Form } from "./styles"
 
 interface Props {
   typeAvaliation : string
