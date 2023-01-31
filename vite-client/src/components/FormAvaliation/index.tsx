@@ -1,11 +1,12 @@
 import { Form } from "./styles"
 
-interface Props {
+import { CreateQuestions } from "../../Pages/CreateQuestions"
+
+export interface Props {
   typeAvaliation : string
-  selectValue: string
 }
 
-export function FormAvaliation( {typeAvaliation, selectValue} : Props) {
+export function FormAvaliation( {typeAvaliation} : Props) {
   return (
     <>
       {
@@ -35,6 +36,8 @@ export function FormAvaliation( {typeAvaliation, selectValue} : Props) {
             <input type="number" name="points" id="points" />
             <br />
             <button type="submit">Iniciar questões</button>
+            {/* Redirecionar para o componente que vai gerar as questões*/}
+            <CreateQuestions typeAvaliation={typeAvaliation}/>
           </Form>
         :
         // Formulario para criar tarefa 
@@ -55,6 +58,7 @@ export function FormAvaliation( {typeAvaliation, selectValue} : Props) {
             <br />
 
             <button type="submit">Iniciar questões</button>
+            <CreateQuestions typeAvaliation={typeAvaliation}/>
           </Form>
       } 
     </>

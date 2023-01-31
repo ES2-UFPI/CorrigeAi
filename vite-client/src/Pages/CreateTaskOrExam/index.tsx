@@ -9,11 +9,13 @@ import { CreateTaskOrExamStyled } from './styles'
 
 export function CreateTaskOrExam() {
   const [selectValue, setSelectValue] = useState('')
+  
   const list = [
     { id: 'empty', name: 'Nenhuma' },
     { id: 'exam', name: 'Prova' },
     { id: 'task', name: 'Tarefa' }
   ]
+
   return (
     <Wrapper className="Wrapper">
       <CreateTaskOrExamStyled className="TaskOrExam">
@@ -35,7 +37,6 @@ export function CreateTaskOrExam() {
           selectValue !== 'empty' ? 
             <FormAvaliation 
               typeAvaliation={selectValue}
-              selectValue={selectValue}
             /> 
             : 
             <h2>Escolha uma opção</h2>
