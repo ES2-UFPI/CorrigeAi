@@ -1,27 +1,42 @@
 import { useState } from "react"
 
-import { Form } from "../../components/FormAvaliation/styles"
+// import { uuid } from "uuidv4";
 
 import { Props } from "../../components/FormAvaliation"
-import { GenerateQuestions } from "../../components/GenerateQuestions"
+import { GenerateQuestions } from "../../components/GenerateQuestions";
 
 export function CreateQuestions({typeAvaliation} : Props) {
-  const [addQuestion, setAddQuestion] = useState(false)
+  //Variaveis para lidar com gerador de questões
   const [selectTypeQuestion, setSelectTypeQuestion] = useState('none')
   const [description, setDescription] = useState('')
   const [points, setPoints] = useState(0)
 
-  const list = [
-    {id: 'none',       type: 'Selecione uma opção'},
-    {id: 'trueFalse',  type: 'Verdadeira ou Falsa '},
-    {id: 'subjective', type: 'Subjetiva'},
-    {id: 'objective',  type: 'Objetiva'}
-  ]
+  // Armazena alternativas das questões 'trueFalse'
+  const [contQuestions, setContQuestions] = useState(0)
+  const [questions, setQuestions] = useState([{}])
 
   function handleNewQuestion() {
-    setAddQuestion(true)
+    //Adicionando nova questão
+    if (contQuestions > 0 ){
+      setContQuestions(contQuestions + 1); 
+      setQuestions(current => [...current, {
+        numberQuestion: contQuestions + 1,
+        typeQuestion: '',
+        description: '',
+        points: 0
+      }]);
+    } else {
+      //Substitue o primeiro elemento, pois o state precisa ser inicializado
+      setContQuestions(contQuestions + 1); 
+      setQuestions([{
+        numberQuestion: contQuestions + 1,
+        typeQuestion: '',
+        description: '',
+        points: 0
+      }])
+    }
   }
-  console.log(description)
+
   return (
     <div>
       <h3>Criando questões da {typeAvaliation === 'exam' ? 'prova' : 'Atividade'}</h3>
@@ -29,43 +44,15 @@ export function CreateQuestions({typeAvaliation} : Props) {
         Adicionar questão
       </button>
       { 
-        addQuestion ? 
-          <Form>
-            <label htmlFor="typeQuestion">Qual tipo da questão: </label>
-            <select 
-              name="typeQuestion" id="typeQuestion"
-              value={selectTypeQuestion}
-              onChange={ e => setSelectTypeQuestion( e.target.value ) }
-            >
-              {list.map( (option, i) => (
-                <option key={i} value={option.id}>{option.type}</option>
-              ))}
-            </select>
-            <br />
-
-            <label htmlFor="description">Qual enunciado da questão: </label>
-            <br />
-            <textarea 
-              name="postContent" 
-              rows={4} 
-              cols={40} 
-              value={description} 
-              onChange={ e => setDescription( e.target.value ) }
-            />
-
-            <br />
-            <label htmlFor="points">Pontuação da questão: </label>
-            <input 
-              value={points}
-              onChange={ e => setPoints( e.target.valueAsNumber ) } 
-              type="number" 
-            />
-            <GenerateQuestions 
-              description={description} 
-              typeQuestion={selectTypeQuestion}
-              points={points} 
-            />
-          </Form> 
+        contQuestions > 0 ? 
+          // Renderizando elementos do array dentro do component de quetões
+          <GenerateQuestions 
+            description={description}
+            setDescription={setDescription}
+            setPoints={setPoints}
+            typeQuestion={selectTypeQuestion}
+            setTypeQuestion={setSelectTypeQuestion}
+          />
           : 
           <p>Nehuma questão foi criada</p>
       }

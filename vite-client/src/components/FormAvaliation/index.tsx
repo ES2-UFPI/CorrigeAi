@@ -7,6 +7,10 @@ export interface Props {
 }
 
 export function FormAvaliation( {typeAvaliation} : Props) {
+  function handleSaveQuestion() {
+    console.log('helo')
+  }
+  
   return (
     <>
       {
@@ -35,8 +39,7 @@ export function FormAvaliation( {typeAvaliation} : Props) {
             <label htmlFor="points">Pontuação: </label>
             <input type="number" name="points" id="points" />
             <br />
-            <button type="submit">Iniciar questões</button>
-            {/* Redirecionar para o componente que vai gerar as questões*/}
+
             <CreateQuestions typeAvaliation={typeAvaliation}/>
           </Form>
         :
@@ -57,10 +60,12 @@ export function FormAvaliation( {typeAvaliation} : Props) {
             <input type="date" name="finalDateTask" id="finalDateTask" />              
             <br />
 
-            <button type="submit">Iniciar questões</button>
             <CreateQuestions typeAvaliation={typeAvaliation}/>
           </Form>
-      } 
+      }
+      <button onClick={handleSaveQuestion}>
+        Salvar questões
+      </button>
     </>
   )
 }
