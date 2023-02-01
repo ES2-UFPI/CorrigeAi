@@ -8,12 +8,14 @@ import { Wrapper } from '../../styles/Layout'
 import { CreateTaskOrExamStyled } from './styles'
 
 export function CreateTaskOrExam() {
-  const [selectValue, setSelectValue] = useState('')
+  const [selectValue, setSelectValue] = useState('none')
+  
   const list = [
-    { id: 'empty', name: 'Nenhuma' },
+    { id: 'none', name: 'Nenhuma' },
     { id: 'exam', name: 'Prova' },
     { id: 'task', name: 'Tarefa' }
   ]
+
   return (
     <Wrapper className="Wrapper">
       <CreateTaskOrExamStyled className="TaskOrExam">
@@ -32,10 +34,9 @@ export function CreateTaskOrExam() {
         </select>
         {/* Dependendo da escolha, vai gerar um formulario diferente */}
         { 
-          selectValue !== 'empty' ? 
+          selectValue !== 'none' ? 
             <FormAvaliation 
               typeAvaliation={selectValue}
-              selectValue={selectValue}
             /> 
             : 
             <h2>Escolha uma opção</h2>
