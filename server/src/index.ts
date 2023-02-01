@@ -1,11 +1,10 @@
-
-
-import { config } from 'dotenv'
-import cors from 'cors';
-config();
-
 import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
+import { config } from 'dotenv'
+config();
+
+import { Tarefa, Prova } from './model/Schemas';
 
 const app = express();
 mongoose.set('strictQuery', false);
@@ -18,12 +17,31 @@ app.use(
 );
 app.use(express.json());
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!');
+app.post('/criarTarefa', async (req: Request, res: Response) => {
+  const tarefa = new Tarefa({
+    tema: "novo teste tarefa",
+    dataInicio: new Date(),
+    dataFim: new Date(),
+    prazo: 20,
+  });
+  const criarTarefa = await tarefa.save();
+  res.send(criarTarefa);
 }); 
 
+app.post('/criarProva', async (req: Request, res: Response) => {
+  const prova = new Prova({
+    tema: "teste prova",
+    dataInicio: new Date(),
+    dataFim: new Date(),
+    prazo: 20,
+    pontos: Number,
 
-mongoose.connect(`${process.env.MONGO_URL}, { useNewUrlParser: true }`).then(() => {
+  });
+  const criarProva = await prova.save();
+  res.send(criarProva);
+}); 
+
+mongoose.connect(`${process.env.MONGO_URL}`).then(() => {
   console.log(`listening on port ${PORT}`);
   app.listen(PORT);
 });  
