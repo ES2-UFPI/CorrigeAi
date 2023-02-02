@@ -8,6 +8,5 @@ export const CreateTaskOrExamStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid red;
 `
 
