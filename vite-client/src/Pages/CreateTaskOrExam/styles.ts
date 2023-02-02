@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const CreateTaskOrExamStyled = styled.div`
   background: var(--twitter);
   width: 50%; 
-  padding: 10rem 10rem;
   height: 100vh;
+  padding: 10rem 10rem;
   display: flex;
   flex-direction: column;
   align-items: center;
