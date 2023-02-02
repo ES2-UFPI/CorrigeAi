@@ -35,10 +35,10 @@ app.post('/criarProva', async (req: Request, res: Response) => {
     dataFim: new Date(),
     prazo: 20,
     pontos: Number,
-
   });
   const criarProva = await prova.save();
   res.send(criarProva);
+  
 }); 
 
 mongoose.connect(`${process.env.MONGO_URL}`).then(() => {
