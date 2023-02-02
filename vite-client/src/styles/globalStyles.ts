@@ -25,10 +25,9 @@ export default createGlobalStyle `
   html, body, #root {
     max-height: 100vh;
     max-width: 100%;
-
-    width: 100%;
+    width: 100vw;
     height: 100%;
-    color: var(--white);
+    color: white;
     font-size: 1.6rem;
   }
 

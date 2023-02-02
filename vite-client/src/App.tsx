@@ -1,10 +1,11 @@
 import { CreateTaskOrExam } from "./Pages/CreateTaskOrExam"; 
-
+import { AppStyles } from "./styles"
+ 
 function App() {
   return (
-    <div className="App">
+    <AppStyles className="App">
       <CreateTaskOrExam />
-    </div>
+    </AppStyles>
   );
 }
 
