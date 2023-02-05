@@ -4,11 +4,11 @@ import { useState } from 'react'
 import { FormAvaliation } from '../../components/FormAvaliation'
 
 //Components de estilização
-import { Wrapper } from '../../styles/Layout'
 import { CreateTaskOrExamStyled } from './styles'
 
 export function CreateTaskOrExam() {
   const [selectValue, setSelectValue] = useState('none')
+
   
   const list = [
     { id: 'none', name: 'Nenhuma' },
@@ -17,7 +17,6 @@ export function CreateTaskOrExam() {
   ]
 
   return (
-    <Wrapper className="Wrapper">
       <CreateTaskOrExamStyled className="TaskOrExam">
         <label htmlFor="avaliation">Escolha a avaliação: </label>
         <select
@@ -42,6 +41,5 @@ export function CreateTaskOrExam() {
             <h2>Escolha uma opção</h2>
         }
       </CreateTaskOrExamStyled>
-    </Wrapper>
   )
 }
