@@ -38,7 +38,7 @@ export function CreateQuestions({typeAvaliation} : Props) {
   }
 
   return (
-    <div>
+    <div className="CreateQuestion">
       <h3>Criando questões da {typeAvaliation === 'exam' ? 'prova' : 'Atividade'}</h3>
       <button onClick={handleNewQuestion}>
         Adicionar questão
