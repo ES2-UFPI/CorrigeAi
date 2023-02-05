@@ -81,7 +81,7 @@ export function FormAvaliation( {typeAvaliation} : Props ) {
           </Form>
       }
       <button onClick={handleSaveQuestion}>
-        Salvar questões
+        Salvar prova
       </button>
     </>
   )
