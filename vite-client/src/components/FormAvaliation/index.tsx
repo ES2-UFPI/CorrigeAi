@@ -1,14 +1,25 @@
+import { useState } from 'react'
+
 import { Form } from "./styles"
 
 import { CreateQuestions } from "../../Pages/CreateQuestions"
+import { PropsQuestions } from '../GenerateQuestions'
 
 export interface Props {
   typeAvaliation : string
+  handleSaveQuestion?: () => void
 }
 
-export function FormAvaliation( {typeAvaliation} : Props) {
+export function FormAvaliation( {typeAvaliation} : Props ) {
+  // Array para armazenar todas questões
+  const [questions, setQuestions] = useState<PropsQuestions>(
+    { 
+      description: '',
+      typeQuestion: '',
+    })
+  
   function handleSaveQuestion() {
-    console.log('helo')
+    
   }
   
   return (
@@ -40,7 +51,10 @@ export function FormAvaliation( {typeAvaliation} : Props) {
             <input type="number" name="points" id="points" />
             <br />
 
-            <CreateQuestions typeAvaliation={typeAvaliation}/>
+            <CreateQuestions 
+              typeAvaliation={typeAvaliation}
+              handleSaveQuestion={handleSaveQuestion}
+            />
           </Form>
         :
         // Formulario para criar tarefa 
@@ -60,7 +74,10 @@ export function FormAvaliation( {typeAvaliation} : Props) {
             <input type="date" name="finalDateTask" id="finalDateTask" />              
             <br />
 
-            <CreateQuestions typeAvaliation={typeAvaliation}/>
+            <CreateQuestions 
+              typeAvaliation={typeAvaliation}
+              handleSaveQuestion={ handleSaveQuestion }
+            />
           </Form>
       }
       <button onClick={handleSaveQuestion}>
