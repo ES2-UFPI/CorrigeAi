@@ -1,14 +1,21 @@
+import { useState, useContext } from 'react'
+
 import { Form } from "./styles"
 
 import { CreateQuestions } from "../../Pages/CreateQuestions"
+import { PropsQuestions } from '../GenerateQuestions'
+import { ContextQuestions } from '../../context/contextQuestions'
 
 export interface Props {
   typeAvaliation : string
+  handleSaveQuestion?: () => void
 }
 
-export function FormAvaliation( {typeAvaliation} : Props) {
+export function FormAvaliation( {typeAvaliation} : Props ) {
+  // Array para armazenar todas questões
+
   function handleSaveQuestion() {
-    console.log('helo')
+    // Vai lidar com o armazenamento das questões no state
   }
   
   return (
@@ -16,7 +23,7 @@ export function FormAvaliation( {typeAvaliation} : Props) {
       {
         //Formulario para criar prova
         typeAvaliation === 'exam' ? 
-          <Form onSubmit={ e => e.preventDefault() } >
+          <Form className="Form-avaliation" onSubmit={ e => e.preventDefault() } >
             <legend>
               <h2>Cadastro de prova</h2>
             </legend>
@@ -40,7 +47,10 @@ export function FormAvaliation( {typeAvaliation} : Props) {
             <input type="number" name="points" id="points" />
             <br />
 
-            <CreateQuestions typeAvaliation={typeAvaliation}/>
+            <CreateQuestions 
+              typeAvaliation={typeAvaliation}
+              handleSaveQuestion={handleSaveQuestion}
+            />
           </Form>
         :
         // Formulario para criar tarefa 
@@ -60,7 +70,10 @@ export function FormAvaliation( {typeAvaliation} : Props) {
             <input type="date" name="finalDateTask" id="finalDateTask" />              
             <br />
 
-            <CreateQuestions typeAvaliation={typeAvaliation}/>
+            <CreateQuestions 
+              typeAvaliation={typeAvaliation}
+              handleSaveQuestion={ handleSaveQuestion }
+            />
           </Form>
       }
       <button onClick={handleSaveQuestion}>

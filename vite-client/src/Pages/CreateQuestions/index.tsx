@@ -1,9 +1,8 @@
-import { useState } from "react"
-
-// import { uuid } from "uuidv4";
+import { useState, useContext } from "react"
 
 import { Props } from "../../components/FormAvaliation"
 import { GenerateQuestions } from "../../components/GenerateQuestions";
+import { ContextQuestions } from "../../context/contextQuestions";
 
 export function CreateQuestions({typeAvaliation} : Props) {
   //Variaveis para lidar com gerador de questões
@@ -11,32 +10,9 @@ export function CreateQuestions({typeAvaliation} : Props) {
   const [description, setDescription] = useState('')
   const [points, setPoints] = useState(0)
 
-  // Armazena alternativas das questões 'trueFalse'
-  const [contQuestions, setContQuestions] = useState(0)
-  const [questions, setQuestions] = useState([{}])
-
-  function handleNewQuestion() {
-    //Adicionando nova questão
-    if (contQuestions > 0 ){
-      setContQuestions(contQuestions + 1); 
-      setQuestions(current => [...current, {
-        numberQuestion: contQuestions + 1,
-        typeQuestion: '',
-        description: '',
-        points: 0
-      }]);
-    } else {
-      //Substitue o primeiro elemento, pois o state precisa ser inicializado
-      setContQuestions(contQuestions + 1); 
-      setQuestions([{
-        numberQuestion: contQuestions + 1,
-        typeQuestion: '',
-        description: '',
-        points: 0
-      }])
-    }
-  }
-
+  // const [questions, setQuestions] = useState([{}])
+  // Usando contexto global
+  const {questions, handleNewQuestion, contQuestions} = useContext(ContextQuestions)
   return (
     <div>
       <h3>Criando questões da {typeAvaliation === 'exam' ? 'prova' : 'Atividade'}</h3>
@@ -46,13 +22,21 @@ export function CreateQuestions({typeAvaliation} : Props) {
       { 
         contQuestions > 0 ? 
           // Renderizando elementos do array dentro do component de quetões
-          <GenerateQuestions 
-            description={description}
-            setDescription={setDescription}
-            setPoints={setPoints}
-            typeQuestion={selectTypeQuestion}
-            setTypeQuestion={setSelectTypeQuestion}
-          />
+          questions.map((question, index) => {
+            return (
+              <GenerateQuestions 
+                key={index}
+                id={index}
+                description={question?.description}
+                numberQuestion={question?.numberQuestion}
+                typeQuestion={question.typeQuestion}
+                points={question?.points}
+                setDescription={question?.setDescription}
+                setPoints={question?.setPoints}
+                setTypeQuestion={question?.setTypeQuestion}
+              />
+            )
+          })
           : 
           <p>Nehuma questão foi criada</p>
       }
