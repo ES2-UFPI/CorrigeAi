@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 //Components da aplicação
 import { FormAvaliation } from '../../components/FormAvaliation'
+import { ContextQuestionsProvider } from '../../context/contextQuestions'
 
 //Components de estilização
 import { CreateTaskOrExamStyled } from './styles'
@@ -9,7 +10,6 @@ import { CreateTaskOrExamStyled } from './styles'
 export function CreateTaskOrExam() {
   const [selectValue, setSelectValue] = useState('none')
 
-  
   const list = [
     { id: 'none', name: 'Nenhuma' },
     { id: 'exam', name: 'Prova' },
@@ -17,6 +17,7 @@ export function CreateTaskOrExam() {
   ]
 
   return (
+    <ContextQuestionsProvider>
       <CreateTaskOrExamStyled className="TaskOrExam">
         <label htmlFor="avaliation">Escolha a avaliação: </label>
         <select
@@ -41,5 +42,6 @@ export function CreateTaskOrExam() {
             <h2>Escolha uma opção</h2>
         }
       </CreateTaskOrExamStyled>
+    </ContextQuestionsProvider>
   )
 }

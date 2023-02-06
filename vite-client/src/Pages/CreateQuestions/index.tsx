@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 
 import { Props } from "../../components/FormAvaliation"
 import { GenerateQuestions } from "../../components/GenerateQuestions";
+import { ContextQuestions } from "../../context/contextQuestions";
 
 export function CreateQuestions({typeAvaliation} : Props) {
   //Variaveis para lidar com gerador de questões
@@ -9,31 +10,9 @@ export function CreateQuestions({typeAvaliation} : Props) {
   const [description, setDescription] = useState('')
   const [points, setPoints] = useState(0)
 
-  // Armazena alternativas das questões 'trueFalse'
-  const [contQuestions, setContQuestions] = useState(0)
-  const [questions, setQuestions] = useState([{}])
-
-  function handleNewQuestion() {
-    //Adicionando nova questão
-    if (contQuestions > 0 ){
-      setContQuestions(contQuestions + 1); 
-      setQuestions(current => [...current, {
-        numberQuestion: contQuestions + 1,
-        typeQuestion: '',
-        description: '',
-        points: 0
-      }]);
-    } else {
-      //Substitue o primeiro elemento, pois o state precisa ser inicializado
-      setContQuestions(contQuestions + 1); 
-      setQuestions([{
-        numberQuestion: contQuestions + 1,
-        typeQuestion: '',
-        description: '',
-        points: 0
-      }])
-    }
-  }
+  // const [questions, setQuestions] = useState([{}])
+  // Usando contexto global
+  const {questions, handleNewQuestion, contQuestions} = useContext(ContextQuestions)
 
   return (
     <div>
@@ -45,6 +24,7 @@ export function CreateQuestions({typeAvaliation} : Props) {
         contQuestions > 0 ? 
           // Renderizando elementos do array dentro do component de quetões
           <GenerateQuestions 
+            numberQuestion={contQuestions} 
             description={description}
             setDescription={setDescription}
             setPoints={setPoints}

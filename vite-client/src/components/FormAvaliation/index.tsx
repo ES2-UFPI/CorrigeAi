@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 
 import { Form } from "./styles"
 
 import { CreateQuestions } from "../../Pages/CreateQuestions"
 import { PropsQuestions } from '../GenerateQuestions'
+import { ContextQuestions } from '../../context/contextQuestions'
 
 export interface Props {
   typeAvaliation : string
@@ -12,14 +13,9 @@ export interface Props {
 
 export function FormAvaliation( {typeAvaliation} : Props ) {
   // Array para armazenar todas questões
-  const [questions, setQuestions] = useState<PropsQuestions>(
-    { 
-      description: '',
-      typeQuestion: '',
-    })
-  
+
   function handleSaveQuestion() {
-    
+    // Vai lidar com o armazenamento das questões no state
   }
   
   return (
@@ -27,7 +23,7 @@ export function FormAvaliation( {typeAvaliation} : Props ) {
       {
         //Formulario para criar prova
         typeAvaliation === 'exam' ? 
-          <Form onSubmit={ e => e.preventDefault() } >
+          <Form className="Form-avaliation" onSubmit={ e => e.preventDefault() } >
             <legend>
               <h2>Cadastro de prova</h2>
             </legend>

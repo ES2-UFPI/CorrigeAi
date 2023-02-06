@@ -4,6 +4,7 @@ import { GenerateQuestionStyled } from "./styles"
 // import { AlternativeQuestion } from "../../components/AlternativeQuestion"
 
 export interface PropsQuestions {
+  numberQuestion: number
   typeQuestion: string;
   description: string;
   points?: number;
