@@ -26,6 +26,7 @@ export function CreateQuestions({typeAvaliation} : Props) {
             return (
               <GenerateQuestions 
                 key={index}
+                id={index}
                 description={question?.description}
                 numberQuestion={question?.numberQuestion}
                 typeQuestion={question.typeQuestion}

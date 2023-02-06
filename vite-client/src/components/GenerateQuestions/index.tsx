@@ -1,9 +1,12 @@
+import { useContext } from "react"
+
 import { Form } from "../../components/FormAvaliation/styles"
 import { GenerateQuestionStyled } from "./styles"
 
-// import { AlternativeQuestion } from "../../components/AlternativeQuestion"
+import { ContextQuestions } from "../../context/contextQuestions"
 
 export interface PropsQuestions {
+  id: number
   numberQuestion: number
   typeQuestion: string;
   description: string;
@@ -21,6 +24,29 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
     {id: 'objective',  type: 'Objetiva'}
   ]
 
+  const { questions, setQuestions } = useContext(ContextQuestions)
+
+  function handleOnChangeTypeQuestion(
+    e : React.ChangeEvent<HTMLSelectElement>, id: number){
+      //Manipulando individualmente cada input selection
+      questions[id].typeQuestion = e.target.value
+      setQuestions([...questions])
+  }
+
+  function handleOnChangeDescription(
+    e : React.ChangeEvent<HTMLTextAreaElement>, id: number){
+      //Manipulando individualmente cada input textarea
+      questions[id].description = e.target.value
+      setQuestions([...questions])
+  }
+
+  function handleOnChangePoints(
+    e : React.ChangeEvent<HTMLInputElement> , id: number ){
+    //Manipulando individualmente cada input number
+    questions[id].points = Number(e.target.value)
+    setQuestions([...questions])
+  }
+
   return (
     <GenerateQuestionStyled>
       <form>
@@ -29,7 +55,7 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
           name="typeQuestion"
           id="typeQuestion"
           value={typeQuestion}
-          onChange={e => props.setTypeQuestion?.(e.target.value)} //?.
+          onChange={ e => handleOnChangeTypeQuestion(e, props.id) } //?.
         >
           {list.map((option, i) => (
             <option key={i} value={option.id}>
@@ -46,7 +72,7 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
           rows={4}
           cols={40}
           value={description}
-          onChange={e => props.setDescription?.(e.target.value)}
+          onChange={ e => handleOnChangeDescription(e , props.id) }
         />
 
         {typeQuestion === 'trueFalse' ? (
@@ -79,7 +105,7 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
         <label htmlFor="points">Pontuação da questão: </label>
         <input
           value={points}
-          onChange={e => props.setPoints?.(e.target.valueAsNumber)}
+          onChange={e => handleOnChangePoints(e, props.id)}
           type="number"
         />
         <br />

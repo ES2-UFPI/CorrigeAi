@@ -3,6 +3,7 @@ import { PropsQuestions } from "../components/GenerateQuestions";
 
 interface IContextQuestionsProps {
   questions: PropsQuestions[]  
+  setQuestions: React.Dispatch<React.SetStateAction<PropsQuestions[]>>
   contQuestions: number
   handleNewQuestion: () => void
 }
@@ -20,6 +21,7 @@ export const ContextQuestionsProvider : React.FC<Props> = ({children}) => {
   function handleNewQuestion() {
     setContQuestions(contQuestions + 1); 
     setQuestions(current => [...current, {
+      id: contQuestions,
       numberQuestion: contQuestions + 1,
       typeQuestion: '',
       description: '',
@@ -31,6 +33,7 @@ export const ContextQuestionsProvider : React.FC<Props> = ({children}) => {
     <ContextQuestions.Provider value={{
       questions: questions,
       contQuestions: contQuestions,
+      setQuestions: setQuestions,
       handleNewQuestion: handleNewQuestion
     }}>
       {children}
