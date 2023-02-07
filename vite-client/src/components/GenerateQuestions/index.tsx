@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useCallback } from "react"
+import { useContext, useState } from "react"
 
 import { GenerateQuestionStyled } from "./styles"
 
@@ -52,17 +52,15 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
     setQuestions([...questions])
   }
 
-  
-
   async function handleAddAlternative(e : React.InputHTMLAttributes<HTMLInputElement>){
     //Criar elemento alternative dentro de question
     const newQuestions = questions
     if (newQuestions[props.id].alternatives){
       // Quando array alternatives existe
-      newQuestions[props.id].alternatives?.push({alternativeData: 'a'})
+      newQuestions[props.id].alternatives?.push({alternativeData: ''})
     }else {
       // Primeira insersão no array, alternatives ainda não existe
-      newQuestions[props.id].alternatives = [{alternativeData: 'b'}]
+      newQuestions[props.id].alternatives = [{alternativeData: ''}]
     }
     await setQuestions(newQuestions)
     forceUpdate()
@@ -109,11 +107,9 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
               //Renderizar alternativas para cada questão
               questions[props.id].alternatives ?
                 questions[props.id].alternatives?.map((alternative, key) => {
-                  console.log(alternative.alternativeData)
                   return (
                     <AlternativeQuestion 
                       key={key}
-                      alternativeData={alternative.alternativeData}
                       // setAlternativeData={alternative.alternativeData}
                     />
                   )

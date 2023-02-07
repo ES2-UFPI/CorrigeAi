@@ -1,14 +1,13 @@
-import { useState } from 'react'
+import { useContext } from "react"
+import { alternativeContext } from "../../context/contextAlternatives"
 
 export interface PropsAlternative {
   alternativeData: string 
 }
 
-export function AlternativeQuestion({alternativeData} : PropsAlternative) {
-  function handleAlternativeChange(){
-
-  }
-
+export function AlternativeQuestion() {
+  const { alternativeData, setAlternative } = useContext(alternativeContext)
+ 
   return (
     <div>
       <label htmlFor="alternative">Enunciado da alternativa: </label>
@@ -16,7 +15,7 @@ export function AlternativeQuestion({alternativeData} : PropsAlternative) {
         type="text" 
         id="alternative"
         value={alternativeData}  
-        onChange={handleAlternativeChange}
+        onChange={ e => setAlternative(e.target.value) }
       />
     </div>
   )

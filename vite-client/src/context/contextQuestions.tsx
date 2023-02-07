@@ -1,6 +1,8 @@
 import { createContext, useState } from "react";
 import { PropsQuestions } from "../components/GenerateQuestions";
 
+import { AlternativeProvider } from "./contextAlternatives";
+
 interface IContextQuestionsProps {
   questions: PropsQuestions[]  
   setQuestions: React.Dispatch<React.SetStateAction<PropsQuestions[]>>
@@ -36,7 +38,9 @@ export const ContextQuestionsProvider : React.FC<Props> = ({children}) => {
       setQuestions: setQuestions,
       handleNewQuestion: handleNewQuestion
     }}>
-      {children}
+      <AlternativeProvider>
+        {children}
+      </AlternativeProvider>
     </ContextQuestions.Provider>
   )
 }
