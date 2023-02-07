@@ -25,7 +25,7 @@ export const ContextQuestionsProvider : React.FC<Props> = ({children}) => {
       numberQuestion: contQuestions + 1,
       typeQuestion: '',
       description: '',
-      points: 0
+      points: 0,
     }]);
   }
 
