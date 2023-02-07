@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react"
+import { useContext, useState, useEffect, useCallback } from "react"
 
 import { GenerateQuestionStyled } from "./styles"
 
@@ -28,7 +28,8 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
   
   // usando contexto global para questões
   const { questions, setQuestions } = useContext(ContextQuestions)
-  const [alternativeData, setAlternativeData] = useState('')
+
+  const forceUpdate: () => void = useState({})[1].bind(null, {}) // gambiarra para re-renderizar pagina
 
   function handleOnChangeTypeQuestion(
     e : React.ChangeEvent<HTMLSelectElement>){
@@ -51,17 +52,20 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
     setQuestions([...questions])
   }
 
-  function handleAddAlternative(e : React.InputHTMLAttributes<HTMLInputElement>){
+  
+
+  async function handleAddAlternative(e : React.InputHTMLAttributes<HTMLInputElement>){
     //Criar elemento alternative dentro de question
     const newQuestions = questions
     if (newQuestions[props.id].alternatives){
       // Quando array alternatives existe
-      newQuestions[props.id].alternatives?.push({alternativeData: ''})
+      newQuestions[props.id].alternatives?.push({alternativeData: 'a'})
     }else {
       // Primeira insersão no array, alternatives ainda não existe
-      newQuestions[props.id].alternatives = [{alternativeData: ''}]
+      newQuestions[props.id].alternatives = [{alternativeData: 'b'}]
     }
-    setQuestions(newQuestions)
+    await setQuestions(newQuestions)
+    forceUpdate()
   }
 
   return (
@@ -105,6 +109,7 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
               //Renderizar alternativas para cada questão
               questions[props.id].alternatives ?
                 questions[props.id].alternatives?.map((alternative, key) => {
+                  console.log(alternative.alternativeData)
                   return (
                     <AlternativeQuestion 
                       key={key}

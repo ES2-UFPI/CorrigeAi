@@ -5,10 +5,8 @@ export interface PropsAlternative {
 }
 
 export function AlternativeQuestion({alternativeData} : PropsAlternative) {
-  // const [alternativeData, setAlternativeData] = useState('')
+  function handleAlternativeChange(){
 
-  function handleAlternative(e : React.ChangeEvent<HTMLInputElement>){
-    // setAlternativeData(e.target.value)
   }
 
   return (
@@ -17,8 +15,8 @@ export function AlternativeQuestion({alternativeData} : PropsAlternative) {
       <input 
         type="text" 
         id="alternative"
-        value={alternativeData} 
-        onChange={e => handleAlternative( e )}
+        value={alternativeData}  
+        onChange={handleAlternativeChange}
       />
     </div>
   )
