@@ -43,6 +43,8 @@ app.post('/criarProva', async (req: Request, res: Response) => {
 app.post('/criarProvaTeste', async (req: Request, res: Response) => {
   const prova = new Prova({
     tema: req.body.tema,
+    dataInicio: req.body.dataInicio,
+    dataFim: req.body.dataFim,
   });
   const criarProva = await prova.save();
   res.json(criarProva);
