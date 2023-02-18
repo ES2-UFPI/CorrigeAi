@@ -20,21 +20,18 @@ const verdadeiroOuFalso = new Schema({
 
 const questaoSchema = new Schema({
   tipo: String,
-  objetiva: objetiva,
-  subjetiva: subjetiva,
-  verdadeiroOuFalso: verdadeiroOuFalso,
+  objetiva: objetiva || null,
+  subjetiva: subjetiva || null,
+  verdadeiroOuFalso: verdadeiroOuFalso || null,
 })
 
 const provaSchema = new Schema({
   tema: { type: String, required: true },
-  dataInicio: { type: Date, required: true },
-  dataFim: { type: Date, required: true },
+  dataInicio: { type: Date, required: false },
+  dataFim: { type: Date, required: false },
   prazo: Number,
   pontos: Number,
-  questoes: [
-    { type: Schema.Types.ObjectId, ref: 'Questao'
-    }
-  ]
+  
 });
 
 const tarefaSchema = new Schema({

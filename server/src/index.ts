@@ -10,7 +10,7 @@ const app = express();
 mongoose.set('strictQuery', false);
 const PORT = 3000;
 
-app.use(
+app.use( 
   cors({
     origin: "*",
   })
@@ -38,9 +38,16 @@ app.post('/criarProva', async (req: Request, res: Response) => {
   });
   const criarProva = await prova.save();
   res.send(criarProva);
-  
 }); 
 
+app.post('/criarProvaTeste', async (req: Request, res: Response) => {
+  const prova = new Prova({
+    tema: req.body.tema,
+  });
+  const criarProva = await prova.save();
+  res.json(criarProva);
+}); 
+ 
 mongoose.connect(`${process.env.MONGO_URL}`).then(() => {
   console.log(`listening on port ${PORT}`);
   app.listen(PORT);
