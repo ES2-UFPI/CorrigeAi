@@ -49,7 +49,12 @@ app.post('/criarProvaTeste', async (req: Request, res: Response) => {
   const criarProva = await prova.save();
   res.json(criarProva);
 }); 
- 
+
+app.get('/Provas', async (req: Request, res: Response) => {
+  const provas = await Prova.find();
+  res.json(provas);
+}); 
+
 mongoose.connect(`${process.env.MONGO_URL}`).then(() => {
   console.log(`listening on port ${PORT}`);
   app.listen(PORT);
