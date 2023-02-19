@@ -23,11 +23,7 @@ export function FormAvaliation( {typeAvaliation} : Props ) {
       {
         //Formulario para criar prova
         typeAvaliation === 'exam' ? 
-<<<<<<< HEAD
           <Form className="FormAvaliation" onSubmit={ e => e.preventDefault() } >
-=======
-          <Form className="Form-avaliation" onSubmit={ e => e.preventDefault() } >
->>>>>>> dev
             <legend>
               <h2>Cadastro de prova</h2>
             </legend>

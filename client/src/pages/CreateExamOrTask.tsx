@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./Style.css";
 
 function CreateExamOrTask() {
@@ -65,7 +66,8 @@ function CreateExamOrTask() {
           <input type="date" value={finalDate} onChange={handleDataFinalChange} ref={finalDateRef} />
           <p>Selected Date: {finalDate}</p>
         </div>
-        <button>Criar Prova</button>
+        
+        <Link to="/adicionarQuestoes"><button>Criar Prova</button></Link>
       </form>
     </div>
   )

@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema; 
 
 const subjetiva = new Schema({
-  enunciado: String,
+  enunciado: String, 
   resposta: String,
 })
 

@@ -8,6 +8,7 @@ import {
   Route
 } from "react-router-dom";
 import './index.css'
+import AddQuestions from './pages/AddQuestions';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,11 @@ const router = createBrowserRouter([
     path: "/criarProvaOuTarefa",
     element: <CreateExamOrTask/>,
   },
+  {
+    path: "/adicionarQuestoes",
+    element: <AddQuestions/>,
+  },
+
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

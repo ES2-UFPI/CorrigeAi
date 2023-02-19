@@ -1,9 +1,23 @@
-import React from 'react'
+import React from "react";
+import Objetiva from "./Objetiva";
+import Subjetiva from "./Subjetiva";
 
-function CreateQuestion() {
+
+const CreateQuestion: React.FC<{title:string}> = ( {title} ) => {
   return (
-    <div>CreateQuestion</div>
-  )
-}
+    <div>
+      {(() => {
+        switch (title) {
+          case "objetiva":
+            return <Objetiva />;
+          case "subjetiva":
+            return <Subjetiva />;
+          default:
+            return null;
+        }
+      })()}
+    </div>
+  );
+};
 
-export default CreateQuestion
+export default CreateQuestion;
