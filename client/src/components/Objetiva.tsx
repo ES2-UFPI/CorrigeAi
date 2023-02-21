@@ -1,8 +1,9 @@
 import React from 'react'
+import './Styles.css'
 
 function Objetiva() {
   return (
-    <div>
+    <div id='questao'>
       <div>Objetiva</div>
       <div>Enunciado</div>
       <div>Alternativas</div>

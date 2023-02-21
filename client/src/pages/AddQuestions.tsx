@@ -39,9 +39,10 @@ function AddQuestions() {
         <select onChange={selectChange} id="tipo">
           <option value="subjetiva">Subjetiva</option>
           <option value="objetiva">Objetiva</option>
+          <option value="verdadeiroOuFalso">Verdadeiro ou Falso</option> 
         </select>
-        <CreateQuestion title={tipo} />
       </form>
+      <CreateQuestion typeOfQuestion={tipo} />
     </div>
   );
 }

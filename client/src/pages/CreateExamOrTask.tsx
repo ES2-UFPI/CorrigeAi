@@ -66,9 +66,8 @@ function CreateExamOrTask() {
           <input type="date" value={finalDate} onChange={handleDataFinalChange} ref={finalDateRef} />
           <p>Selected Date: {finalDate}</p>
         </div>
-        
-        <Link to="/adicionarQuestoes"><button>Criar Prova</button></Link>
       </form>
+      <Link to="/adicionarQuestoes"><button>Criar Prova</button></Link>
     </div>
   )
 }

@@ -1,9 +1,10 @@
 import React from 'react'
+import './Styles.css'
 
 function Subjetiva() {
   return (
-    <div>Subjetiva</div>
-    
+    <div id='questao'>Subjetiva</div>
+
   )
 }
 
