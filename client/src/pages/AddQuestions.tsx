@@ -19,31 +19,62 @@ interface iQuestao {
 }
 
 function AddQuestions() {
-
+  const [tipos, setTipo] = useState<string[]>(["subjetiva"]);
   const [questoes, setQuestoes] = useState<iQuestao[]>([] as iQuestao[]);
-  const [tipo, setTipo] = useState<string>("");
-
 
   // This function is triggered when the select changes
-  const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const selectChange = (index: number, event: React.ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
-    const value = event.target.value;
-    setTipo(value);
+    const newTipos = [...tipos];
+    newTipos[index] = event.target.value;
+    setTipo(newTipos);
   };
   
+  const handleCreateQuestion = () => {
+    setTipo([...tipos, "subjetiva"])
+  };
+
+  const handleDeleteOption = (index: number) => {
+    const newTipos = [...tipos];
+    newTipos.splice(index, 1);
+    setTipo(newTipos);
+  };
+
+  const teste = () => {
+    console.log(tipos);
+  };
+  teste()
+
+  const handleAddQuestion = () => {
+  
+    console.log('foi')
+    //setQuestoes([...questoes, question]);
+  };
+
 
   return (
-    <div>
-      <form>
-        <label htmlFor="tipo">Tipo de questão</label>
-        <select onChange={selectChange} id="tipo">
-          <option value="subjetiva">Subjetiva</option>
-          <option value="objetiva">Objetiva</option>
-          <option value="verdadeiroOuFalso">Verdadeiro ou Falso</option> 
-        </select>
-      </form>
-      <CreateQuestion typeOfQuestion={tipo} />
-    </div>
+  
+    <form>
+      {tipos.map((tipo, index) => (
+        <div key={index}>
+          <label htmlFor="tipo">Tipo de questão</label>
+          <select value={tipo} onChange={ (e) => selectChange(index, e)} id="tipo">
+            <option value="subjetiva">Subjetiva</option>
+            <option value="objetiva">Objetiva</option>
+            <option value="verdadeiroOuFalso">Verdadeiro ou Falso</option> 
+          </select>
+          <CreateQuestion typeOfQuestion={tipo} onSetState={handleAddQuestion} />
+          {(tipo.length) > 1 && (
+            <button type="button" onClick={() => handleDeleteOption(index)}>
+              Delete
+            </button>
+          )}
+        </div>     
+      ))}
+      <button type="button" onClick={handleCreateQuestion}>
+        Adicionar Questao
+      </button>
+    </form>
   );
 }
 

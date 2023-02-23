@@ -1,6 +1,5 @@
-import React, { DetailedHTMLProps } from 'react'
-import { useState, useEffect  } from 'react';
-import { useAsyncValue } from 'react-router-dom';
+import React, { MouseEventHandler } from 'react'
+import { useState  } from 'react';
 import './Styles.css'
 
 type Alternative = {
@@ -18,8 +17,12 @@ const initialFormValues: FormValues = {
   alternatives: [{ text: "", isTrue: false }],
 };
 
+interface Props {
+  onSetState: MouseEventHandler<HTMLButtonElement>;
+}
 
-function VerdadeiroOuFalso( {  } ) {
+
+const VerdadeiroOuFalso: React.FC<Props> =( { onSetState } ) =>{
 
   const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
 
@@ -50,10 +53,11 @@ function VerdadeiroOuFalso( {  } ) {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     console.log("Form values", formValues);
-  };
+  };  
+
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
     <div>
       <label htmlFor="question">Question:</label>
       <input
@@ -92,8 +96,8 @@ function VerdadeiroOuFalso( {  } ) {
     <button type="button" onClick={handleAddAlternative}>
       Add Alternative
     </button>
-    <button type="submit">Register Question</button>
-  </form>
+    <button type="button" onClick={onSetState}>Register Question</button>
+  </div>
   )
 }
 export default VerdadeiroOuFalso
