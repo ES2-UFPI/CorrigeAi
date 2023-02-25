@@ -13,35 +13,56 @@ interface iObjetiva {
   resposta: string;
 }
 
-interface iQuestao {
-  tipo: "subjetiva" | "objetiva";
-  questao: iSubjetiva | iObjetiva;
+type Alternative = {
+  text: string;
+  isTrue: boolean;
+};
+
+interface iTrueOrFalse {
+  statement: string;
+  alternative: Alternative[];
 }
 
+
+
+interface iQuestions {
+  type: string;
+  saved: boolean;
+  question: string;
+}
+
+const initialState: iQuestions[] = [
+  {
+    type: "subjetiva",
+    saved: false,
+    question: "subjetiva",
+  },
+];
+
 function AddQuestions() {
-  const [tipos, setTipo] = useState<string[]>(["subjetiva"]);
+  const [questions, setQuestion] = useState<iQuestions[]>(initialState);
   const [questoes, setQuestoes] = useState<iQuestao[]>([] as iQuestao[]);
 
   // This function is triggered when the select changes
   const selectChange = (index: number, event: React.ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
-    const newTipos = [...tipos];
-    newTipos[index] = event.target.value;
-    setTipo(newTipos);
+    const newQuestion = [...questions];
+    newQuestion[index].type = event.target.value;
+    setQuestion(newQuestion);
   };
   
   const handleCreateQuestion = () => {
-    setTipo([...tipos, "subjetiva"])
+    setQuestion([...questions, initialState[0]])
   };
 
   const handleDeleteOption = (index: number) => {
-    const newTipos = [...tipos];
-    newTipos.splice(index, 1);
-    setTipo(newTipos);
+    const newQuestions = [...questions];
+    newQuestions.splice(index, 1);
+    setQuestion(newQuestions);
   };
 
   const teste = () => {
-    console.log(tipos);
+    console.log();
   };
   teste()
 
@@ -55,16 +76,16 @@ function AddQuestions() {
   return (
   
     <form>
-      {tipos.map((tipo, index) => (
+      {questions.map((question, index) => (
         <div key={index}>
           <label htmlFor="tipo">Tipo de questão</label>
-          <select value={tipo} onChange={ (e) => selectChange(index, e)} id="tipo">
+          <select value={question.type} onChange={ (e) => selectChange(index, e)} id="tipo">
             <option value="subjetiva">Subjetiva</option>
             <option value="objetiva">Objetiva</option>
             <option value="verdadeiroOuFalso">Verdadeiro ou Falso</option> 
           </select>
-          <CreateQuestion typeOfQuestion={tipo} onSetState={handleAddQuestion} />
-          {(tipo.length) > 1 && (
+          <CreateQuestion question={question} onSetState={handleAddQuestion} />
+          { (((questions.length) > 1) && (question.saved == false)  )  && (
             <button type="button" onClick={() => handleDeleteOption(index)}>
               Delete
             </button>

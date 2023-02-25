@@ -5,11 +5,16 @@ function Objetiva() {
   return (
     <div id='questao'>
       <div>Objetiva</div>
-      <div>Enunciado</div>
-      <div>Alternativas</div>
-      <div>Resposta</div>
     </div>
   )
 }
 
-export default Objetiva
+function ObjetivaCadastrada() {
+  return (
+    <div id='questao'>
+      <div>Objetiva Cadastrada</div>
+    </div>
+  )
+}
+
+export { Objetiva, ObjetivaCadastrada }
