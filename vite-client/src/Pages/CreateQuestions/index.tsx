@@ -5,12 +5,6 @@ import { GenerateQuestions } from "../../components/GenerateQuestions";
 import { ContextQuestions } from "../../context/contextQuestions";
 
 export function CreateQuestions({typeAvaliation} : Props) {
-  //Variaveis para lidar com gerador de questões
-  const [selectTypeQuestion, setSelectTypeQuestion] = useState('none')
-  const [description, setDescription] = useState('')
-  const [points, setPoints] = useState(0)
-
-  // const [questions, setQuestions] = useState([{}])
   // Usando contexto global
   const {questions, handleNewQuestion, contQuestions} = useContext(ContextQuestions)
   return (

@@ -1,16 +1,19 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 
-import { Form } from "../../components/FormAvaliation/styles"
 import { GenerateQuestionStyled } from "./styles"
 
 import { ContextQuestions } from "../../context/contextQuestions"
+import { ContextAlternatives } from "../../context/contextAlternatives"
+import { PropsAlternative } from "../AlternativeQuestion"
+import { AlternativeQuestion } from "../AlternativeQuestion"
 
 export interface PropsQuestions {
-  id: number
+  id: number //id para referenciar alternativa
   numberQuestion: number
   typeQuestion: string;
   description: string;
   points?: number;
+  alternatives?: PropsAlternative []
   setTypeQuestion?: React.Dispatch<React.SetStateAction<string>>;
   setDescription?: React.Dispatch<React.SetStateAction<string>>; 
   setPoints?: React.Dispatch<React.SetStateAction<number>>;
@@ -23,28 +26,60 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
     {id: 'subjective', type: 'Subjetiva'},
     {id: 'objective',  type: 'Objetiva'}
   ]
-
+  
+  // usando contexto global para questões
   const { questions, setQuestions } = useContext(ContextQuestions)
+  const { allAlternatives, setAllAlternatives } = useContext(ContextAlternatives)
+  // const { alternativeData } = useContext(alternativeContext)
+  console.log(questions)
+
+  const forceUpdate: () => void = useState({})[1].bind(null, {}) // gambiarra para re-renderizar pagina
 
   function handleOnChangeTypeQuestion(
-    e : React.ChangeEvent<HTMLSelectElement>, id: number){
+    e : React.ChangeEvent<HTMLSelectElement>){
       //Manipulando individualmente cada input selection
-      questions[id].typeQuestion = e.target.value
+      questions[props.id].typeQuestion = e.target.value
       setQuestions([...questions])
   }
 
   function handleOnChangeDescription(
-    e : React.ChangeEvent<HTMLTextAreaElement>, id: number){
+    e : React.ChangeEvent<HTMLTextAreaElement>){
       //Manipulando individualmente cada input textarea
-      questions[id].description = e.target.value
+      questions[props.id].description = e.target.value
       setQuestions([...questions])
   }
 
   function handleOnChangePoints(
-    e : React.ChangeEvent<HTMLInputElement> , id: number ){
+    e : React.ChangeEvent<HTMLInputElement>){
     //Manipulando individualmente cada input number
-    questions[id].points = Number(e.target.value)
+    questions[props.id].points = Number(e.target.value)
     setQuestions([...questions])
+  }
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const newAlternatives = questions[props.id].alternatives
+    if (newAlternatives){
+      //Modifica cada input de maneira especifica
+      newAlternatives[index].alternativeData = event.target.value
+    }
+    setQuestions([...questions])
+  }
+
+  async function handleAddAlternative(e : React.InputHTMLAttributes<HTMLInputElement>){
+    // Criar elemento alternative dentro de question
+    const newQuestions = questions
+    if (newQuestions[props.id].alternatives){
+      // Quando array alternatives existe
+      newQuestions[props.id].alternatives?.push(
+        { alternativeData: '', }
+      )
+    }else {
+      // Primeira insersão no array, alternatives ainda não existe
+      newQuestions[props.id].alternatives = [
+        { alternativeData: '',
+      }] //?
+    }
+    await setQuestions(newQuestions)
+    forceUpdate() 
   }
 
   return (
@@ -55,7 +90,7 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
           name="typeQuestion"
           id="typeQuestion"
           value={typeQuestion}
-          onChange={ e => handleOnChangeTypeQuestion(e, props.id) } //?.
+          onChange={ e => handleOnChangeTypeQuestion(e) } 
         >
           {list.map((option, i) => (
             <option key={i} value={option.id}>
@@ -64,7 +99,6 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
           ))}
         </select>
         <br />
-
         <label htmlFor="description">Qual enunciado da questão: </label>
         <br />
         <textarea
@@ -72,29 +106,54 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
           rows={4}
           cols={40}
           value={description}
-          onChange={ e => handleOnChangeDescription(e , props.id) }
+          onChange={ e => handleOnChangeDescription(e) }
         />
 
-        {typeQuestion === 'trueFalse' ? (
+        {typeQuestion === 'trueFalse' ? ( //Questões verdadeira ou falsa
           <div>
             <legend>
               <h3>Questão verdadeira ou falsa</h3>
             </legend>
-            <button type="button">
+            <button 
+              type="button"
+              onClick={ e => handleAddAlternative(e) }>
               +
             </button>
-            {
-              // moreAlternative && setAlternativesQuestion( <AlternativeQuestions /> )
-              //Vai renderizar o component para cada objeto dentro do array
-            }
+            { 
+              // Renderizar alternativas para cada questão
+              questions[props.id].alternatives ?
+                questions[props.id].alternatives?.map((alternative, index) => {
+                  return (
+                    <div>
+                      <label htmlFor="alternative">Enunciado da alternativa: </label>
+                      <input 
+                        type="text" 
+                        id="alternative"
+                        value={alternative.alternativeData}  
+                        onChange={ event => handleInputChange(event, index)}
+                      />
+                  </div>
+                  )
+                })
+                // allAlternatives.map((alternative) => {
+                //   return (
+                //     <AlternativeQuestion 
+                //       keyAlternative={props.id}
+                //       alternativeData={alternative.alternativeData}
+                //     />
+                //   )
+                // })
+                : 
+                <p>Não tem alternativa</p>
+            } 
           </div>
-        ) : typeQuestion === 'objective' ? (
+        ) : typeQuestion === 'objective' ? ( //Questões objetivas
           <div>
             <legend>
               <h3>Questão objetiva</h3>
             </legend>
           </div>
-        ) : typeQuestion === 'subjective' ? (
+        ) : typeQuestion === 'subjective' ? ( //Questões subjetivas
           <div>
             <legend>
               <h3>Questão subjetiva</h3>
@@ -105,7 +164,7 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
         <label htmlFor="points">Pontuação da questão: </label>
         <input
           value={points}
-          onChange={e => handleOnChangePoints(e, props.id)}
+          onChange={e => handleOnChangePoints(e)}
           type="number"
         />
         <br />
