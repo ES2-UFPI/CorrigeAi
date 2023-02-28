@@ -1,12 +1,12 @@
 import { useContext } from "react"
-import { alternativeContext } from "../../context/contextAlternatives"
+import { ContextAlternatives } from "../../context/contextAlternatives"
 
 export interface PropsAlternative {
-  alternativeData: string
-  keyAlternative: Number
+  alternativeData?: string
+  keyAlternative?: Number
 }
 
-export function AlternativeQuestion() {
+export function AlternativeQuestion({ alternativeData } : PropsAlternative) {
   // const { alternativeData, setAlternative } = useContext(alternativeContext)
  
   return (
@@ -15,7 +15,7 @@ export function AlternativeQuestion() {
       <input 
         type="text" 
         id="alternative"
-        // value={}  
+        value={alternativeData}  
         // onChange={ }
       />
     </div>

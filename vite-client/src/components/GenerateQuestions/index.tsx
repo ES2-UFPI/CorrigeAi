@@ -57,30 +57,30 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
   }
 
   async function handleAddAlternative(e : React.InputHTMLAttributes<HTMLInputElement>){
-    //Criar elemento alternative dentro de question
-    // const newQuestions = questions
-    // if (newQuestions[props.id].alternatives){
-    //   // Quando array alternatives existe
-    //   newQuestions[props.id].alternatives?.push(
-    //     {
-    //       alternativeData: '',
-    //       keyAlternative: props.id, //Chave da questão 
-    //     }
-    //   )
-    // }else {
-    //   // Primeira insersão no array, alternatives ainda não existe
-    //   newQuestions[props.id].alternatives = [
-    //     {
-    //       alternativeData: '',
-    //       keyAlternative: props.id
-    //     }] //?
-    // }
-    // await setQuestions(newQuestions)
-    // forceUpdate()
-    allAlternatives.push({
-            alternativeData: '',
-            keyAlternative: props.id
-          })
+    // Criar elemento alternative dentro de question
+    const newQuestions = questions
+    if (newQuestions[props.id].alternatives){
+      // Quando array alternatives existe
+      newQuestions[props.id].alternatives?.push(
+        {
+          alternativeData: '',
+          keyAlternative: props.id, //Chave da questão 
+        }
+      )
+    }else {
+      // Primeira insersão no array, alternatives ainda não existe
+      newQuestions[props.id].alternatives = [
+        {
+          alternativeData: '',
+          keyAlternative: props.id
+        }] //?
+    }
+    await setQuestions(newQuestions)
+    forceUpdate()
+    // allAlternatives.push({
+    //         alternativeData: '',
+    //         keyAlternative: props.id
+    //       })
         
   }
 
@@ -122,26 +122,26 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
               +
             </button>
             { 
-              //Renderizar alternativas para cada questão
-              // questions[props.id].alternatives ?
-              //   questions[props.id].alternatives?.map((alternative, key) => {
-              //     return (
-              //       <AlternativeQuestion 
-              //         key={key}
-              //         // setAlternativeData={alternative.alternativeData}
-              //       />
-              //     )
-              //   })
-                allAlternatives.map((alternative) => {
+              // Renderizar alternativas para cada questão
+              questions[props.id].alternatives ?
+                questions[props.id].alternatives?.map((alternative, key) => {
                   return (
                     <AlternativeQuestion 
-                      keyAlternative={props.id}
-                      alternativeData={alternative.alternativeData}
+                      key={key}
+                      // setAlternativeData={alternative.alternativeData}
                     />
                   )
                 })
-                // : 
-                // <p>Não tem alternativa</p>
+                // allAlternatives.map((alternative) => {
+                //   return (
+                //     <AlternativeQuestion 
+                //       keyAlternative={props.id}
+                //       alternativeData={alternative.alternativeData}
+                //     />
+                //   )
+                // })
+                : 
+                <p>Não tem alternativa</p>
             } 
           </div>
         ) : typeQuestion === 'objective' ? ( //Questões objetivas
