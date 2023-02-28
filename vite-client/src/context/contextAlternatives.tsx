@@ -1,27 +1,28 @@
 import { createContext, useState } from 'react'
+import { PropsAlternative } from '../components/AlternativeQuestion'
 
 interface IPropsAlternative {
-  alternativeData: string
-  setAlternative: React.Dispatch<React.SetStateAction<string>>
+  allAlternatives: PropsAlternative [],
+  setAllAlternatives: React.Dispatch<React.SetStateAction<PropsAlternative[]>>
 }
 
 interface Props {
   children: React.ReactNode
 }
 
-export const alternativeContext = createContext({} as IPropsAlternative )
+export const ContextAlternatives = createContext({} as IPropsAlternative )
 
 export const AlternativeProvider : React.FC<Props> = ({children}) => {
-  const [alternative, setAlternative] = useState('')
+  const [allAlternatives, setAllAlternatives] = useState<PropsAlternative[]>([])
 
   return (
-    <alternativeContext.Provider
+    <ContextAlternatives.Provider
       value={{
-        alternativeData: alternative,
-        setAlternative: setAlternative,
+        allAlternatives,
+        setAllAlternatives
       }}  
     >
       {children}
-    </alternativeContext.Provider>
+    </ContextAlternatives.Provider>
   )
 }

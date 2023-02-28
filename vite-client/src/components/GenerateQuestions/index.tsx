@@ -3,11 +3,12 @@ import { useContext, useState } from "react"
 import { GenerateQuestionStyled } from "./styles"
 
 import { ContextQuestions } from "../../context/contextQuestions"
+import { ContextAlternatives } from "../../context/contextAlternatives"
 import { PropsAlternative } from "../AlternativeQuestion"
 import { AlternativeQuestion } from "../AlternativeQuestion"
 
 export interface PropsQuestions {
-  id: number
+  id: number //id para referenciar alternativa
   numberQuestion: number
   typeQuestion: string;
   description: string;
@@ -28,6 +29,9 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
   
   // usando contexto global para questões
   const { questions, setQuestions } = useContext(ContextQuestions)
+  const { allAlternatives, setAllAlternatives } = useContext(ContextAlternatives)
+  // const { alternativeData } = useContext(alternativeContext)
+  console.log(questions)
 
   const forceUpdate: () => void = useState({})[1].bind(null, {}) // gambiarra para re-renderizar pagina
 
@@ -54,16 +58,30 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
 
   async function handleAddAlternative(e : React.InputHTMLAttributes<HTMLInputElement>){
     //Criar elemento alternative dentro de question
-    const newQuestions = questions
-    if (newQuestions[props.id].alternatives){
-      // Quando array alternatives existe
-      newQuestions[props.id].alternatives?.push({alternativeData: ''})
-    }else {
-      // Primeira insersão no array, alternatives ainda não existe
-      newQuestions[props.id].alternatives = [{alternativeData: ''}]
-    }
-    await setQuestions(newQuestions)
-    forceUpdate()
+    // const newQuestions = questions
+    // if (newQuestions[props.id].alternatives){
+    //   // Quando array alternatives existe
+    //   newQuestions[props.id].alternatives?.push(
+    //     {
+    //       alternativeData: '',
+    //       keyAlternative: props.id, //Chave da questão 
+    //     }
+    //   )
+    // }else {
+    //   // Primeira insersão no array, alternatives ainda não existe
+    //   newQuestions[props.id].alternatives = [
+    //     {
+    //       alternativeData: '',
+    //       keyAlternative: props.id
+    //     }] //?
+    // }
+    // await setQuestions(newQuestions)
+    // forceUpdate()
+    allAlternatives.push({
+            alternativeData: '',
+            keyAlternative: props.id
+          })
+        
   }
 
   return (
@@ -105,17 +123,25 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
             </button>
             { 
               //Renderizar alternativas para cada questão
-              questions[props.id].alternatives ?
-                questions[props.id].alternatives?.map((alternative, key) => {
+              // questions[props.id].alternatives ?
+              //   questions[props.id].alternatives?.map((alternative, key) => {
+              //     return (
+              //       <AlternativeQuestion 
+              //         key={key}
+              //         // setAlternativeData={alternative.alternativeData}
+              //       />
+              //     )
+              //   })
+                allAlternatives.map((alternative) => {
                   return (
                     <AlternativeQuestion 
-                      key={key}
-                      // setAlternativeData={alternative.alternativeData}
+                      keyAlternative={props.id}
+                      alternativeData={alternative.alternativeData}
                     />
                   )
                 })
-                : 
-                <p>Não tem alternativa</p>
+                // : 
+                // <p>Não tem alternativa</p>
             } 
           </div>
         ) : typeQuestion === 'objective' ? ( //Questões objetivas
