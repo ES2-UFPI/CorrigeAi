@@ -55,6 +55,14 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
     questions[props.id].points = Number(e.target.value)
     setQuestions([...questions])
   }
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const newAlternatives = questions[props.id].alternatives
+    if (newAlternatives){
+      //Modifica cada input de maneira especifica
+      newAlternatives[index].alternativeData = event.target.value
+    }
+    setQuestions([...questions])
+  }
 
   async function handleAddAlternative(e : React.InputHTMLAttributes<HTMLInputElement>){
     // Criar elemento alternative dentro de question
@@ -62,26 +70,16 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
     if (newQuestions[props.id].alternatives){
       // Quando array alternatives existe
       newQuestions[props.id].alternatives?.push(
-        {
-          alternativeData: '',
-          keyAlternative: props.id, //Chave da questão 
-        }
+        { alternativeData: '', }
       )
     }else {
       // Primeira insersão no array, alternatives ainda não existe
       newQuestions[props.id].alternatives = [
-        {
-          alternativeData: '',
-          keyAlternative: props.id
-        }] //?
+        { alternativeData: '',
+      }] //?
     }
     await setQuestions(newQuestions)
-    forceUpdate()
-    // allAlternatives.push({
-    //         alternativeData: '',
-    //         keyAlternative: props.id
-    //       })
-        
+    forceUpdate() 
   }
 
   return (
@@ -124,12 +122,17 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
             { 
               // Renderizar alternativas para cada questão
               questions[props.id].alternatives ?
-                questions[props.id].alternatives?.map((alternative, key) => {
+                questions[props.id].alternatives?.map((alternative, index) => {
                   return (
-                    <AlternativeQuestion 
-                      key={key}
-                      // setAlternativeData={alternative.alternativeData}
-                    />
+                    <div>
+                      <label htmlFor="alternative">Enunciado da alternativa: </label>
+                      <input 
+                        type="text" 
+                        id="alternative"
+                        value={alternative.alternativeData}  
+                        onChange={ event => handleInputChange(event, index)}
+                      />
+                  </div>
                   )
                 })
                 // allAlternatives.map((alternative) => {
