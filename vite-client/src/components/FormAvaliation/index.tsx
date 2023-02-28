@@ -6,16 +6,18 @@ import { CreateQuestions } from "../../Pages/CreateQuestions"
 import { PropsQuestions } from '../GenerateQuestions'
 import { ContextQuestions } from '../../context/contextQuestions'
 
-export interface Props {
+export interface PropsForm {
   typeAvaliation : string
-  handleSaveQuestion?: () => void
+
 }
 
-export function FormAvaliation( {typeAvaliation} : Props ) {
-  // Array para armazenar todas questões
+export function FormAvaliation( {typeAvaliation} : PropsForm ) {
+  // Array para armazenar todas questões, e informações do forumario
+  const { questions } = useContext(ContextQuestions)
 
   function handleSaveQuestion() {
     // Vai lidar com o armazenamento das questões no state
+    console.log(questions, typeAvaliation)
   }
   
   return (
@@ -49,7 +51,6 @@ export function FormAvaliation( {typeAvaliation} : Props ) {
 
             <CreateQuestions 
               typeAvaliation={typeAvaliation}
-              handleSaveQuestion={handleSaveQuestion}
             />
           </Form>
         :
@@ -72,7 +73,6 @@ export function FormAvaliation( {typeAvaliation} : Props ) {
 
             <CreateQuestions 
               typeAvaliation={typeAvaliation}
-              handleSaveQuestion={ handleSaveQuestion }
             />
           </Form>
       }
