@@ -110,14 +110,29 @@ export function FormAvaliation( {typeAvaliation, ...props} : PropsForm ) {
             </legend>
 
             <label htmlFor="themeTask">Tema da atividade: </label>
-            <input type="text" id="themeTask" name="themeTask"/>
+            <input 
+              type="text" 
+              id="themeTask" 
+              name="themeTask"
+              onChange={ e => setThemeAvaliation(e.target.value) }
+            />
             
             <br />
             <label htmlFor="initialDateTask">Data de inicio: </label>
-            <input type="date" name="initialDateTask" id="initialDateTask" />              
+            <input 
+              type="date" 
+              name="initialDateTask" 
+              id="initialDateTask" 
+              onChange={ e => setInitialAvaliation(e.target.value) }
+            />              
 
             <label htmlFor="finalDateTask">Até: </label>
-            <input type="date" name="finalDateTask" id="finalDateTask" />              
+            <input 
+              type="date" 
+              name="finalDateTask" 
+              id="finalDateTask" 
+              onChange={ e => setFinalAvaliation(e.target.value) }
+            />              
             <br />
 
             <CreateQuestions 
