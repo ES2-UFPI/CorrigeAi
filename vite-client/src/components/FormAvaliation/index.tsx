@@ -2,7 +2,7 @@ import { useState, useContext } from 'react'
 
 import { Form } from "./styles"
 
-import { CreateQuestions } from "../../Pages/CreateQuestions"
+import { CreateQuestions } from "../CreateQuestions"
 import { PropsQuestions } from '../GenerateQuestions'
 import { ContextQuestions } from '../../context/contextQuestions'
 
@@ -15,7 +15,6 @@ export interface PropsForm {
   time?: string
   points?: number
 }
-
 
 export function FormAvaliation( {typeAvaliation, ...props} : PropsForm ) {
   

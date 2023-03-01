@@ -1,7 +1,7 @@
 import { useState, useContext } from "react"
 
-import { PropsForm } from "../../components/FormAvaliation"
-import { GenerateQuestions } from "../../components/GenerateQuestions";
+import { PropsForm } from "../FormAvaliation"
+import { GenerateQuestions } from "../GenerateQuestions";
 import { ContextQuestions } from "../../context/contextQuestions";
 
 export function CreateQuestions({typeAvaliation} : PropsForm) {
