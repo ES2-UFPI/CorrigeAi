@@ -34,7 +34,7 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
   const [isCorrect, setIsCorrect]  = useState(false)
 
   // const { alternativeData } = useContext(alternativeContext)
-  console.log(questions)
+  // console.log(questions)
 
   const forceUpdate: () => void = useState({})[1].bind(null, {}) // gambiarra para re-renderizar pagina
 
@@ -89,12 +89,6 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
   async function handleAddAlternative(e : React.InputHTMLAttributes<HTMLInputElement>){
     // Criar elemento alternative dentro de question
     const newQuestions = questions
-    if (typeQuestion === 'trueFalse') {
-
-    }else { //objective
-
-    }
-
     if (newQuestions[props.id].alternatives){
       // Quando array alternatives existe
       newQuestions[props.id].alternatives?.push(
@@ -189,6 +183,7 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
                       <input 
                         type="checkbox" 
                         checked={!alternative.isCorrect} 
+                        defaultChecked
                         onClick={ () => handleIsCorrect(index) }  
                       />
                     </div>
