@@ -37,8 +37,15 @@ export function FormAvaliation( {typeAvaliation, ...props} : PropsForm ) {
   }
 
   // const [formData, setFormData] = useState<PropsForm>(initialForm) 
-  function handleSaveQuestion() {
-    // Vai lidar com o armazenamento das questões no state
+  const handleSubmit = async () => {
+   
+    fetch("http://localhost:3000/createForm", {
+      method: "POST",
+      body: JSON.stringify(initialForm),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     console.log(initialForm)
   }
   
@@ -47,7 +54,7 @@ export function FormAvaliation( {typeAvaliation, ...props} : PropsForm ) {
       {
         //Formulario para criar prova
         typeAvaliation === 'exam' ? 
-          <Form className="Form-avaliation" onSubmit={ e => e.preventDefault() } >
+          <Form className="Form-avaliation" onSubmit={ (e) => e.preventDefault } >
             <legend>
               <h2>Cadastro de prova</h2>
             </legend>
@@ -104,7 +111,7 @@ export function FormAvaliation( {typeAvaliation, ...props} : PropsForm ) {
           </Form>
         :
         // Formulario para criar tarefa 
-          <Form onSubmit={ e => e.preventDefault() } >
+          <Form onSubmit={(e) => e.preventDefault } >
             <legend>
               <h2>Cadastro de tarefa</h2>
             </legend>
@@ -140,8 +147,8 @@ export function FormAvaliation( {typeAvaliation, ...props} : PropsForm ) {
             />
           </Form>
       }
-      <button onClick={handleSaveQuestion}>
-        Salvar prova
+      <button onClick={handleSubmit}>
+        Salvar
       </button>
     </>
   )
