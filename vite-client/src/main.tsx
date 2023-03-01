@@ -6,16 +6,26 @@ import GlobalStyles from "./styles/globalStyles";
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
 import { Home } from "./Pages/Home";
-import { CreateTaskOrExam } from "./Pages/CreateTaskOrExam";
+import { CreateTaskOrExam } from "./Pages/CreateAvaliation";
+import { ViewAvaliations } from "./Pages/ViewAvaliations";
+import { SolveAvaliation } from "./Pages/SolveAvaliation";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />
+    element: <CreateTaskOrExam />
   }, 
   {
     path: "/form-avaliation",
     element: <CreateTaskOrExam />
+  },
+  {
+    path: "/view-avaliation",
+    element: <ViewAvaliations />
+  },
+  {
+    path: "/solve-avaliation",
+    element: <SolveAvaliation/>
   }
 ])
 
