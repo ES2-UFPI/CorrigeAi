@@ -1,56 +1,57 @@
-import mongoose from "mongoose";
-const Schema = mongoose.Schema;
+import { Schema, model, Document } from 'mongoose';
 
-const subjetiva = new Schema({
-  enunciado: String,
-  resposta: String,
-})
+interface iAlternative {
+  alternativeData?: string
+  isCorrect: boolean
+}
 
-const objetiva = new Schema({
-  enunciado: String,
-  alternativas: [String],
-  resposta: String,
-})
+interface iQuestions {
+  id: number //id para referenciar alternativa
+  numberQuestion: number
+  typeQuestion: string;
+  description: string;
+  expectedAnswerSubjective?: string
+  points?: number;
+  alternatives?: iAlternative []
+}
 
-const verdadeiroOuFalso = new Schema({
-  enunciado: String,
-  altervativa: [String],
-  respostas: [String],
-})
+interface iForms {
+  typeAvaliation: string
+  themeAvaliation?: string
+  questions?: iQuestions[]
+  initialAvaliation?: string
+  finalAvaliation?: string
+  time?: string
+  points?: number
+}
+interface FormDocument extends Document, iForms {}
 
-const questaoSchema = new Schema({
-  tipo: String,
-  objetiva: objetiva,
-  subjetiva: subjetiva,
-  verdadeiroOuFalso: verdadeiroOuFalso,
-})
-
-const provaSchema = new Schema({
-  tema: { type: String, required: true },
-  dataInicio: { type: Date, required: true },
-  dataFim: { type: Date, required: true },
-  prazo: Number,
-  pontos: Number,
-  questoes: [
-    { type: Schema.Types.ObjectId, ref: 'Questao'
-    }
-  ]
+const AlternativeSchema = new Schema<iAlternative>({
+  alternativeData: String,
+  isCorrect: Boolean,
 });
 
-const tarefaSchema = new Schema({
-  tema: { type: String, required: true },
-  dataInicio: { type: Date, required: true },
-  dataFim: { type: Date, required: true },
-  prazo: Number,
-  questoes: [
-    { type: Schema.Types.ObjectId, ref: 'Questao'
-    }
-  ]
+const QuestionSchema = new Schema<iQuestions>({
+  id: Number,
+  numberQuestion: Number,
+  typeQuestion: String,
+  description: String,
+  expectedAnswerSubjective: String,
+  points: Number,
+  alternatives: [AlternativeSchema],
 });
 
-const Tarefa = mongoose.model('Tarefa', tarefaSchema);
-const Prova = mongoose.model('Prova', provaSchema);
-const Questao = mongoose.model('Questao', questaoSchema);
+const FormSchema = new Schema<FormDocument>({
+  typeAvaliation: String,
+  themeAvaliation: String,
+  questions: [QuestionSchema],
+  initialAvaliation: String,
+  finalAvaliation: String,
+  time: String,
+  points: Number,
+});
 
-export { Tarefa, Prova ,Questao};
+const FormModel = model<FormDocument>('Form', FormSchema);
+
+export { iForms, FormDocument, FormModel };
 

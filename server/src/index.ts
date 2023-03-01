@@ -2,9 +2,11 @@ import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import { config } from 'dotenv'
+import axios from 'axios';
+
 config();
 
-import { Tarefa, Prova } from './model/Schemas';
+import { FormModel, FormDocument } from './model/Schemas';
 
 const app = express();
 mongoose.set('strictQuery', false);
@@ -17,29 +19,33 @@ app.use(
 );
 app.use(express.json());
 
-app.post('/criarTarefa', async (req: Request, res: Response) => {
-  const tarefa = new Tarefa({
-    tema: "novo teste tarefa",
-    dataInicio: new Date(),
-    dataFim: new Date(),
-    prazo: 20,
-  });
-  const criarTarefa = await tarefa.save();
-  res.send(criarTarefa);
+
+
+
+  
+app.post('/createForm', async (req: Request, res: Response) => {
+  try {
+    const { typeAvaliation, themeAvaliation, questions, initialAvaliation, finalAvaliation, time, points } = req.body;
+    console.log(req.body);
+    const form = new FormModel({
+      typeAvaliation,
+      themeAvaliation,
+      questions,
+      initialAvaliation,
+      finalAvaliation,
+      time,
+      points,
+    });
+
+    const createForm = await form.save();
+
+    res.status(201).json({ message: 'Form created successfully', createForm });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error creating form' });
+  }
 }); 
 
-app.post('/criarProva', async (req: Request, res: Response) => {
-  const prova = new Prova({
-    tema: "teste prova",
-    dataInicio: new Date(),
-    dataFim: new Date(),
-    prazo: 20,
-    pontos: Number,
-  });
-  const criarProva = await prova.save();
-  res.send(criarProva);
-  
-}); 
 
 mongoose.connect(`${process.env.MONGO_URL}`).then(() => {
   console.log(`listening on port ${PORT}`);
