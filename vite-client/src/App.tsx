@@ -1,4 +1,4 @@
-import { CreateTaskOrExam } from "./Pages/CreateTaskOrExam"; 
+import { CreateTaskOrExam } from "./Pages/CreateAvaliation"; 
 import { AppStyles } from "./styles"
  
 function App() {
