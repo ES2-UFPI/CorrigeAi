@@ -1,6 +1,8 @@
 {
-  "finalExam": "2023-03-06",
-  "initialExam": "2023-03-05",
+  "typeAvaliation:": "exam",
+  "themeAvaliation": "Prova sobre Plantas",
+  "finalAvaliation": "2023-03-06",
+  "initialAvaliation": "2023-03-05",
   "points": 10,
   "questions" : [
     {

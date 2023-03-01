@@ -11,12 +11,16 @@ export function SolveAvaliation(){
         Accept: "application/json"
       }
     }).then(res => res.json())
-      .then(res => setExam(res))
+      .then(res => {
+        setExam(res)
+        console.log(exam)
+      })
   },[])
 
   return (
     <div>
-      <h1>Resolvendo avaliação</h1>
+      <h1>Tema: {exam.themeAvaliation}</h1>
+      
     </div>
   )
 }

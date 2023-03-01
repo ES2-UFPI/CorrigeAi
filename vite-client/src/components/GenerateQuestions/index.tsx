@@ -12,8 +12,6 @@ export interface PropsQuestions {
   typeQuestion: string;
   description: string;
   expectedAnswerSubjective?: string
-  expectedAnswerTrueFalse?: string
-  expectedAnswerObjective?: string
   points?: number;
   alternatives?: PropsAlternative []
   setTypeQuestion?: React.Dispatch<React.SetStateAction<string>>;
