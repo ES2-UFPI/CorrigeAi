@@ -1,10 +1,10 @@
 import { useState, useContext } from "react"
 
-import { Props } from "../../components/FormAvaliation"
-import { GenerateQuestions } from "../../components/GenerateQuestions";
+import { PropsForm } from "../FormAvaliation"
+import { GenerateQuestions } from "../GenerateQuestions";
 import { ContextQuestions } from "../../context/contextQuestions";
 
-export function CreateQuestions({typeAvaliation} : Props) {
+export function CreateQuestions({typeAvaliation} : PropsForm) {
   // Usando contexto global
   const {questions, handleNewQuestion, contQuestions} = useContext(ContextQuestions)
   return (

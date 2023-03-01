@@ -1,3 +1,4 @@
+//Logica não utilizada
 import { createContext, useState } from 'react'
 import { PropsAlternative } from '../components/AlternativeQuestion'
 
