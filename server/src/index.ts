@@ -2,8 +2,6 @@ import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import { config } from 'dotenv'
-import axios from 'axios';
-
 config();
 
 import { FormModel, FormDocument } from './model/Schemas';
@@ -42,6 +40,16 @@ app.post('/createForm', async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Error creating form' });
   }
 }); 
+
+app.get('/getForms', async (req: Request, res: Response) => {
+  try {
+    const form = await FormModel.find();
+    res.status(200).json({ message: 'Form found successfully', form });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error finding form' });
+  }
+});
 
 
 mongoose.connect(`${process.env.MONGO_URL}`).then(() => {
