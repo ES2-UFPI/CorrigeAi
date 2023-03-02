@@ -3,6 +3,7 @@
   "themeAvaliation": "Prova sobre Plantas",
   "finalAvaliation": "2023-03-06",
   "initialAvaliation": "2023-03-05",
+  "time": "60:00",
   "points": 10,
   "questions" : [
     {
@@ -14,15 +15,18 @@
       "alternatives": [
         {
           "alternativeData": "Todas as plantas são amarelas",
-          "isCorrect": false
+          "isCorrect": false,
+          "answerAlternative": false 
         },
         {
           "alternativeData": "Plantas possuem cor",
-          "isCorrect": true
+          "isCorrect": true,
+          "answerAlternative": false 
         },
         {
           "alternativeData": "Gira sol tem nome do sol",
-          "isCorrect": false
+          "isCorrect": false,
+          "answerAlternative": false 
         }
       ]
     },
@@ -43,15 +47,18 @@
       "alternatives": [
         {
           "alternativeData": "opção1 errada",
-          "isCorrect": false
+          "isCorrect": false,
+          "answerAlternative": false 
         },
         {
           "alternativeData": "opção2 certa",
-          "isCorrect": true
+          "isCorrect": true,
+          "answerAlternative": false 
         },
         {
           "alternativeData": "opção3 errada",
-          "isCorrect": false
+          "isCorrect": false,
+          "answerAlternative": false 
         }
       ]
     }

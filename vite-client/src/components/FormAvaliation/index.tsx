@@ -7,7 +7,7 @@ import { PropsQuestions } from '../GenerateQuestions'
 import { ContextQuestions } from '../../context/contextQuestions'
 
 export interface PropsForm {
-  typeAvaliation: string
+  typeAvaliation?: string
   themeAvaliation?: string
   questions?: PropsQuestions[]
   initialAvaliation?: string

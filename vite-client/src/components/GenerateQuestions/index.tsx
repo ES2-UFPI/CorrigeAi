@@ -4,7 +4,7 @@ import { GenerateQuestionStyled } from "./styles"
 
 import { ContextQuestions } from "../../context/contextQuestions"
 import { PropsAlternative } from "../AlternativeQuestion"
-import { AlternativeQuestion } from "../AlternativeQuestion"
+// import { AlternativeQuestion } from "../AlternativeQuestion"
 
 export interface PropsQuestions {
   id: number //id para referenciar alternativa
@@ -12,6 +12,7 @@ export interface PropsQuestions {
   typeQuestion: string;
   description: string;
   expectedAnswerSubjective?: string
+  answer?: string;
   points?: number;
   alternatives?: PropsAlternative []
   setTypeQuestion?: React.Dispatch<React.SetStateAction<string>>;
@@ -90,12 +91,12 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
     if (newQuestions[props.id].alternatives){
       // Quando array alternatives existe
       newQuestions[props.id].alternatives?.push(
-        { alternativeData: '', isCorrect: isCorrect }
+        { alternativeData: '', isCorrect: isCorrect, answerAlternative: false }
       )
     }else {
       // Primeira insersão no array, alternatives ainda não existe
       newQuestions[props.id].alternatives = [
-        { alternativeData: '', isCorrect: isCorrect }] //?
+        { alternativeData: '', isCorrect: isCorrect, answerAlternative: false }] //?
     }
     await setQuestions(newQuestions)
     forceUpdate() 
