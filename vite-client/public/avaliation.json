@@ -1,0 +1,66 @@
+{
+  "typeAvaliation:": "exam",
+  "themeAvaliation": "Prova sobre Plantas",
+  "finalAvaliation": "2023-03-06",
+  "initialAvaliation": "2023-03-05",
+  "time": "60:00",
+  "points": 10,
+  "questions" : [
+    {
+      "description": "Com base nas alternativas diga quais são verdadeiras ou falsas.",
+      "id": 0,
+      "numberQuestion": 1,
+      "points": 1,
+      "typeQuestion": "trueFalse",
+      "alternatives": [
+        {
+          "alternativeData": "Todas as plantas são amarelas",
+          "isCorrect": false,
+          "answerAlternative": false 
+        },
+        {
+          "alternativeData": "Plantas possuem cor",
+          "isCorrect": true,
+          "answerAlternative": false 
+        },
+        {
+          "alternativeData": "Gira sol tem nome do sol",
+          "isCorrect": false,
+          "answerAlternative": false 
+        }
+      ]
+    },
+    {
+      "description": "Qual nome do fulano ?",
+      "expectedAnswerSubjective": "Fulano de tall",
+      "id": 1,
+      "numberQuestion": 2,
+      "points": 2,
+      "typeQuestion":"subjective"
+    },
+    {
+      "description":"Marque a opção correta",
+      "id": 2,
+      "numberQuestion": 3,
+      "points": 2,
+      "typeQuestion": "objective",
+      "alternatives": [
+        {
+          "alternativeData": "opção1 errada",
+          "isCorrect": false,
+          "answerAlternative": false 
+        },
+        {
+          "alternativeData": "opção2 certa",
+          "isCorrect": true,
+          "answerAlternative": false 
+        },
+        {
+          "alternativeData": "opção3 errada",
+          "isCorrect": false,
+          "answerAlternative": false 
+        }
+      ]
+    }
+  ]
+}

@@ -1,12 +1,16 @@
-interface PropsAlternative {
-  
+// import { PropsForm } from "../FormAvaliation"
+// import { PropsQuestions } from "../GenerateQuestions"
+
+export interface PropsAlternative {
+  alternativeData?: string
+  isCorrect: boolean
+  answerAlternative?: boolean
 }
 
-export function AlternativeQuestion() {
+export function AlternativeQuestion(props : PropsAlternative){
   return (
     <div>
-      <label htmlFor="alternative">Enunciado da alternativa: </label>
-      <input type="text" id="alternative"/>
+      <h1>teste</h1>
     </div>
   )
 }
