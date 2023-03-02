@@ -13,7 +13,7 @@ import { SolveAvaliation } from "./Pages/SolveAvaliation";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <CreateTaskOrExam />
+    element: <Home />
   }, 
   {
     path: "/form-avaliation",

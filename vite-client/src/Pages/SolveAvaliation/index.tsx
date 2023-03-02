@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import React from "react";
 import { AlternativeQuestion, PropsAlternative } from "../../components/AlternativeQuestion"
 // import { AlternativeQuestion } from "../../components/AlternativeQuestion"
-
+import { Avaliation, QuestionStyle } from "./styles";
 import { PropsForm } from "../../components/FormAvaliation"
 
 export function SolveAvaliation(){
@@ -54,7 +54,7 @@ export function SolveAvaliation(){
   }
 
   return (
-    <div>
+    <Avaliation>
       {/* <h1>{ formAvaliation.typeAvaliation }</h1>  */}
       <h2>Tema: {formAvaliation.themeAvaliation}</h2>
       <p>Data de inicio - {formAvaliation.initialAvaliation} até {formAvaliation.finalAvaliation}</p>
@@ -66,7 +66,7 @@ export function SolveAvaliation(){
         formAvaliation.questions?.map((question, index) => {
           if (question.typeQuestion === 'subjective'){
             return (
-              <div key={index} className="question">
+              <QuestionStyle key={index} className="question">
                 <h4>{question.numberQuestion + " - " + question.description}</h4>
                 <label htmlFor="description">Resposta:</label>
                 <br />
@@ -79,11 +79,11 @@ export function SolveAvaliation(){
                 />
                 <br />
                 <br />
-              </div>
+              </QuestionStyle>
             )
           }else if (question.typeQuestion === 'objective'){
             return (
-              <div>
+              <QuestionStyle>
                 <h4>{question.numberQuestion + " - " + question.description}</h4>  
                 {
                   question.alternatives?.map( (alternative, index) => {
@@ -99,11 +99,11 @@ export function SolveAvaliation(){
                   })   
                 }
                 <br />
-              </div>            
+              </QuestionStyle>            
             )
           }else {
             return (
-              <div key={index} className="question">
+              <QuestionStyle key={index} className="question">
                 <div>
                   <h4>{question.numberQuestion + " - " + question.description}</h4>  
                   {
@@ -129,11 +129,11 @@ export function SolveAvaliation(){
                   }
                   <br />
                 </div>   
-              </div>
+              </QuestionStyle>
             )
           }
         }) 
       }
-    </div>
+    </Avaliation>
   )
 }

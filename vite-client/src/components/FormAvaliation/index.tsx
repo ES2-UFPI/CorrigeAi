@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'
 
 import { Form } from "./styles"
-
+import { Link } from "react-router-dom";
 import { CreateQuestions } from "../CreateQuestions"
 import { PropsQuestions } from '../GenerateQuestions'
 import { ContextQuestions } from '../../context/contextQuestions'
@@ -38,6 +38,16 @@ export function FormAvaliation( {typeAvaliation, ...props} : PropsForm ) {
 
   // const [formData, setFormData] = useState<PropsForm>(initialForm) 
   const handleSubmit = async () => {
+
+    if (themeAvaliation === '' || finalAvaliation === '' || initialAvaliation === '' || points === 0 ) {
+      alert('Preencha todos os campos para continuar')
+      return
+    }
+
+    if (questions.length === 0) {
+      alert('Adicione pelo menos uma questão')
+      return
+    }
    
     fetch("http://localhost:3000/createForm", {
       method: "POST",
@@ -147,9 +157,9 @@ export function FormAvaliation( {typeAvaliation, ...props} : PropsForm ) {
             />
           </Form>
       }
-      <button onClick={handleSubmit}>
+      <Link to='/' onClick={handleSubmit}>
         Salvar
-      </button>
+      </Link>
     </>
   )
 }
