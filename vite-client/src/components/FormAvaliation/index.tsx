@@ -54,7 +54,7 @@ export function FormAvaliation( {typeAvaliation, ...props} : PropsForm ) {
       {
         //Formulario para criar prova
         typeAvaliation === 'exam' ? 
-          <Form className="Form-avaliation" onSubmit={ (e) => e.preventDefault } >
+          <Form className="Form-avaliation" onSubmit={ (e) => e.preventDefault() } >
             <legend>
               <h2>Cadastro de prova</h2>
             </legend>
@@ -111,7 +111,7 @@ export function FormAvaliation( {typeAvaliation, ...props} : PropsForm ) {
           </Form>
         :
         // Formulario para criar tarefa 
-          <Form onSubmit={(e) => e.preventDefault } >
+          <Form onSubmit={(e) => e.preventDefault() } >
             <legend>
               <h2>Cadastro de tarefa</h2>
             </legend>
