@@ -49,9 +49,9 @@ app.get('/getForms', async (req: Request, res: Response) => {
     console.error(error);
     res.status(500).json({ message: 'Error finding form' });
   }
-});
+});  
 
-
+ 
 mongoose.connect(`${process.env.MONGO_URL}`).then(() => {
   console.log(`listening on port ${PORT}`);
   app.listen(PORT);

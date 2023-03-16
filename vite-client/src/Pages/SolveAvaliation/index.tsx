@@ -4,23 +4,22 @@ import { AlternativeQuestion, PropsAlternative } from "../../components/Alternat
 // import { AlternativeQuestion } from "../../components/AlternativeQuestion"
 import { Avaliation, QuestionStyle } from "./styles";
 import { PropsForm } from "../../components/FormAvaliation"
+import { useLocation } from "react-router-dom";
 
-export function SolveAvaliation(){
+
+export function SolveAvaliation( ){
   const [formAvaliation, setFormAvaliation] = useState<PropsForm>( {} as PropsForm )
+  const { state } = useLocation();
   const [isClick, setIsClick] = useState(false)
 
   const forceUpdate: () => void = useState({})[1].bind(null, {}) 
+  
+  console.log(state)
 
   useEffect(() => {
-    fetch('./avaliation.json', {
-      headers: {
-        Accept: "application/json"
-      }
-    }).then(res => res.json())
-      .then(res => {
-        setFormAvaliation(res)
-        // console.log(formAvaliation)
-      })
+   
+    setFormAvaliation(state)
+ 
   },[])
     
   function handleExpectedAnswer( 
