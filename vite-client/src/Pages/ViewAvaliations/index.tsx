@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PropsForm } from "../../components/FormAvaliation"
 import { Avaliations, Avaliation } from "./styles";
+import { Link } from "react-router-dom";
 
 interface iForms extends PropsForm {
   _id: string;
@@ -9,6 +10,11 @@ interface iForms extends PropsForm {
 export function ViewAvaliations(){
 
   const [forms, setForms] = useState<iForms[]>([]);
+  const [selectedForm, setSelectedForm] = useState<iForms | null>(null);
+
+  const handleFormClick = (form: iForms) => {
+    setSelectedForm(form);
+  };
 
   useEffect(() => {
     const fetchForms = async () => {
@@ -31,6 +37,9 @@ export function ViewAvaliations(){
           <p>Data Inicial: {form.initialAvaliation}</p>
           <p>Data Final: {form.finalAvaliation}</p>
           <p>Points: {form.points}</p>
+          <Link to="/solve-avaliation" state={ form }>
+            <button>Acessar Prova</button>
+          </Link>
         </Avaliation>
       ))}
     </Avaliations>
