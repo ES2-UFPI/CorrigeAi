@@ -13,11 +13,18 @@ export const Avaliation = styled.div`
 `
 
 export const QuestionStyle = styled.div`
+  width: 80%;
   background: #272643;
   padding: 20px 20px;
   color: #fff;
   border-radius: 20px;
   margin-top: 30px;
+  textarea {
+    width: 100%;
+  }
+`
+export const Alternatives = styled.div`
+  
 `
 
 

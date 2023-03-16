@@ -114,7 +114,6 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
     setQuestions([...questions])
   }
 
-  console.log(questions)
   function handleDeleteQuestion(){
     const newQuestions = questions.slice()
     newQuestions.splice(props.id, 1)
@@ -263,6 +262,15 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
         />
         <br />
         <button
+          style={
+            {
+              marginTop: "1rem",
+              paddingBlock: ".5rem",
+              paddingInline: "2rem",
+              borderRadius: "2rem",
+              border: "none",
+            }
+          }
           onClick={handleDeleteQuestion}>
           Excluir
         </button>
