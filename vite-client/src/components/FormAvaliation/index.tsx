@@ -1,10 +1,11 @@
 import { useState, useContext } from 'react'
 
-import { Form } from "./styles"
-import { Link } from "react-router-dom";
-import { CreateQuestions } from "../CreateQuestions"
+import { Form } from './styles'
+import { Link } from 'react-router-dom'
+import { CreateQuestions } from '../CreateQuestions'
 import { PropsQuestions } from '../GenerateQuestions'
 import { ContextQuestions } from '../../context/contextQuestions'
+import { Wrapper } from '../../styles/Layout'
 
 export interface PropsForm {
   typeAvaliation?: string
@@ -16,17 +17,16 @@ export interface PropsForm {
   points?: number
 }
 
-export function FormAvaliation( {typeAvaliation, ...props} : PropsForm ) {
-  
+export function FormAvaliation({ typeAvaliation, ...props }: PropsForm) {
   // Array para armazenar todas questões, e informações do forumario
   const { questions } = useContext(ContextQuestions)
   const [themeAvaliation, setThemeAvaliation] = useState('')
   const [finalAvaliation, setFinalAvaliation] = useState('')
   const [initialAvaliation, setInitialAvaliation] = useState('')
   const [points, setPoints] = useState(0)
-  const [time, setTime] = useState('')
+  const [time, setTime] = useState('00:00')
 
-  const initialForm : PropsForm = {
+  const initialForm: PropsForm = {
     typeAvaliation,
     finalAvaliation,
     initialAvaliation,
@@ -36,10 +36,14 @@ export function FormAvaliation( {typeAvaliation, ...props} : PropsForm ) {
     time
   }
 
-  // const [formData, setFormData] = useState<PropsForm>(initialForm) 
+  // const [formData, setFormData] = useState<PropsForm>(initialForm)
   const handleSubmit = async () => {
-
-    if (themeAvaliation === '' || finalAvaliation === '' || initialAvaliation === '' || points === 0 ) {
+    if (
+      themeAvaliation === '' ||
+      finalAvaliation === '' ||
+      initialAvaliation === '' ||
+      points === 0
+    ) {
       alert('Preencha todos os campos para continuar')
       return
     }
@@ -48,116 +52,120 @@ export function FormAvaliation( {typeAvaliation, ...props} : PropsForm ) {
       alert('Adicione pelo menos uma questão')
       return
     }
-   
-    fetch("http://localhost:3000/createForm", {
-      method: "POST",
+
+    fetch('http://localhost:3000/createForm', {
+      method: 'POST',
       body: JSON.stringify(initialForm),
       headers: {
-        "Content-Type": "application/json",
-      },
-    });
+        'Content-Type': 'application/json'
+      }
+    })
     console.log(initialForm)
   }
-  
+
   return (
     <>
       {
         //Formulario para criar prova
-        typeAvaliation === 'exam' ? 
-          <Form className="Form-avaliation" onSubmit={ (e) => e.preventDefault() } >
+        typeAvaliation === 'exam' ? (
+          <Form className="Form-avaliation" onSubmit={e => e.preventDefault()}>
             <legend>
               <h2>Cadastro de prova</h2>
             </legend>
 
             <label htmlFor="themeExam">Tema da prova: </label>
-            <input 
-              type="text" 
-              id="themeExam" 
-              name="themeExam" 
-              value={themeAvaliation} 
-              onChange={ e => setThemeAvaliation(e.target.value) }
+            <input
+              type="text"
+              id="themeExam"
+              name="themeExam"
+              value={themeAvaliation}
+              onChange={e => setThemeAvaliation(e.target.value)}
             />
-            
-            <br />
+
             <label htmlFor="initialDateExam">Data de inicio: </label>
-            <input 
-              type="date" 
-              name="initialDateExam" 
-              id="initialDateExam" 
-              value={initialAvaliation} 
-              onChange={ e => setInitialAvaliation(e.target.value) }
-            />              
+            <input
+              type="date"
+              name="initialDateExam"
+              id="initialDateExam"
+              value={initialAvaliation}
+              onChange={e => setInitialAvaliation(e.target.value)}
+            />
 
             <label htmlFor="finalDateExam">Até: </label>
-            <input 
-              type="date" 
-              name="finalDateExam" 
-              id="finalDateExam" 
+            <input
+              type="date"
+              name="finalDateExam"
+              id="finalDateExam"
               value={finalAvaliation}
-              onChange={ e => setFinalAvaliation(e.target.value) }  
-            />              
-            <br />
+              onChange={e => setFinalAvaliation(e.target.value)}
+            />
 
             <label htmlFor="time">Prazo: </label>
-            <input 
-              type="time" 
+            <input
+              type="number"
+              min="0"
+              max="24"
               value={time}
-              onChange={ e => setTime(e.target.value) }  
+              onChange={e => setTime(e.target.value)}
             />
-            <br />
 
             <label htmlFor="points">Pontuação: </label>
-            <input 
-              type="number" 
-              name="points" 
-              id="points" 
-              onChange={ e => setPoints(Number(e.target.value)) }
+            <input
+              type="number"
+              name="points"
+              id="points"
+              onChange={e => setPoints(Number(e.target.value))}
             />
-            <br />
-
-            <CreateQuestions 
-              typeAvaliation={typeAvaliation}
-            />
+            <hr />
+            <CreateQuestions typeAvaliation={typeAvaliation} />
           </Form>
-        :
-        // Formulario para criar tarefa 
-          <Form onSubmit={(e) => e.preventDefault() } >
+        ) : (
+          // Formulario para criar tarefa
+          <Form onSubmit={e => e.preventDefault()}>
             <legend>
               <h2>Cadastro de tarefa</h2>
             </legend>
 
             <label htmlFor="themeTask">Tema da atividade: </label>
-            <input 
-              type="text" 
-              id="themeTask" 
+            <input
+              type="text"
+              id="themeTask"
               name="themeTask"
-              onChange={ e => setThemeAvaliation(e.target.value) }
+              onChange={e => setThemeAvaliation(e.target.value)}
             />
-            
-            <br />
+
             <label htmlFor="initialDateTask">Data de inicio: </label>
-            <input 
-              type="date" 
-              name="initialDateTask" 
-              id="initialDateTask" 
-              onChange={ e => setInitialAvaliation(e.target.value) }
-            />              
+            <input
+              type="date"
+              name="initialDateTask"
+              id="initialDateTask"
+              onChange={e => setInitialAvaliation(e.target.value)}
+            />
 
             <label htmlFor="finalDateTask">Até: </label>
-            <input 
-              type="date" 
-              name="finalDateTask" 
-              id="finalDateTask" 
-              onChange={ e => setFinalAvaliation(e.target.value) }
-            />              
-            <br />
-
-            <CreateQuestions 
-              typeAvaliation={typeAvaliation}
+            <input
+              type="date"
+              name="finalDateTask"
+              id="finalDateTask"
+              onChange={e => setFinalAvaliation(e.target.value)}
             />
+            <hr />
+            <CreateQuestions typeAvaliation={typeAvaliation} />
           </Form>
+        )
       }
-      <Link to='/' onClick={handleSubmit}>
+      <Link 
+        to="/" 
+        onClick={handleSubmit}
+        style={{
+          color: '#272643',
+          backgroundColor: "#C9D5FF",
+          paddingBlock: ".5rem",
+          paddingInline: "5rem",
+          borderRadius: "2rem",
+          textDecoration: "none"          
+        }}
+      >
         Salvar
       </Link>
     </>

@@ -8,3 +8,16 @@ export const CreateQuestionsStyled = styled.div`
   align-items: center;
 `
 
+export const SubForm = styled.div`
+  width: 100%;
+  padding: 0 4rem;
+
+  label {
+    color: white;
+  }
+  
+  h3 {
+    color: #272643; 
+    font-size: 2.4rem;
+  }
+`

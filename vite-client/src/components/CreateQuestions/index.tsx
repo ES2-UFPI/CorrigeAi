@@ -3,12 +3,13 @@ import { useState, useContext } from "react"
 import { PropsForm } from "../FormAvaliation"
 import { GenerateQuestions } from "../GenerateQuestions";
 import { ContextQuestions } from "../../context/contextQuestions";
+import { SubForm } from "./styles";
 
 export function CreateQuestions({typeAvaliation} : PropsForm) {
   // Usando contexto global
   const {questions, handleNewQuestion, contQuestions} = useContext(ContextQuestions)
   return (
-    <div>
+    <SubForm>
       <h3>Criando questões da {typeAvaliation === 'exam' ? 'prova' : 'Atividade'}</h3>
       <button onClick={handleNewQuestion}>
         Adicionar questão
@@ -34,6 +35,6 @@ export function CreateQuestions({typeAvaliation} : PropsForm) {
           : 
           <p>Nehuma questão foi criada</p>
       }
-    </div>
+    </SubForm>
   )
 }

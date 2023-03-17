@@ -29,7 +29,7 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
   ]
   
   // usando contexto global para questões
-  const { questions, setQuestions } = useContext(ContextQuestions)
+  const { questions, setQuestions, contQuestions, setContQuestions } = useContext(ContextQuestions)
   const [isCorrect, setIsCorrect]  = useState(false)
 
   // const { alternativeData } = useContext(alternativeContext)
@@ -114,6 +114,12 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
     setQuestions([...questions])
   }
 
+  function handleDeleteQuestion(){
+    const newQuestions = questions.slice()
+    newQuestions.splice(props.id, 1)
+    setQuestions(newQuestions)
+  }
+
   return (
     <GenerateQuestionStyled>
       <div>
@@ -190,7 +196,7 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
                 })
                 : 
                 <p>Não tem alternativa</p>
-            } 
+            }    
           </div>
         ) : typeQuestion === 'objective' ? ( //Questões objetivas
           <div>
@@ -207,7 +213,7 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
               questions[props.id].alternatives ?
                 questions[props.id].alternatives?.map((alternative, index) => {
                   return (
-                    <div>
+                    <div key={index}>
                       <label htmlFor="alternative">Enunciado da alternativa: </label>
                       <input 
                         type="text" 
@@ -255,6 +261,19 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
           type="number"
         />
         <br />
+        <button
+          style={
+            {
+              marginTop: "1rem",
+              paddingBlock: ".5rem",
+              paddingInline: "2rem",
+              borderRadius: "2rem",
+              border: "none",
+            }
+          }
+          onClick={handleDeleteQuestion}>
+          Excluir
+        </button>
       </div>
     </GenerateQuestionStyled>
   )

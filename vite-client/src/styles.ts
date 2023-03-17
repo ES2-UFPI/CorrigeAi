@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const AppStyles = styled.div`
   background: var(--twitter);
   width: 100%; 
