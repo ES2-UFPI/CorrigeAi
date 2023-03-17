@@ -49,7 +49,7 @@ export function FormAvaliation( {typeAvaliation, ...props} : PropsForm ) {
       return
     }
    
-    fetch("http://localhost:3000/createForm", {
+    fetch("http://localhost:3000/createAvaliation", {
       method: "POST",
       body: JSON.stringify(initialForm),
       headers: {

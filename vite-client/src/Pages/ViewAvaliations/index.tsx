@@ -18,7 +18,7 @@ export function ViewAvaliations(){
 
   useEffect(() => {
     const fetchForms = async () => {
-      const response = await fetch('http://localhost:3000/getForms');
+      const response = await fetch('http://localhost:3000/getAvaliations');
       const data = await response.json();
       console.log(data.form);
       setForms(data.form);

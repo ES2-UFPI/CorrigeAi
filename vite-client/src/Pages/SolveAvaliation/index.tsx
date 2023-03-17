@@ -14,7 +14,16 @@ export function SolveAvaliation( ){
 
   const forceUpdate: () => void = useState({})[1].bind(null, {}) 
   
-  console.log(state)
+  const handleSend = () => {
+    console.log(formAvaliation)
+    fetch("http://localhost:3000/createAvaliation", {
+      method: "POST",
+      body: JSON.stringify(formAvaliation),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
 
   useEffect(() => {
    
@@ -127,12 +136,13 @@ export function SolveAvaliation( ){
                     })   
                   }
                   <br />
-                </div>   
+                </div>  
               </QuestionStyle>
             )
           }
         }) 
       }
+      <button onClick={ () => handleSend() }>Enviar</button>
     </Avaliation>
   )
 }
