@@ -13,7 +13,7 @@ export const Form = styled.form `
   display: flex;
   flex-direction: column;
   align-items: left;
-  gap: 1rem;
+  gap: .5rem;
 
   h2 {
     margin-bottom: 1rem;  
@@ -30,6 +30,7 @@ export const Form = styled.form `
     border: none;
     height: 4rem;
     padding: 2rem;
+    margin-bottom: 1rem;
   }
   
   hr {
@@ -39,4 +40,5 @@ export const Form = styled.form `
     border: none;
   }
 `
+
 
