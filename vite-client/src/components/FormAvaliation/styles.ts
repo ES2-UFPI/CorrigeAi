@@ -24,6 +24,10 @@ export const Form = styled.form `
     color: #272643;
   }
 
+  h3 {
+    color: #272643;
+  }
+
   input {
     width: 100%;
     border-radius: 2rem;
@@ -32,13 +36,43 @@ export const Form = styled.form `
     padding: 2rem;
     margin-bottom: 1rem;
   }
-  
+
   hr {
     margin: 2rem;
     height: 1px;
-    background-color: #27264352;
+    background-color: rgb(106,90,205, 0.30);
     border: none;
   }
 `
+export const SubForm = styled.div`
+  width: 100%;
+  padding: 0 4rem;
 
+  label {
+    color: white;
+  }
+  
+  h3 {
+    font-size: 2.4rem;
+  }
+
+  textarea {
+    border-radius: .8rem;
+  }
+
+  div {
+    h4 {
+      color: white;
+      font-size: 2.2rem;
+    }  
+    
+    div > hr {
+      margin: 2rem;
+      height: 1px;
+      background-color: rgb(72,61,139);
+      border: none;
+    }
+  }
+
+`
 

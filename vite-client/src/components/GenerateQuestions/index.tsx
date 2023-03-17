@@ -121,7 +121,7 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
   }
 
   return (
-    <GenerateQuestionStyled>
+    <GenerateQuestionStyled className="question">
       <div>
         <TypeQuestion>
           <label htmlFor="typeQuestion">Qual tipo da questão: </label>
@@ -150,7 +150,7 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
         {typeQuestion === 'trueFalse' ? ( //Questões verdadeira ou falsa
           <div>
             <legend>
-              <h3>Questão verdadeira ou falsa</h3>
+              <h4>Questão verdadeira ou falsa</h4>
             </legend>
             <ButtonAddAlternative 
               type="button"
@@ -203,7 +203,7 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
         ) : typeQuestion === 'objective' ? ( //Questões objetivas
           <div>
             <legend>
-              <h3>Questão objetiva</h3>
+              <h4>Questão objetiva</h4>
             </legend>
             <ButtonAddAlternative
               type="button"
@@ -248,7 +248,7 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
         ) : typeQuestion === 'subjective' ? ( //Questões subjetivas
           <div>
             <legend>
-              <h3>Questão subjetiva</h3>
+              <h4>Questão subjetiva</h4>
             </legend>
             <label htmlFor="response">Resposta esperada da questão </label>
             <textarea

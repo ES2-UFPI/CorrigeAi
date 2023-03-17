@@ -6,7 +6,13 @@ import {
   PropsAlternative
 } from '../../components/AlternativeQuestion'
 
-import { Avaliation, QuestionStyle } from './styles'
+import {
+  AlternativesObjective,
+  AlternativesTrueFalse,
+  Avaliation,
+  Container,
+  QuestionStyle
+} from './styles'
 import { PropsForm } from '../../components/FormAvaliation'
 import { Wrapper } from '../../styles/Layout'
 
@@ -80,27 +86,30 @@ export function SolveAvaliation() {
   return (
     <Avaliation>
       <Wrapper>
-        {/* <h1>{ formAvaliation.typeAvaliation }</h1>  */}
-        <h2>Tema: {formAvaliation.themeAvaliation}</h2>
-        <p>
-          Data de inicio - {formAvaliation.initialAvaliation} até{' '}
-          {formAvaliation.finalAvaliation}
-        </p>
-        <p>Tempo: {formAvaliation.time}</p>
-        <strong>Vale {formAvaliation.points} pontos</strong>
-        <h3>Questões: </h3>
+        <Container className='container'>
+          <div className='aboutAvaliation'>
+            <h2>Tema: {formAvaliation.themeAvaliation}</h2>
+            <p>
+              Data de inicio - {formAvaliation.initialAvaliation} até{' '}
+              {formAvaliation.finalAvaliation}
+            </p>
+            <p>Tempo: {formAvaliation.time}</p>
+            <strong>Vale {formAvaliation.points} pontos</strong>
+          </div>
 
-        <div className='questions'>
-          {formAvaliation.questions?.map((question, index) => {
-            if (question.typeQuestion === 'subjective') {
-              return (
-                <QuestionStyle key={generateUniqueId()} className="question">
-                  <div key={generateUniqueId()}>
+          <h3>Questões: </h3>
+          <div className="questions">
+            {formAvaliation.questions?.map((question, index) => {
+              if (question.typeQuestion === 'subjective') {
+                return (
+                  <QuestionStyle
+                    key={generateUniqueId()}
+                    className="subjective"
+                  >
                     <h4>
                       {question.numberQuestion + ' - ' + question.description}
                     </h4>
                     <label htmlFor="description">Resposta:</label>
-                    <br />
                     <textarea
                       name="postContent"
                       rows={4}
@@ -108,72 +117,75 @@ export function SolveAvaliation() {
                       value={question.answer}
                       onChange={e => handleExpectedAnswer(e, index)}
                     />
-                    <br />
-                    <br />
-                  </div>
-                </QuestionStyle>
-              )
-            } else if (question.typeQuestion === 'objective') {
-              return (
-                <QuestionStyle key={generateUniqueId()}>
-                  <h4>
-                    {question.numberQuestion + ' - ' + question.description}
-                  </h4>
-                  {question.alternatives?.map((alternative, index) => {
-                    return (
-                      <div key={generateUniqueId()}>
-                        <input
-                          type="checkbox"
-                          onChange={e =>
-                            handleExpectedAnswerAlternative(alternative, e)
-                          }
-                        />
-                        <p>{alternative.alternativeData}</p>
-                      </div>
-                    )
-                  })}
-                  <br />
-                </QuestionStyle>
-              )
-            } else {
-              return (
-                <QuestionStyle key={generateUniqueId()} className="question">
-                  <div>
+                  </QuestionStyle>
+                )
+              } else if (question.typeQuestion === 'objective') {
+                return (
+                  <QuestionStyle key={generateUniqueId()} className="objective">
                     <h4>
                       {question.numberQuestion + ' - ' + question.description}
                     </h4>
-                    {question.alternatives?.map((alternative, index) => {
-                      return (
-                        <div key={generateUniqueId()}>
-                          <strong>
-                            {'>' + alternative.alternativeData + '-'}
-                          </strong>
-                          <label htmlFor="true">Verdadeiro</label>
-                          <input
-                            type="checkbox"
-                            checked={alternative.answerAlternative}
-                            onChange={e =>
-                              handleExpectedAnswerTrueFalse(alternative, e)
-                            }
-                          />
-                          <label htmlFor="false">falso</label>
-                          <input
-                            type="checkbox"
-                            checked={!alternative.answerAlternative}
-                            onChange={e =>
-                              handleExpectedAnswerTrueFalse(alternative, e)
-                            }
-                          />
-                        </div>
-                      )
-                    })}
-                    <br />
-                  </div>
-                </QuestionStyle>
-              )
-            }
-          })}
-        </div>
+                    <AlternativesObjective>
+                      {question.alternatives?.map((alternative, index) => {
+                        return (
+                          <div key={generateUniqueId()}>
+                            <input
+                              type="checkbox"
+                              onChange={e =>
+                                handleExpectedAnswerAlternative(alternative, e)
+                              }
+                            />
+                            <p>{alternative.alternativeData}</p>
+                          </div>
+                        )
+                      })}
+                    </AlternativesObjective>
+                  </QuestionStyle>
+                )
+              } else {
+                return (
+                  <QuestionStyle key={generateUniqueId()} className="trueFalse">
+                    <h4>
+                      {question.numberQuestion + ' - ' + question.description}
+                    </h4>
+                    <AlternativesTrueFalse>
+                      {question.alternatives?.map((alternative, index) => {
+                        return (
+                          <div key={generateUniqueId()}>
+                            <p>{alternative.alternativeData}</p>
+                            <div>
+                              <input
+                                type="checkbox"
+                                checked={alternative.answerAlternative}
+                                onChange={e =>
+                                  handleExpectedAnswerTrueFalse(alternative, e)
+                                }
+                              />
+                              <label htmlFor="true">
+                                <strong>Verdadeiro</strong>
+                              </label>
+
+                              <input
+                                type="checkbox"
+                                checked={!alternative.answerAlternative}
+                                onChange={e =>
+                                  handleExpectedAnswerTrueFalse(alternative, e)
+                                }
+                              />
+                              <label htmlFor="false">
+                                <strong>Falso</strong>
+                              </label>
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </AlternativesTrueFalse>
+                  </QuestionStyle>
+                )
+              }
+            })}
+          </div>
+        </Container>
       </Wrapper>
     </Avaliation>
   )
