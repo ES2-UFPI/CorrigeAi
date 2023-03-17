@@ -1,6 +1,6 @@
 import { useContext, useState } from "react"
 
-import { GenerateQuestionStyled } from "./styles"
+import { Alternative, ButtonAddAlternative, ButtonDeleteQuestion, GenerateQuestionStyled, TypeQuestion } from "./styles"
 
 import { ContextQuestions } from "../../context/contextQuestions"
 import { PropsAlternative } from "../AlternativeQuestion"
@@ -123,22 +123,22 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
   return (
     <GenerateQuestionStyled>
       <div>
-        <label htmlFor="typeQuestion">Qual tipo da questão: </label>
-        <select
-          name="typeQuestion"
-          id="typeQuestion"
-          value={typeQuestion}
-          onChange={ e => handleOnChangeTypeQuestion(e) } 
-        >
-          {list.map((option, i) => (
-            <option key={i} value={option.id}>
-              {option.type}
-            </option>
-          ))}
-        </select>
-        <br />
+        <TypeQuestion>
+          <label htmlFor="typeQuestion">Qual tipo da questão: </label>
+          <select
+            name="typeQuestion"
+            id="typeQuestion"
+            value={typeQuestion}
+            onChange={ e => handleOnChangeTypeQuestion(e) }
+          >
+            {list.map((option, i) => (
+              <option key={i} value={option.id}>
+                {option.type}
+              </option>
+            ))}
+          </select>
+        </TypeQuestion>
         <label htmlFor="description">Qual enunciado da questão: </label>
-        <br />
         <textarea
           name="postContent"
           rows={4}
@@ -152,17 +152,17 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
             <legend>
               <h3>Questão verdadeira ou falsa</h3>
             </legend>
-            <button 
+            <ButtonAddAlternative 
               type="button"
               onClick={ e => handleAddAlternative(e) }>
               +
-            </button>
+            </ButtonAddAlternative>
             { 
               // Renderizar alternativas para cada questão
               questions[props.id].alternatives ?
                 questions[props.id].alternatives?.map((alternative, index) => {
                   return (
-                    <div key={index}>
+                    <Alternative key={index}>
                       <label htmlFor="alternative">Enunciado da alternativa: </label>
                       <input 
                         type="text" 
@@ -170,28 +170,30 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
                         value={alternative.alternativeData}  
                         onChange={ event => handleInputChange(event, index)}
                       />
-                      <button 
-                        type="button"
-                        onClick={ () => handleRemoveAlternative(index) }>
-                        x
-                      </button>
 
-                      <br />
-                      <label htmlFor="choiceAlternative">Verdadeira</label>
-                      <input 
-                        type="checkbox" 
-                        checked={alternative.isCorrect}
-                        onClick={ () => handleIsCorrect(index) }  
-                      />
+                      <div className="trueFalse">
+                        <input
+                          type="checkbox"
+                          checked={alternative.isCorrect}
+                          onClick={ () => handleIsCorrect(index) }
+                        />
+                        <label htmlFor="choiceAlternative">Verdadeira</label>
 
-                      <label htmlFor="choiceAlternative">Falsa</label>
-                      <input 
-                        type="checkbox" 
-                        checked={!alternative.isCorrect} 
-                        defaultChecked
-                        onClick={ () => handleIsCorrect(index) }  
-                      />
-                    </div>
+                        <input
+                          type="checkbox"
+                          checked={!alternative.isCorrect}
+                          defaultChecked
+                          onClick={ () => handleIsCorrect(index) }
+                        />
+                        <label htmlFor="choiceAlternative">Falsa</label>
+
+                        <button 
+                          type="button"
+                          onClick={ () => handleRemoveAlternative(index) }>
+                          Deletar alternativa
+                        </button>
+                      </div>
+                    </Alternative>
                   )
                 })
                 : 
@@ -203,34 +205,40 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
             <legend>
               <h3>Questão objetiva</h3>
             </legend>
-            <button 
+            <ButtonAddAlternative
               type="button"
               onClick={ e => handleAddAlternative(e) }>
               +
-            </button>
+            </ButtonAddAlternative>
             { 
               // Renderizar alternativas para cada questão
               questions[props.id].alternatives ?
                 questions[props.id].alternatives?.map((alternative, index) => {
                   return (
-                    <div key={index}>
+                    <Alternative key={index}>
                       <label htmlFor="alternative">Enunciado da alternativa: </label>
-                      <input 
-                        type="text" 
+                      <input
+                        type="text"
                         id="alternative"
-                        value={alternative.alternativeData}  
+                        value={alternative.alternativeData}
                         onChange={ event => handleInputChange(event, index)}
                       />
-                      <input 
-                        type="checkbox" 
-                        onClick={ () => handleIsCorrect(index) } 
-                      />
-                      <button 
-                        type="button"
-                        onClick={ () => handleRemoveAlternative(index) }>
-                        x
-                      </button>
-                    </div>
+
+                      <div className="objective">
+                        <div>
+                          <label htmlFor="alternative">Opção correta ?</label>
+                          <input
+                            type="checkbox"
+                            onClick={ () => handleIsCorrect(index) }
+                          />
+                        </div>
+                        <button
+                          type="button"
+                          onClick={ () => handleRemoveAlternative(index) }>
+                          Deletar alternativa
+                        </button>
+                      </div>
+                    </Alternative>
                   )
                 })
                 : 
@@ -243,7 +251,6 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
               <h3>Questão subjetiva</h3>
             </legend>
             <label htmlFor="response">Resposta esperada da questão </label>
-            <br />
             <textarea
               name="postContent"
               rows={4}
@@ -253,27 +260,17 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
             />
           </div>
         ) : null}
-        <br />
+        <hr />
         <label htmlFor="points">Pontuação da questão: </label>
         <input
           value={points}
           onChange={e => handleOnChangePoints(e)}
           type="number"
         />
-        <br />
-        <button
-          style={
-            {
-              marginTop: "1rem",
-              paddingBlock: ".5rem",
-              paddingInline: "2rem",
-              borderRadius: "2rem",
-              border: "none",
-            }
-          }
+        <ButtonDeleteQuestion
           onClick={handleDeleteQuestion}>
           Excluir
-        </button>
+        </ButtonDeleteQuestion>
       </div>
     </GenerateQuestionStyled>
   )
