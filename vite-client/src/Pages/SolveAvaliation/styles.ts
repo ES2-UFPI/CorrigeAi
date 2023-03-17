@@ -10,6 +10,16 @@ export const Avaliation = styled.div`
   align-items: center;
   justify-content: center;
   color: #1b1f2f;
+
+  .questions {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    
+    > * {
+      width: 100%;
+    }
+  }
 `
 
 export const QuestionStyle = styled.div`

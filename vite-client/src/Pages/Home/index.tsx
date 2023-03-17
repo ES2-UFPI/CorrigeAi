@@ -15,6 +15,11 @@ export function Home(){
         style={{color: '#fff', marginTop: '20px', border:'1px solid white', padding:'6px', borderRadius:'10px', textDecoration:'none'}}>
           Responder prova ou tarefa
       </Link>
+      <Link 
+        to="/view-avaliations" 
+        style={{color: '#fff', marginTop: '20px', border:'1px solid white', padding:'6px', borderRadius:'10px', textDecoration:'none'}}>
+          Ver provas e tarefas cadastradas
+      </Link>
     </HomePage>
   )
 }
