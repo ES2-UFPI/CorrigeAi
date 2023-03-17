@@ -15,7 +15,7 @@ interface iQuestions {
   alternatives?: iAlternative []
 }
 
-interface iForms {
+interface iAvaliation {
   typeAvaliation: string
   themeAvaliation?: string
   questions?: iQuestions[]
@@ -24,7 +24,7 @@ interface iForms {
   time?: string
   points?: number
 }
-interface FormDocument extends Document, iForms {}
+interface AvaliationDocument extends Document, iAvaliation {}
 
 const AlternativeSchema = new Schema<iAlternative>({
   alternativeData: String,
@@ -41,7 +41,7 @@ const QuestionSchema = new Schema<iQuestions>({
   alternatives: [AlternativeSchema],
 });
 
-const FormSchema = new Schema<FormDocument>({
+const AvaliationSchema = new Schema<AvaliationDocument>({
   typeAvaliation: String,
   themeAvaliation: String,
   questions: [QuestionSchema],
@@ -51,7 +51,7 @@ const FormSchema = new Schema<FormDocument>({
   points: Number,
 });
 
-const FormModel = model<FormDocument>('Form', FormSchema);
+const AvaliationModel = model<AvaliationDocument>('Avaliation', AvaliationSchema);
 
-export { iForms, FormDocument, FormModel };
+export { iAvaliation, AvaliationDocument, AvaliationModel };
 

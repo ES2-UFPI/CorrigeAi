@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     element: <CreateTaskOrExam />
   },
   {
-    path: "/view-avaliation",
+    path: "/view-avaliations",
     element: <ViewAvaliations />
   },
   {
