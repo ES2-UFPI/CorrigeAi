@@ -23,7 +23,7 @@ app.post('/createAvaliation', async (req: Request, res: Response) => {
   try {
     const { typeAvaliation, themeAvaliation, questions, initialAvaliation, finalAvaliation, time, points } = req.body;
     console.log(req.body);
-    const form = new AvaliationModel({
+    const NewAvaliation = new AvaliationModel({
       typeAvaliation,
       themeAvaliation,
       questions,
@@ -33,7 +33,7 @@ app.post('/createAvaliation', async (req: Request, res: Response) => {
       points,
     });
 
-    const createAvaliation = await form.save();
+    const createAvaliation = await NewAvaliation.save();
 
     res.status(201).json({ message: 'Form created successfully', createAvaliation });
   } catch (error) {
@@ -44,8 +44,8 @@ app.post('/createAvaliation', async (req: Request, res: Response) => {
 
 app.get('/getAvaliations', async (req: Request, res: Response) => {
   try {
-    const form = await AvaliationModel.find();
-    res.status(200).json({ message: 'Form found successfully', form });
+    const Avaliations = await AvaliationModel.find();
+    res.status(200).json({ message: 'Form found successfully', Avaliations });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error finding form' });
