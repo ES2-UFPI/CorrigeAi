@@ -12,10 +12,6 @@ export function ViewAvaliations(){
   const [forms, setForms] = useState<iForms[]>([]);
   const [selectedForm, setSelectedForm] = useState<iForms | null>(null);
 
-/*   const handleFormClick = (form: iForms) => {
-    setSelectedForm(form);
-  }; */
-
   useEffect(() => {
     const fetchForms = async () => {
       const response = await fetch('http://localhost:3000/getAvaliations');

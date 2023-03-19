@@ -8,26 +8,23 @@ import {
 import { Avaliation, QuestionStyle } from './styles'
 import { PropsForm } from '../../components/FormAvaliation'
 import { Wrapper } from '../../styles/Layout'
+import { useLocation } from "react-router-dom";
+
 
 export function SolveAvaliation() {
   const [formAvaliation, setFormAvaliation] = useState<PropsForm>(
     {} as PropsForm
   )
   const [isClick, setIsClick] = useState(false)
+  const { state } = useLocation();
 
   const forceUpdate: () => void = useState({})[1].bind(null, {})
 
+
   useEffect(() => {
-    fetch('./avaliation.json', {
-      headers: {
-        Accept: 'application/json'
-      }
-    })
-      .then(res => res.json())
-      .then(res => {
-        setFormAvaliation(res)
-        // console.log(formAvaliation)
-      })
+    
+    setFormAvaliation(state)
+     
   }, [])
 
   function handleExpectedAnswer(
