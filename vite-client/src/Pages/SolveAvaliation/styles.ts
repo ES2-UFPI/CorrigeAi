@@ -6,10 +6,6 @@ export const Avaliation = styled.div`
   padding: 1rem 1rem;
   background: #c9d5ff;
 
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
   color: #1b1f2f;
 
   .questions {
@@ -24,6 +20,7 @@ export const Avaliation = styled.div`
 `
 
 export const Container = styled.div `
+  width: 100%;
   h3 {
     margin-top: 1.5rem;
     font-size: 2.2rem;
@@ -42,7 +39,7 @@ export const Container = styled.div `
 export const QuestionStyle = styled.div`
   width: 80%;
   background: #272643;
-  padding: 20px 20px;
+  padding: 2rem;
   color: #fff;
   border-radius: 20px;
   margin-top: 2rem;
@@ -66,6 +63,10 @@ export const QuestionStyle = styled.div`
   }
 `
 
+export const ContentQuestion =  styled.div `
+  padding: 0 1.5rem;
+`
+
 export const AlternativesTrueFalse = styled.div `
   display: flex; 
   flex-direction: column; 
@@ -85,13 +86,13 @@ export const AlternativesTrueFalse = styled.div `
       border-radius: 50%;
       width: 1.5rem;
       height: 1.5rem;
-      border: 1px solid white;
+      border: 1px solid #A2A7DC;
       outline: none;
       cursor: pointer;
     }
 
     input[type="checkbox"]:checked {
-      background-color: #00BFFF;
+      background-color: white;
     }
 
     label:nth-child(2){
@@ -115,7 +116,6 @@ export const AlternativesObjective = styled(AlternativesTrueFalse) `
     justify-content: flex-start;
     align-items: center;
   }
-  
 `
 
 

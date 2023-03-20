@@ -35,6 +35,7 @@ export function ViewAvaliations(){
           <Avaliation key={form._id}>
             <AboutAvaliation>
               <h2>{form.typeAvaliation === 'exam' ? 'Prova' : 'Tarefa'}</h2>
+              <hr />
               <p><strong>Tema</strong>: {form.themeAvaliation}</p>
               <p><strong>Tipo de Avaliação</strong>: {form.typeAvaliation === 'exam' ? 'Prova' : 'Tarefa'}</p>
               <p><strong>Data Inicial</strong>: {form.initialAvaliation}</p>

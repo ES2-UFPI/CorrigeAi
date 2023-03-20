@@ -25,8 +25,7 @@ export const Avaliation = styled.div`
   align-items: center;
 
   h2 {
-    margin-bottom: 1rem;
-    color: var(--primary)
+    color: var(--primary);
   }
 `
 
@@ -38,7 +37,17 @@ export const AboutAvaliation = styled.div `
 
   display: flex;
   flex-direction: column;
-  
+
+  strong {
+    color: var(--primary);
+  }
+
+  hr {
+    height: 1px;
+    background-color: rgb(72,61,139);
+    border: none;
+    margin: .5rem 0rem 1rem;
+  }
 `
 
 export const ButtonsAvaliation = styled.div `
