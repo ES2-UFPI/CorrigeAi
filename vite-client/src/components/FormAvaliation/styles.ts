@@ -73,6 +73,26 @@ export const SubForm = styled.div`
       border: none;
     }
   }
+`
 
+export const ButtonSave = styled.button `
+  color: '#272643';
+  background-color: #C9D5FF;
+  padding: 1rem 4rem;
+  
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  
+  font-size: 1.6rem;
+  font-weight: bold;
+  
+  transition: .2s;
+
+  :hover {
+    background-color: #76DC28;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+  }
 `
 

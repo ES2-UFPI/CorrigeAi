@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react'
 
-import { Form } from './styles'
+import { ButtonSave, Form } from './styles'
 import { Link } from 'react-router-dom'
 import { CreateQuestions } from '../CreateQuestions'
 import { PropsQuestions } from '../GenerateQuestions'
@@ -154,20 +154,14 @@ export function FormAvaliation({ typeAvaliation, ...props }: PropsForm) {
           </Form>
         )
       }
-      <Link 
-        to="/" 
-        onClick={handleSubmit}
-        style={{
-          color: '#272643',
-          backgroundColor: "#C9D5FF",
-          paddingBlock: ".5rem",
-          paddingInline: "5rem",
-          borderRadius: "2rem",
-          textDecoration: "none"          
-        }}
-      >
-        Salvar
-      </Link>
+        <Link 
+          to="/" 
+          onClick={handleSubmit}
+        >
+          <ButtonSave>
+            Salvar
+          </ButtonSave>
+        </Link>
     </>
   )
 }

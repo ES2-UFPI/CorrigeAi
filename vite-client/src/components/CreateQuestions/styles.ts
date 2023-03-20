@@ -15,8 +15,12 @@ export const ButtonAddQuestion = styled.button `
   border: none; 
   cursor: pointer;
 
+  transition: .2s;
+  
   :hover {
-    background-color: rgb(39, 38, 67, 0.09);
+    background-color: #76DC28;
+    color: white;
+    text-shadow: 1px 1px 1px black;
   }
 `
 

@@ -4,6 +4,7 @@ import { Alternative, ButtonAddAlternative, ButtonDeleteQuestion, GenerateQuesti
 
 import { ContextQuestions } from "../../context/contextQuestions"
 import { PropsAlternative } from "../AlternativeQuestion"
+import { AddIcon } from "../AddIcon"
 // import { AlternativeQuestion } from "../AlternativeQuestion"
 
 export interface PropsQuestions {
@@ -152,10 +153,8 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
             <legend>
               <h4>Questão verdadeira ou falsa</h4>
             </legend>
-            <ButtonAddAlternative 
-              type="button"
-              onClick={ e => handleAddAlternative(e) }>
-              +
+            <ButtonAddAlternative >
+              <AddIcon />
             </ButtonAddAlternative>
             { 
               // Renderizar alternativas para cada questão
@@ -208,7 +207,7 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
             <ButtonAddAlternative
               type="button"
               onClick={ e => handleAddAlternative(e) }>
-              +
+              <AddIcon />
             </ButtonAddAlternative>
             { 
               // Renderizar alternativas para cada questão

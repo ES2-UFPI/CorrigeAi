@@ -58,8 +58,16 @@ export const ButtonAddAlternative = styled.button `
   cursor: pointer;
   margin: 1rem 0rem;
 
+  display: inline-block;
+
+  transition: .2s;
+  
+  font-size: 1.6rem;
+
   :hover {
-    background: #76DC28;
+    background-color: #76DC28;
+    color: white;
+    text-shadow: 1px 1px 1px black;
   }
 `
 
