@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.button `
+export const ContainerButtonGreen = styled.button `
   margin-top: 1rem;
   padding: .5rem 2rem; 
   border: none;

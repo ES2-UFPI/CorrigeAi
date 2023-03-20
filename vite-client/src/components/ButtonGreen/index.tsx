@@ -1,4 +1,4 @@
-import { Container } from "./styles"
+import { ContainerButtonGreen } from "./styles"
 
 interface IButtonGreen {
   children: React.ReactNode
@@ -6,8 +6,8 @@ interface IButtonGreen {
 
 export function ButtonGreen( { children }: IButtonGreen){
   return (
-    <Container>
+    <ContainerButtonGreen>
       {children}
-    </Container>
+    </ContainerButtonGreen>
   )
 }
