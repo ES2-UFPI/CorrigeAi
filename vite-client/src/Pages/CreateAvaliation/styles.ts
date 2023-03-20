@@ -12,7 +12,7 @@ export const CreateTaskOrExamStyled = styled.div`
 
   label {
     width: 50%;
-    margin-bottom: 1rem;
+    /* margin-bottom: .5rem; */
   }
 
   select {
