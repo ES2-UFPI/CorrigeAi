@@ -5,6 +5,7 @@ import { config } from 'dotenv'
 config();
 
 import { AvaliationModel, AvaliationDocument } from './model/Avaliation';
+import { Class, IClass } from './model/Class';
 import AvaliationResponseModel from './model/AvaliationResponse';
 
 const app = express();
@@ -65,6 +66,24 @@ app.post('/getResponseAvaliation/:id}', async (req: Request, res: Response) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error finding form' });
+  }
+});
+
+app.post('/createClass', async (req: Request, res: Response) => {
+  try {
+    const { className, classSummary } = req.body;
+
+    const newClass: IClass = new Class({
+      className,
+      classSummary,
+    });
+
+    const savedClass: IClass = await newClass.save();
+
+    res.status(201).json({ message: 'Form created successfully', savedClass});
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
   }
 });
 

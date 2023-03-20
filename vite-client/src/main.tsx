@@ -9,6 +9,8 @@ import { Home } from "./Pages/Home";
 import { CreateTaskOrExam } from "./Pages/CreateAvaliation";
 import { ViewAvaliations } from "./Pages/ViewAvaliations";
 import { SolveAvaliation } from "./Pages/SolveAvaliation";
+import { CreateClass } from "./Pages/CreateClass";
+import { ViewClasses } from "./Pages/ViewClasses";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,14 @@ const router = createBrowserRouter([
   {
     path: "/solve-avaliation",
     element: <SolveAvaliation/>
+  },
+  {
+    path: "/create-class",
+    element: <CreateClass/>
+  },
+  {
+    path: "/view-classes",
+    element: <ViewClasses/>
   }
 ])
 

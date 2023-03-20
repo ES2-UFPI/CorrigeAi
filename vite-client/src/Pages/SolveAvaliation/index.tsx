@@ -11,6 +11,7 @@ import {
   AlternativesTrueFalse,
   Avaliation,
   Container,
+  ContentQuestion,
   QuestionStyle
 } from './styles'
 
@@ -77,10 +78,17 @@ export function SolveAvaliation() {
     forceUpdate()
   }
 
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase();
+
+  function getAlphabetLetter(index: number): string {
+    const letterIndex = index % 26; // pega o índice da letra no alfabeto
+    return alphabet.charAt(letterIndex);
+  }
+
   return (
     <Avaliation>
-      <Wrapper>
-        <Container className='container'>
+      <Wrapper className='Wrapper'>
+        <Container className='Container'>
           <div className='aboutAvaliation'>
             <h2>Tema: {formAvaliation.themeAvaliation}</h2>
             <p>
@@ -103,14 +111,16 @@ export function SolveAvaliation() {
                     <h4>
                       {question.numberQuestion + ' - ' + question.description}
                     </h4>
-                    <label htmlFor="description">Resposta:</label>
-                    <textarea
-                      name="postContent"
-                      rows={4}
-                      cols={40}
-                      value={question.answer}
-                      onChange={e => handleExpectedAnswer(e, index)}
-                    />
+                    <ContentQuestion>
+                      <label htmlFor="description">Resposta:</label>
+                      <textarea
+                        name="postContent"
+                        rows={4}
+                        cols={40}
+                        value={question.answer}
+                        onChange={e => handleExpectedAnswer(e, index)}
+                      />
+                    </ContentQuestion>
                   </QuestionStyle>
                 )
               } else if (question.typeQuestion === 'objective') {
@@ -119,21 +129,23 @@ export function SolveAvaliation() {
                     <h4>
                       {question.numberQuestion + ' - ' + question.description}
                     </h4>
-                    <AlternativesObjective>
-                      {question.alternatives?.map((alternative, index) => {
-                        return (
-                          <div key={generateUniqueId()}>
-                            <input
-                              type="checkbox"
-                              onChange={e =>
-                                handleExpectedAnswerAlternative(alternative, e)
-                              }
-                            />
-                            <p>{alternative.alternativeData}</p>
-                          </div>
-                        )
-                      })}
-                    </AlternativesObjective>
+                    <ContentQuestion>
+                      <AlternativesObjective>
+                        {question.alternatives?.map((alternative, index) => {
+                          return (
+                            <div key={generateUniqueId()}>
+                              <input
+                                type="checkbox"
+                                onChange={e =>
+                                  handleExpectedAnswerAlternative(alternative, e)
+                                }
+                              />
+                              <p>{alternative.alternativeData}</p>
+                            </div>
+                          )
+                        })}
+                      </AlternativesObjective>
+                    </ContentQuestion>
                   </QuestionStyle>
                 )
               } else {
@@ -142,38 +154,39 @@ export function SolveAvaliation() {
                     <h4>
                       {question.numberQuestion + ' - ' + question.description}
                     </h4>
-                    <AlternativesTrueFalse>
-                      {question.alternatives?.map((alternative, index) => {
-                        return (
-                          <div key={generateUniqueId()}>
-                            <p>{alternative.alternativeData}</p>
-                            <div>
-                              <input
-                                type="checkbox"
-                                checked={alternative.answerAlternative}
-                                onChange={e =>
-                                  handleExpectedAnswerTrueFalse(alternative, e)
-                                }
-                              />
-                              <label htmlFor="true">
-                                <strong>Verdadeiro</strong>
-                              </label>
-
-                              <input
-                                type="checkbox"
-                                checked={!alternative.answerAlternative}
-                                onChange={e =>
-                                  handleExpectedAnswerTrueFalse(alternative, e)
-                                }
-                              />
-                              <label htmlFor="false">
-                                <strong>Falso</strong>
-                              </label>
+                    <ContentQuestion>
+                      <AlternativesTrueFalse>
+                        {question.alternatives?.map((alternative, index) => {
+                          return (
+                            <div key={generateUniqueId()}>
+                              <p>{getAlphabetLetter(index) + ' - ' + alternative.alternativeData}</p>
+                              <div>
+                                <input
+                                  type="checkbox"
+                                  checked={alternative.answerAlternative}
+                                  onChange={e =>
+                                    handleExpectedAnswerTrueFalse(alternative, e)
+                                  }
+                                />
+                                <label htmlFor="true">
+                                  <strong>Verdadeiro</strong>
+                                </label>
+                                <input
+                                  type="checkbox"
+                                  checked={!alternative.answerAlternative}
+                                  onChange={e =>
+                                    handleExpectedAnswerTrueFalse(alternative, e)
+                                  }
+                                />
+                                <label htmlFor="false">
+                                  <strong>Falso</strong>
+                                </label>
+                              </div>
                             </div>
-                          </div>
-                        )
-                      })}
-                    </AlternativesTrueFalse>
+                          )
+                        })}
+                      </AlternativesTrueFalse>
+                    </ContentQuestion>
                   </QuestionStyle>
                 )
               }

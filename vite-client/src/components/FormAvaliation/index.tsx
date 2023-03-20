@@ -79,6 +79,7 @@ export function FormAvaliation({ typeAvaliation, ...props }: PropsForm) {
               id="themeExam"
               name="themeExam"
               value={themeAvaliation}
+              placeholder='Tema da prova'
               onChange={e => setThemeAvaliation(e.target.value)}
             />
 
@@ -106,6 +107,7 @@ export function FormAvaliation({ typeAvaliation, ...props }: PropsForm) {
               min="0"
               max="24"
               value={time}
+              placeholder='Tempo para realizar a prova'
               onChange={e => setTime(e.target.value)}
             />
 
@@ -114,6 +116,7 @@ export function FormAvaliation({ typeAvaliation, ...props }: PropsForm) {
               type="number"
               name="points"
               id="points"
+              placeholder='Pontuação da prova'
               onChange={e => setPoints(Number(e.target.value))}
             />
             <hr />
@@ -131,6 +134,7 @@ export function FormAvaliation({ typeAvaliation, ...props }: PropsForm) {
               type="text"
               id="themeTask"
               name="themeTask"
+              placeholder='Tema da atividade'
               onChange={e => setThemeAvaliation(e.target.value)}
             />
 
