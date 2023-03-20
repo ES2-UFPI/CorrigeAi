@@ -7,12 +7,10 @@ export const CreateTaskOrExamStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 40px;
   min-height: 100vh;
 
   label {
     width: 50%;
-    /* margin-bottom: .5rem; */
   }
 
   select {

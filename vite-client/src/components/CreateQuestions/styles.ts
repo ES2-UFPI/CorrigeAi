@@ -8,24 +8,6 @@ export const CreateQuestionsStyled = styled.div`
   align-items: center;
 `
 
-export const SubForm = styled.div`
-  width: 100%;
-  padding: 0 4rem;
-
-  label {
-    color: white;
-  }
-  
-  h3 {
-    color: #272643; 
-    font-size: 2.4rem;
-  }
-
-  textarea {
-    border-radius: .8rem;
-  }
-`
-
 export const ButtonAddQuestion = styled.button `
   margin: 1rem 0 1rem;
   border-radius: .8rem;
@@ -33,8 +15,12 @@ export const ButtonAddQuestion = styled.button `
   border: none; 
   cursor: pointer;
 
+  transition: .2s;
+  
   :hover {
-    background-color: rgb(39, 38, 67, 0.09);
+    background-color: #76DC28;
+    color: white;
+    text-shadow: 1px 1px 1px black;
   }
 `
 

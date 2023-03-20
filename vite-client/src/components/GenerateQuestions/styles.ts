@@ -15,12 +15,17 @@ export const GenerateQuestionStyled = styled.div `
     width: 100%; 
   }
 
-  label {
-    margin-bottom: .5rem;
-  }
-
   hr {
     background-color: rgb(229, 229, 229, 0.29);
+  }
+  
+  label:nth-child(1){
+    margin: 0;
+  }
+
+  label {
+    margin-bottom: .5rem;
+    display: inline-block;
   }
 `
 export const TypeQuestion = styled.div `
@@ -36,9 +41,11 @@ export const ButtonDeleteQuestion = styled.button `
   border-radius: .8rem;
   border: none;
   cursor: pointer;
+  background-color: #B8282A;
+  color: white;
 
   :hover {
-    background-color: #8782AA;
+    background-color:#8E1F21;
   }
 `
 
@@ -51,8 +58,16 @@ export const ButtonAddAlternative = styled.button `
   cursor: pointer;
   margin: 1rem 0rem;
 
+  display: inline-block;
+
+  transition: .2s;
+  
+  font-size: 1.6rem;
+
   :hover {
-    background: #76DC28;
+    background-color: #76DC28;
+    color: white;
+    text-shadow: 1px 1px 1px black;
   }
 `
 
