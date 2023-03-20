@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
+
 import { PropsForm } from "../../components/FormAvaliation"
-import { Avaliations, Avaliation } from "./styles";
+import { Avaliations, Avaliation, AboutAvaliation, ButtonsAvaliation } from "./styles";
 import { Link } from "react-router-dom";
+
+import { Wrapper } from '../../styles/Layout';
+
+import { ButtonGreen } from '../../components/ButtonGreen';
 
 interface iForms extends PropsForm {
   _id: string;
@@ -24,20 +29,34 @@ export function ViewAvaliations(){
 
   return (
     <Avaliations>
-      <h1>Provas Cadastradas</h1>
-      {forms.map((form) => (
-        <Avaliation key={form._id}>
-          <h2>{form.typeAvaliation}</h2>
-          <p>Tema: {form.themeAvaliation}</p>
-          <p>Tipo de Avaliação: {form.typeAvaliation}</p>
-          <p>Data Inicial: {form.initialAvaliation}</p>
-          <p>Data Final: {form.finalAvaliation}</p>
-          <p>Points: {form.points}</p>
-          <Link to="/solve-avaliation" state={ form }>
-            <button>Acessar Prova</button>
-          </Link>
-        </Avaliation>
-      ))}
+      <Wrapper className='Wrapper'>
+        <h1>Provas Cadastradas</h1>
+        {forms.map((form) => (
+          <Avaliation key={form._id}>
+            <AboutAvaliation>
+              <h2>{form.typeAvaliation === 'exam' ? 'Prova' : 'Tarefa'}</h2>
+              <p><strong>Tema</strong>: {form.themeAvaliation}</p>
+              <p><strong>Tipo de Avaliação</strong>: {form.typeAvaliation === 'exam' ? 'Prova' : 'Tarefa'}</p>
+              <p><strong>Data Inicial</strong>: {form.initialAvaliation}</p>
+              <p><strong>Data Final</strong>: {form.finalAvaliation}</p>
+              <p><strong>Points</strong>: {form.points}</p>
+            </AboutAvaliation>
+            
+            <ButtonsAvaliation>
+              <Link to="/solve-avaliation" state={ form }>
+                <ButtonGreen>Acessar</ButtonGreen>
+              </Link>
+              <Link to="#" state={ form }>
+                <ButtonGreen>Ver prova</ButtonGreen>
+              </Link>
+              <Link to="#" state={ form }>
+                <ButtonGreen>Corrigir</ButtonGreen>
+              </Link>
+            </ButtonsAvaliation>
+            
+          </Avaliation>
+        ))}
+      </Wrapper>
     </Avaliations>
   )
 }

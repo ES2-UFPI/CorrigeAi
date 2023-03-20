@@ -18,6 +18,32 @@ export const Avaliation = styled.div`
   color: #fff;
   border-radius: 20px;
   margin-top: 30px;
+
+  width: 100%;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+
+  h2 {
+    margin-bottom: 1rem;
+    color: var(--primary)
+  }
+`
+
+export const AboutAvaliation = styled.div `
+  border-radius: 2rem;
+  padding: .5rem 4rem 1rem;
+  width: 65%;
+  background: var(--about);
+
+  display: flex;
+  flex-direction: column;
+  
+`
+
+export const ButtonsAvaliation = styled.div `
+  display: flex;
+  gap: 1rem;
 `
 
 
