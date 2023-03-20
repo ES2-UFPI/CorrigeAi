@@ -153,8 +153,10 @@ export function GenerateQuestions({ typeQuestion, description, points, ...props 
             <legend>
               <h4>Questão verdadeira ou falsa</h4>
             </legend>
-            <ButtonAddAlternative >
-              <AddIcon />
+            <ButtonAddAlternative 
+              type="button"
+              onClick={ e => handleAddAlternative(e) }>
+                <AddIcon />
             </ButtonAddAlternative>
             { 
               // Renderizar alternativas para cada questão
