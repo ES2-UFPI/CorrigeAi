@@ -12,3 +12,9 @@ export const Wrapper = styled.div `
   margin: 0 auto;  
 `;
 
+export const WrapperLayout = styled.div `
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  height: 100%;
+`
+

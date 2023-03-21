@@ -4,7 +4,8 @@ import { HomePage } from './styles'
 
 export function Home() {
   return (
-      <HomePage>
+    <Layout>
+      <HomePage className='Home'>
         <h1>Página Inicial do Professor</h1>
         <Link
           to="/form-avaliation"
@@ -62,5 +63,6 @@ export function Home() {
           Ver turmas cadastradas
         </Link>
       </HomePage>
+    </Layout>
   )
 }
