@@ -46,10 +46,10 @@ app.post('/createAvaliation', async (req: Request, res: Response) => {
 app.get('/getAvaliations', async (req: Request, res: Response) => {
   try {
     const Avaliations = await AvaliationModel.find();
-    res.status(200).json({ message: 'Form found successfully', Avaliations });
+    res.status(200).json({ message: 'Avaliations found successfully', Avaliations });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error finding form' });
+    res.status(500).json({ message: 'Error finding Avaliations' });
   }
 });  
 
@@ -81,6 +81,16 @@ app.post('/createClass', async (req: Request, res: Response) => {
     const savedClass: IClass = await newClass.save();
 
     res.status(201).json({ message: 'Form created successfully', savedClass});
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
+
+app.get('/getClasses', async (req: Request, res: Response) => {
+  try {
+    const classes: IClass[] = await Class.find({});
+    res.status(200).json({ classes });
   } catch (err) {
     console.error(err);
     res.status(500).send('Server error');
