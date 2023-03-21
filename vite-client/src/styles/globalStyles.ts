@@ -5,6 +5,7 @@ export default createGlobalStyle `
     --primary: #C9D5FF;
     --secondary: #272643;
     --about: rgb(72,61,139,.30);
+    --menuSideBar: #F2CF0C;
     --white: #D9D9D9;
     --gray: #7A7A7A;
     --greenHover: #76DC28;

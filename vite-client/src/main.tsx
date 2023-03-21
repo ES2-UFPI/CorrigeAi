@@ -11,6 +11,7 @@ import { ViewAvaliations } from "./Pages/ViewAvaliations";
 import { SolveAvaliation } from "./Pages/SolveAvaliation";
 import { CreateClass } from "./Pages/CreateClass";
 import { ViewClasses } from "./Pages/ViewClasses";
+import { Homeclass } from "./Pages/HomeClass";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: "/view-classes",
     element: <ViewClasses/>
+  },
+  {
+    path: "/home-class",
+    element: <Homeclass/>
   }
 ])
 
