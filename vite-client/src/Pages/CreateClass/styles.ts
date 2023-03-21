@@ -3,6 +3,7 @@ import { ContainerButtonGreen } from "../../components/ButtonGreen/styles";
 
 export const Class = styled.div `
   padding: 1rem 1rem;
+  background-color: var(--secondary);
 `
 
 export const Form = styled.form`

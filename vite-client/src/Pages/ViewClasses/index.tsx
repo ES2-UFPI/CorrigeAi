@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
-import { Wrapper } from '../../styles/Layout'
-import { Classes } from './styles'
+import { Link } from 'react-router-dom';
 
-interface iClasses {
+import { Wrapper } from '../../styles/Layout'
+import { ButtonAccessClass, Class, Classes, ContainerClasses } from './styles'
+
+export interface iClasses {
   _id: string;
   className: string;
   classSummary: string;
 }
 
 export function ViewClasses(){
-
   const [classes, setClasses] = useState<iClasses[]>([]);
 
   useEffect(() => {
@@ -27,6 +28,33 @@ export function ViewClasses(){
     <Classes>
       <Wrapper>
         <h1>Ver turmas</h1>
+        {classes.length > 0 ?  
+          <ContainerClasses>
+            {classes.map( (_class, index) => {
+              return (
+                <Class className="Class" key={index}>
+                  <strong>{_class.className}</strong>
+                  <div>
+                    <hr />
+                    <p><strong>Ementa:</strong> {_class.classSummary}</p>
+                    <hr />
+                  </div>
+                  <Link to="/home-class" state={ _class }>
+                    <ButtonAccessClass>
+                      Acessar turma
+                    </ButtonAccessClass>
+                  </Link>
+                </Class>
+              )
+            })}
+          </ContainerClasses> 
+        : 
+          <ContainerClasses>
+            <Class>
+              <strong>Não existe turmas cadastradas!</strong>
+            </Class>
+          </ContainerClasses>
+        }
       </Wrapper>
     </Classes>
   )
