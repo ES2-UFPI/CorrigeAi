@@ -1,12 +1,17 @@
 import styled from "styled-components";
 
-export const MenuSideBarContainer = styled.div `
+interface Props {
+  width: string
+}
+
+export const MenuSideBarContainer = styled.div<Props> `
   background: var(--menuSideBar);
   color: var(--secondary);
   
   display: flex; 
   flex-direction: column;
   max-width: 30rem;
+  width: ${ props => props.width };
   padding: 1rem;
 `
 
