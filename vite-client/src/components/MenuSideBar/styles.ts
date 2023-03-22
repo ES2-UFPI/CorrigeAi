@@ -6,4 +6,12 @@ export const MenuSideBarContainer = styled.div `
   
   display: flex; 
   flex-direction: column;
+  max-width: 30rem;
+  padding: 1rem;
+`
+
+export const AboutMenu = styled.div `
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `

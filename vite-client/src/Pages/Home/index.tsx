@@ -7,61 +7,9 @@ export function Home() {
     <Layout>
       <HomePage className='Home'>
         <h1>Página Inicial do Professor</h1>
-        <Link
-          to="/form-avaliation"
-          style={{
-            color: '#fff',
-            marginTop: '20px',
-            border: '1px solid white',
-            padding: '6px',
-            borderRadius: '10px',
-            textDecoration: 'none'
-          }}
-        >
-          Cadastrar prova ou tarefa
-        </Link>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deleniti quos ipsum a aut consequuntur labore numquam minus, exercitationem recusandae cupiditate nam, provident doloribus fugit voluptas repellat illum quidem aliquid?</p>
 
-        <Link
-          to="/view-avaliations"
-          style={{
-            color: '#fff',
-            marginTop: '20px',
-            border: '1px solid white',
-            padding: '6px',
-            borderRadius: '10px',
-            textDecoration: 'none'
-          }}
-        >
-          Ver provas e tarefas cadastradas
-        </Link>
-
-        <Link
-          to="/create-class"
-          style={{
-            color: '#fff',
-            marginTop: '20px',
-            border: '1px solid white',
-            padding: '6px',
-            borderRadius: '10px',
-            textDecoration: 'none'
-          }}
-        >
-          Criar nova turma
-        </Link>
-
-        <Link
-          to="/view-classes"
-          style={{
-            color: '#fff',
-            marginTop: '20px',
-            border: '1px solid white',
-            padding: '6px',
-            borderRadius: '10px',
-            textDecoration: 'none'
-          }}
-        >
-          Ver turmas cadastradas
-        </Link>
+        <p>Infos proff: Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, aut? Quod eligendi aspernatur officia neque quasi rem accusantium provident rerum error! Iste maiores aut perferendis quaerat eveniet adipisci corporis error.</p>
       </HomePage>
     </Layout>
   )
