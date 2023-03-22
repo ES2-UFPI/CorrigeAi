@@ -9,6 +9,10 @@ export const CreateTaskOrExamStyled = styled.div`
   align-items: center;
   min-height: 100vh;
 
+  h1 {
+    margin-bottom: 1rem;
+  }
+
   label {
     width: 50%;
   }

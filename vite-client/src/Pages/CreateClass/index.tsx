@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Layout } from "../../components/Layout";
 import { Wrapper } from "../../styles/Layout";
 import { ButtonSaveClass, Class, Form } from "./styles";
 
@@ -29,35 +30,37 @@ export function CreateClass(){
   }
 
   return (
-    <Class>
-      <Wrapper>
-        <Form onSubmit={e => e.preventDefault()}>
-          <legend>
-            <h2>Criar nova turma</h2>
-          </legend>
+    <Layout>
+      <Class>
+        <Wrapper>
+          <Form onSubmit={e => e.preventDefault()}>
+            <legend>
+              <h2>Criar nova turma</h2>
+            </legend>
 
-          <label htmlFor="nameClass">Nome da turma:</label>
-          <input type="text" placeholder="Nome da turma"
-            value={className} onChange={(e) => setClassName(e.target.value)} />
+            <label htmlFor="nameClass">Nome da turma:</label>
+            <input type="text" placeholder="Nome da turma"
+              value={className} onChange={(e) => setClassName(e.target.value)} />
 
-          <label htmlFor="dicipline">Diciplina: </label>
-          <input type="text" placeholder="Qual diciplina?"/>
-          
-          <label htmlFor="menuDicipline">Ementa: </label>
-          <textarea
-            name="postContent"
-            rows={4}
-            cols={40}
-            placeholder="Ementa da diciplina..."
-            value={classSummary} onChange={(e) => setClassSummary(e.target.value)} 
-          />
-        </Form>
+            <label htmlFor="dicipline">Diciplina: </label>
+            <input type="text" placeholder="Qual diciplina?"/>
+            
+            <label htmlFor="menuDicipline">Ementa: </label>
+            <textarea
+              name="postContent"
+              rows={4}
+              cols={40}
+              placeholder="Ementa da diciplina..."
+              value={classSummary} onChange={(e) => setClassSummary(e.target.value)} 
+            />
+          </Form>
 
-        <ButtonSaveClass onClick={hanldeSubmitClass}>
-          Cadastrar Turma
-        </ButtonSaveClass>
+          <ButtonSaveClass onClick={hanldeSubmitClass}>
+            Cadastrar Turma
+          </ButtonSaveClass>
 
-      </Wrapper>
-    </Class>
+        </Wrapper>
+      </Class>
+    </Layout>
   )
 }
