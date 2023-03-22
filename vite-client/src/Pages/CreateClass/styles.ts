@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { ContainerButtonGreen } from "../../components/ButtonGreen/styles";
 
 export const Class = styled.div `
+  width: 100%;
   padding: 1rem 1rem;
   background-color: var(--secondary);
 `

@@ -28,11 +28,11 @@ export default createGlobalStyle `
     height: 100%;
     color: white;
     font-size: 1.6rem;
-    background-color: var(--secondary)
+    background-color: var(--secondary);
   }
 
-  html { 
-    background: var(--primary)
+  html {
+    height: 100vh;
   }
 
   *, button, input {

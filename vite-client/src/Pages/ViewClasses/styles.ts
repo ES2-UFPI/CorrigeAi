@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { ContainerButtonGreen } from "../../components/ButtonGreen/styles"
 
 export const Classes = styled.div `
+  width: 100%;
   padding: 1rem 1rem;
   background-color: var(--secondary);
 
@@ -44,3 +45,9 @@ export const ButtonAccessClass = styled(ContainerButtonGreen) `
   margin: 0%;
 `
 
+export const ButtonCreateClass = styled(ContainerButtonGreen) `
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+`
