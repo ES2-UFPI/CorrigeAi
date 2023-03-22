@@ -1,9 +1,4 @@
-import { useContext } from 'react';
 import styled from 'styled-components'
-
-interface Props {
-  display: string
-}
 
 export const Wrapper = styled.div `
   display: flex;
@@ -17,24 +12,8 @@ export const Wrapper = styled.div `
   margin: 0 auto;  
 `;
 
-export const WrapperLayout = styled.div<Props> `
-  display: ${props => props.display};
+export const WrapperLayout = styled.div `
+  display: flex;
   grid-template-columns: 1fr 3fr;
   height: 100%;
 `
-
-// let WrapperLayout = ''
-// if (sideBar){
-//   WrapperLayout = styled.div `
-//     display: grid;
-//     grid-template-columns: 1fr 3fr;
-//     height: 100%;
-//   `
-// } else {
-//   WrapperLayout = styled.div `
-//     display: flex;
-//     height: 100%;
-//   `
-// }
-
-// export { WrapperLayout }

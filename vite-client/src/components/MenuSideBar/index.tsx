@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { CloseButton } from "../../assets/CloseButton";
@@ -9,8 +8,10 @@ interface IMenuSideBar {
   sideBar: boolean
   width: string
   handleCloseBar: () => void
+  scale: string
 }
-export function MenuSideBar({sideBar, width, handleCloseBar}: IMenuSideBar){
+
+export function MenuSideBar({sideBar, width, handleCloseBar, scale}: IMenuSideBar){
   return (
     <MenuSideBarContainer
       width={width}
@@ -25,6 +26,8 @@ export function MenuSideBar({sideBar, width, handleCloseBar}: IMenuSideBar){
             cursor: 'pointer',
             padding: '0',
             height: '25px',
+            transform: `${scale}`,
+            transition: '1s'
           }}>
           <CloseButton />
         </button>

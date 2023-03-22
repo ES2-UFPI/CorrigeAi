@@ -8,20 +8,20 @@ interface ILayout {
 }
 
 export function Layout({children}: ILayout ) {
-  const [sideBar, setSideBar] = useState(false)
-
-  let display = ''
-  if (sideBar) {
-    display = 'grid'  
-  }else {
-    display = 'flex'
-  }
+  const [sideBar, setSideBar] = useState(true)
 
   let width
   if (!sideBar){
     width = '45px'
   }else {
     width = '100%'
+  }
+
+  let scale = ''
+  if (sideBar){
+    scale = 'scale(1)'
+  }else {
+    scale = 'scale(-1)'
   }
 
   function handleCloseSideBar(){
@@ -33,11 +33,12 @@ export function Layout({children}: ILayout ) {
   }
 
   return (
-    <WrapperLayout display={display}>
+    <WrapperLayout>
       <MenuSideBar 
         handleCloseBar={handleCloseSideBar}
         sideBar={sideBar}
         width={width}
+        scale={scale}
       />
       {children}
     </WrapperLayout>
