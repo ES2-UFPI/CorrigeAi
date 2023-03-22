@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Avaliations = styled.div`
-  background: #c9d5ff;
   width: 100%; 
   min-height: 100vh;
   padding: 1rem 1rem;
@@ -10,6 +9,10 @@ export const Avaliations = styled.div`
   align-items: center;
   justify-content: center;
   color: #1b1f2f;
+
+  h1 {
+    color: var(--primary);
+  }
 `
 
 export const Avaliation = styled.div`
@@ -32,7 +35,7 @@ export const Avaliation = styled.div`
 export const AboutAvaliation = styled.div `
   border-radius: 2rem;
   padding: .5rem 4rem 1rem;
-  width: 65%;
+  width: 100%;
   background: var(--about);
 
   display: flex;

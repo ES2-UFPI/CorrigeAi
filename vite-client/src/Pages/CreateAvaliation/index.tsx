@@ -23,6 +23,10 @@ export function CreateTaskOrExam() {
       <ContextQuestionsProvider>
         <CreateTaskOrExamStyled className="TaskOrExam">
           <Wrapper>
+            <h1>Criar avaliação {
+              selectValue == 'none' ?
+                '' : selectValue === 'exam' ? 'Prova' : 'Tarefa'}
+            </h1>
             <label htmlFor="avaliation">Escolha a avaliação: </label>
             <select
               name="avaliation"

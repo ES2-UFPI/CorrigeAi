@@ -5,7 +5,7 @@ interface Props {
 }
 
 export const MenuSideBarContainer = styled.div<Props> `
-  background: var(--menuSideBar);
+  height: 100vh;
   color: var(--secondary);
   
   border-radius: 0 .8rem .8rem 0;
@@ -14,16 +14,22 @@ export const MenuSideBarContainer = styled.div<Props> `
   max-width: 30rem;
   width: ${ props => props.width };
   padding: 1rem;
-
+  
   transition: 1s;
   position: relative;
-
+  
   .contentMenu {
     position: fixed;
-    top: 1rem;
+    background: var(--menuSideBar);
+    padding: 1rem;
+    
+    border-radius: .8rem;
+    top: 0rem;
     bottom: 0;
-    left: 1rem;
-    width: 0rem;
+    left: 0rem;
+    width: 4rem;
+
+    transition: 1s;
 
     .content-buttons {
       opacity: 0;
@@ -60,6 +66,6 @@ export const AboutMenu = styled.div `
   }
 
   &.about.visible {
-    width: 28rem;
+    width: 26rem;
   }
 `
