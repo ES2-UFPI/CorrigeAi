@@ -8,8 +8,8 @@ AlunoSchema = new mongoose.Schema(
     email: { type: String, required: true },
     senha: { type: String, required: true },
     user: { type: String, required: true, unique: true },
-  },
-  { _id: user } // definindo o user como chave primaria
+  }
+  // { _id: user } // definindo o user como chave primaria
 );
 
 module.exports = AlunoSchema;

@@ -8,8 +8,8 @@ ProfessorSchema = new mongoose.Schema(
     email: { type: String, required: true },
     senha: { type: String, required: true },
     user: { type: String, required: true, unique: true },
-  },
-  { _id: user }
+  }
+  //{ _id: user }
 );
 
 module.exports = ProfessorSchema;

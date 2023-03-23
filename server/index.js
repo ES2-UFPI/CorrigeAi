@@ -5,3 +5,5 @@ const ProvaModel = require("./src/models/prova.model");
 dotenv.config();
 
 ConnectToDataBase();
+
+require("./src/controllers/index");

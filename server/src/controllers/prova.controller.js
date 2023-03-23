@@ -2,7 +2,7 @@ const express = require("express");
 const service = require("../services/prova.service");
 
 const app = express();
-app.use(express.json());
+//app.use(express.json());
 
 app.post("/provas", async (req, res) => {
   try {

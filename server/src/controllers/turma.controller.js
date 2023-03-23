@@ -2,7 +2,7 @@ const express = require("express");
 const service = require("../services/turma.service");
 
 const app = express();
-app.use(express.json());
+//app.use(express.json());
 
 //cria uma turma no banco de dados
 app.post("/turmas", async (req, res) => {
