@@ -6,10 +6,14 @@ import { Wrapper } from "../../styles/Layout"
 import { Form, LoginForm, StyledButton, StyledLoginForm } from "./styles"
 
 export function Home(){
-  const { signed } = useContext(AuthContext)
+  const { signed, signIn } = useContext(AuthContext)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  function handleSignIn(){
+    signIn(email, password)
+  }
 
   return (
     <div>
@@ -41,7 +45,9 @@ export function Home(){
                   value={password}
                   onChange={ e => setPassword(e.target.value)}
                 />
-                <StyledButton>
+                <StyledButton
+                  onClick={handleSignIn}
+                >
                   Entrar
                 </StyledButton>
               </LoginForm>

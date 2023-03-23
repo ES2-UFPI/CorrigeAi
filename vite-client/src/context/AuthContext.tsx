@@ -9,7 +9,7 @@ export interface IUser {
 interface AuthContextData {
   user: IUser | null
   signed: boolean
-  signIn: () => void
+  signIn: (email: string, password: string) => void
   signOut: () => void
 }
 
