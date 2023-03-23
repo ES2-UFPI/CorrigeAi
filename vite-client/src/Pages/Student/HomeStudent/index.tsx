@@ -1,13 +1,8 @@
-import { useContext } from 'react'
-
 import { Layout } from '../../../components/Layout'
 import { Wrapper } from '../../../styles/Layout'
 import { HomePage } from './styles'
 
-import { AuthContext } from '../../../context/AuthContext'
-
 export function HomeStudent() {
-  const { signed, signIn, signOut, user } = useContext(AuthContext)
   
   return (
     <Layout>

@@ -18,16 +18,12 @@ export function Login(){
     //Buscando usuario, para depois setar no user
     //...
     e.preventDefault()
-    setUser({ name: 'Jon Kleber', email: "johndoe@example.com", typeUser: 'teacher' });
+    setUser({ name: 'Jon Kleber', email: "johndoe@example.com", typeUser: 'studnet' });
     
     //lógica para autenticar o usuário
     if (user?.email === 'johndoe@example.com'){
       setSigned(true)
-      if (user.typeUser === 'teacher'){
-        navigate('/home-teacher')
-      }else {
-        navigate('/home-student')
-      }
+      navigate('/home')
     }else {
       alert('Usuario não encontrado')
     }
@@ -54,14 +50,14 @@ export function Login(){
               <input 
                 type="email" 
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={ e => setEmail(e.target.value) }
               />
 
               <label htmlFor="password">Senha: </label>
               <input 
                 type="password" 
                 value={password}
-                onChange={ e => setPassword(e.target.value)}
+                onChange={ e => setPassword(e.target.value) }
               />
               <StyledButton
                 onClick={ e => signIn(e) }

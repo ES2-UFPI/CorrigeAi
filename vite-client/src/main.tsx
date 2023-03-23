@@ -5,7 +5,6 @@ import GlobalStyles from "./styles/globalStyles";
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
 import { Login } from "./Pages/Login";
-import { HomeTeacher } from "./Pages/Teacher/HomeTeacher";
 import { CreateTaskOrExam } from "./Pages/CreateAvaliation";
 import { ViewAvaliations } from "./Pages/ViewAvaliations";
 import { SolveAvaliation } from "./Pages/SolveAvaliation";
@@ -15,6 +14,7 @@ import { Homeclass } from "./Pages/HomeClass";
 
 import { AuthContextProvider } from "./context/AuthProvider";
 import { HomeStudent } from "./Pages/Student/HomeStudent";
+import { Home } from "./Pages/Home";
 
 const router = createBrowserRouter([
   {
@@ -22,8 +22,8 @@ const router = createBrowserRouter([
     element: <Login />
   }, 
   {
-    path: "/home-teacher",
-    element: <HomeTeacher />
+    path: "/home",
+    element: <Home />
   }, 
   {
     path: "/home-student",
