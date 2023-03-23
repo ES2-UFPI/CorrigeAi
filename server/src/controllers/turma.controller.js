@@ -4,6 +4,7 @@ const service = require("../services/turma.service");
 const app = express();
 app.use(express.json());
 
+//cria uma turma no banco de dados
 app.post("/turmas", async (req, res) => {
   try {
     const Turma = await service.Creat(req.body);
@@ -13,6 +14,7 @@ app.post("/turmas", async (req, res) => {
   }
 });
 
+// recupera todas as turmas do banco de dados, independente do professor
 app.get("/turmas", async (req, res) => {
   try {
     const Turmas = await service.FindAll();
@@ -22,6 +24,7 @@ app.get("/turmas", async (req, res) => {
   }
 });
 
+//adiciona aluno a uma turma ja criada
 app.patch("/turmas/adicionarAluno", async (req, res) => {
   try {
     const id = req.params.id;
