@@ -1,10 +1,15 @@
 const mongoose = require("mongoose");
 
-const professorSchema = new mongoose.Schema({
-  nome: String,
-  senha: String,
-  email: String,
-  user: String,
-});
+//Criando model professor
 
-module.exports = professorSchema;
+ProfessorSchema = new mongoose.Schema(
+  {
+    nome: { type: String, required: true },
+    email: { type: String, required: true },
+    senha: { type: String, required: true },
+    user: { type: String, required: true, unique: true },
+  },
+  { _id: user }
+);
+
+module.exports = ProfessorSchema;
