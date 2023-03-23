@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { AuthContext } from './AuthContext'
 
 import { IUser } from './AuthContext'
@@ -11,27 +12,12 @@ export const AuthContextProvider : React.FC<Props> = ({children}) => {
   const [signed, setSigned] = useState(false)
   const [user, setUser] = useState<IUser | null>(null)
 
-  function signIn(email: string, password: string) {
-    //Buscando usuario, para depois setar no user
-    //...
-    
-    //lógica para autenticar o usuário
-    setUser({ name: 'Jon Kleber', email: "johndoe@example.com", typeUser: 'teacher' });
-    setSigned(true);
-  }
-
-  function signOut() {
-   //lógica para deslogar o usuário
-    setUser(null);
-    setSigned(false);
-  }
-
   return (
     <AuthContext.Provider value={{
       user,
+      setUser,
       signed,
-      signIn,
-      signOut 
+      setSigned,
     }}>
       {children}
     </AuthContext.Provider>

@@ -8,9 +8,9 @@ export interface IUser {
 
 interface AuthContextData {
   user: IUser | null
+  setUser: React.Dispatch<React.SetStateAction<IUser | null>>
   signed: boolean
-  signIn: (email: string, password: string) => void
-  signOut: () => void
+  setSigned: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const AuthContext = createContext<AuthContextData>({} as AuthContextData)

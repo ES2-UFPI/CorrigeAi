@@ -36,6 +36,8 @@ export const Form = styled.div `
   h1 {
     margin-bottom: 2rem;
   }
+  
+  border: 1px solid var(--menuSideBar);
 `
 
 export const LoginForm = styled.div `
