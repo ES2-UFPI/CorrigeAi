@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const HomeClassContainer = styled.div `
+  width: 100%;
   padding: 1rem;
   background-color: var(--secondary);
 
