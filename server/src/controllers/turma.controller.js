@@ -1,8 +1,10 @@
 const express = require("express");
 const service = require("../services/turma.service");
 
-const app = express();
+//const app = express();
 //app.use(express.json());
+
+const app = require("../index");
 
 //cria uma turma no banco de dados
 app.post("/turmas", async (req, res) => {
@@ -17,8 +19,8 @@ app.post("/turmas", async (req, res) => {
 // recupera todas as turmas do banco de dados, independente do professor
 app.get("/turmas", async (req, res) => {
   try {
-    const Turmas = await service.FindAll();
-    res.status(200).json(Turmas);
+    //const Turmas = await service.FindAll();
+    res.status(200).send("<h1> heloow </h1>");
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -34,3 +36,5 @@ app.patch("/turmas/adicionarAluno", async (req, res) => {
     res.status(500).send(error.message);
   }
 });
+
+//app.listen(5000);
