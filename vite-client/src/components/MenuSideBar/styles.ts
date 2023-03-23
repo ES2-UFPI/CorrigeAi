@@ -11,7 +11,7 @@ export const MenuSideBarContainer = styled.div<Props> `
   border-radius: 0 .8rem .8rem 0;
   display: flex; 
   flex-direction: column;
-  max-width: 30rem;
+  max-width: 28rem;
   width: ${ props => props.width };
   padding: 1rem;
   
@@ -19,6 +19,7 @@ export const MenuSideBarContainer = styled.div<Props> `
   position: relative;
   
   .contentMenu {
+    border-right: 1px solid black;
     position: fixed;
     background: var(--menuSideBar);
     padding: 1rem;

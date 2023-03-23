@@ -17,10 +17,9 @@ export const Avaliations = styled.div`
 
 export const Avaliation = styled.div`
   background: #272643;
-  padding: 20px 20px;
   color: #fff;
   border-radius: 20px;
-  margin-top: 30px;
+  margin-top: 2.5rem;
 
   width: 100%;
   display: flex; 

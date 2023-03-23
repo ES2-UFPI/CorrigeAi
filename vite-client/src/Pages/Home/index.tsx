@@ -1,18 +1,22 @@
-import { Layout } from '../../components/Layout'
-import { Wrapper } from '../../styles/Layout'
-import { HomePage } from './styles'
+import { useContext } from "react"
+import { AuthContext } from "../../context/AuthContext"
 
-export function Home() {
+export function Home(){
+  const { signed } = useContext(AuthContext)
   return (
-    <Layout>
-      <HomePage className='Home'>
-        <Wrapper>
-          <h1>Página Inicial do Professor</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deleniti quos ipsum a aut consequuntur labore numquam minus, exercitationem recusandae cupiditate nam, provident doloribus fugit voluptas repellat illum quidem aliquid?</p>
-
-          <p>Infos proff: Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, aut? Quod eligendi aspernatur officia neque quasi rem accusantium provident rerum error! Iste maiores aut perferendis quaerat eveniet adipisci corporis error.</p>
-        </Wrapper>
-      </HomePage>
-    </Layout>
+    <div>
+      {signed ? (
+        <div>
+          <h1>Home Page</h1> 
+          <p>Vai renderizar Home Page proff ou Aluno</p>
+        </div>
+      ) : ( 
+        <div>
+          <h1>Login</h1> 
+          <p>Opção 1 Proff</p>
+          <p>Opção 2 Aluno</p>
+        </div>
+      )}
+    </div>
   )
 }
