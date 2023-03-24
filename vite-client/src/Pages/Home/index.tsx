@@ -4,18 +4,22 @@ import { HomeTeacher } from '../Teacher/HomeTeacher'
 import { HomeStudent } from '../Student/HomeStudent'
 
 import { AuthContext, IUser } from '../../context/AuthContext'
+import { Navigate } from 'react-router-dom'
 
 export function Home() {
-  const { user } = useContext(AuthContext)
+  const { user, signed } = useContext(AuthContext)
 
+  console.log(user)
   return (
     <div>
-      {user?.typeUser === 'teacher' ? (
-        <HomeTeacher />
-      ) : (
-        <HomeStudent />
-      )}
-      <h1>teste{user?.typeUser}</h1>
+      { signed ? (
+        user?.typeUser === 'teacher' ? (
+          <HomeTeacher />
+          ) : (
+          <HomeStudent />
+        )
+        ): <Navigate to='/login'/>
+      }
     </div>
   )
 }

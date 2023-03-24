@@ -6,15 +6,13 @@ import { Wrapper } from "../../styles/Layout"
 
 import { Form, LoginForm, StyledButton, StyledLoginForm } from "./styles"
 
-
 export function Login(){
-
-  const { Teacher, Student , setTeacher, setStudent,user, setUser, signed, setSigned } = useContext(AuthContext)
+  const { setUser, setSigned } = useContext(AuthContext)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const navigate = useNavigate()
-  
+
   async function signIn(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault()
 
