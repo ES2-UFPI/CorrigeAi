@@ -1,15 +1,15 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { HomeTeacher } from '../Teacher/HomeTeacher'
 import { HomeStudent } from '../Student/HomeStudent'
 
 import { AuthContext, IUser } from '../../context/AuthContext'
-import { Navigate } from 'react-router-dom'
+import { RedirectLogin } from '../../components/Redirect'
 
 export function Home() {
   const { user, signed } = useContext(AuthContext)
 
-  console.log(user)
+  console.log(user, signed)
   return (
     <div>
       { signed ? (
@@ -18,7 +18,7 @@ export function Home() {
           ) : (
           <HomeStudent />
         )
-        ): <Navigate to='/login'/>
+        ): <RedirectLogin />
       }
     </div>
   )

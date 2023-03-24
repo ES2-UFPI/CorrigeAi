@@ -31,8 +31,6 @@ export function Login(){
         name: data.professor.name,
         typeUser: 'teacher'
       })
-
-      navigate('/home')
     }
 
     if (data.student != null){
@@ -42,9 +40,9 @@ export function Login(){
         name: data.student.name,
         typeUser: 'student'
       })
-
-      navigate('/home')
     }
+
+    navigate('/home')
   }
 
   function signOut() {
@@ -88,4 +86,8 @@ export function Login(){
       </StyledLoginForm>
     </>
   )
+}
+
+function userEffect(arg0: () => void) {
+  throw new Error("Function not implemented.")
 }

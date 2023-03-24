@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Layout } from "../../components/Layout";
-import { Wrapper } from "../../styles/Layout";
+import { Layout } from "../../../components/Layout";
+import { Wrapper } from "../../../styles/Layout";
 import { ButtonSaveClass, Class, Form } from "./styles";
 
 

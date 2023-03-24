@@ -4,7 +4,7 @@ import React from 'react'
 import {
   AlternativeQuestion,
   PropsAlternative
-} from '../../components/AlternativeQuestion'
+} from '../../../components/AlternativeQuestion'
 
 import {
   AlternativesObjective,
@@ -15,12 +15,12 @@ import {
   QuestionStyle
 } from './styles'
 
-import { PropsForm } from '../../components/FormAvaliation'
-import { Wrapper } from '../../styles/Layout'
+import { PropsForm } from '../../../components/FormAvaliation'
+import { Wrapper } from '../../../styles/Layout'
 import { useLocation } from "react-router-dom";
-import { Layout } from '../../components/Layout'
+import { Layout } from '../../../components/Layout'
 
-export function SolveAvaliation() {
+export function SolveAvaliationStudent() {
   const [formAvaliation, setFormAvaliation] = useState<PropsForm>(
     {} as PropsForm
   )
