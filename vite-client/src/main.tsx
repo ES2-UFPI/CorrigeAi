@@ -27,14 +27,6 @@ const router = createBrowserRouter([
     element: <Home />
   }, 
   {
-    path: "/home-student",
-    element: <HomeStudent />
-  }, 
-  {
-    path: "/home-teacher",
-    element: <HomeTeacher />
-  }, 
-  {
     path: "/form-avaliation",
     element: <CreateTaskOrExam />
   },

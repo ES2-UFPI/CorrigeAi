@@ -28,14 +28,24 @@ export function Login(){
 
     if (data.professor != null) {
       setSigned(true)
-      setTeacher(data.professor)
-      navigate('/home-teacher')
+      setUser({
+        email: data.professor.email,
+        name: data.professor.name,
+        typeUser: 'teacher'
+      })
+
+      navigate('/home')
     }
 
     if (data.student != null){
       setSigned(true)
-      setStudent(data.student)
-      navigate('/home-student')
+      setUser({
+        email: data.student.email,
+        name: data.student.name,
+        typeUser: 'student'
+      })
+
+      navigate('/home')
     }
   }
 
