@@ -121,6 +121,42 @@ app.post('/createProfessor', async (req: Request, res: Response) => {
   }
 });
 
+
+
+app.get('/getProfessorByEmail/:email', async (req: Request, res: Response) => {
+  try {
+    const { email } = req.params;
+    const professor: IProfessor | null = await Professor.findOne({ email });
+    if (!professor) {
+      return res.status(404).json({ message: 'Professor not found' });
+    }
+    res.status(200).json({ professor });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
+
+app.get('/searchByEmail', async (req: Request, res: Response) => {
+  try {
+    const { email } = req.query;
+
+    const professor: IProfessor | null = await Professor.findOne({ email });
+    const student: IStudent | null = await Student.findOne({ email });
+
+    if (professor || student) {
+      res.status(200).json({ professor, student });
+    } else {
+      res.status(404).json({ message: `No record found for email: ${email}` });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
+
+
+
 app.post('/createStudent', async (req: Request, res: Response) => {
   try {
     const { name, password, email, user } = req.body;
@@ -150,6 +186,7 @@ app.get('/getProfessors', async (req: Request, res: Response) => {
     res.status(500).send('Server error');
   }
 });
+
 
 
 app.get('/getStudents', async (req: Request, res: Response) => {
