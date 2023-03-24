@@ -6,6 +6,8 @@ config();
 
 import { AvaliationModel, AvaliationDocument } from './model/Avaliation';
 import { Class, IClass } from './model/Class';
+import { Professor, IProfessor } from './model/Professor';
+import { Student, IStudent } from './model/Student';
 import AvaliationResponseModel from './model/AvaliationResponse';
 
 const app = express();
@@ -91,6 +93,106 @@ app.get('/getClasses', async (req: Request, res: Response) => {
   try {
     const classes: IClass[] = await Class.find({});
     res.status(200).json({ classes });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
+
+
+
+app.post('/createProfessor', async (req: Request, res: Response) => {
+  try {
+    const { name, password, email, user } = req.body;
+
+    const newProfessor: IProfessor = new Professor({
+      name,
+      password,
+      email,
+      user,
+    });
+
+    const savedProfessor: IProfessor = await newProfessor.save();
+
+    res.status(201).json({ message: 'Professor created successfully', savedProfessor});
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
+
+
+
+app.get('/getProfessorByEmail/:email', async (req: Request, res: Response) => {
+  try {
+    const { email } = req.params;
+    const professor: IProfessor | null = await Professor.findOne({ email });
+    if (!professor) {
+      return res.status(404).json({ message: 'Professor not found' });
+    }
+    res.status(200).json({ professor });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
+
+app.get('/searchByEmail', async (req: Request, res: Response) => {
+  try {
+    const { email } = req.query;
+
+    const professor: IProfessor | null = await Professor.findOne({ email });
+    const student: IStudent | null = await Student.findOne({ email });
+
+    if (professor || student) {
+      res.status(200).json({ professor, student });
+    } else {
+      res.status(404).json({ message: `No record found for email: ${email}` });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
+
+
+
+app.post('/createStudent', async (req: Request, res: Response) => {
+  try {
+    const { name, password, email, user } = req.body;
+
+    const newStudent: IStudent = new Student({
+      name,
+      password,
+      email,
+      user,
+    });
+
+    const savedStudent: IStudent = await newStudent.save();
+
+    res.status(201).json({ message: 'Student created successfully', savedStudent});
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
+
+app.get('/getProfessors', async (req: Request, res: Response) => {
+  try {
+    const Professors: IProfessor[] = await Professor.find({});
+    res.status(200).json({ Professors });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
+});
+
+
+
+app.get('/getStudents', async (req: Request, res: Response) => {
+  try {
+    const Students: IClass[] = await Student.find({});
+    res.status(200).json({ Students });
   } catch (err) {
     console.error(err);
     res.status(500).send('Server error');

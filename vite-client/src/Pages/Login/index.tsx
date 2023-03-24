@@ -6,26 +6,46 @@ import { Wrapper } from "../../styles/Layout"
 
 import { Form, LoginForm, StyledButton, StyledLoginForm } from "./styles"
 
-export function Login(){
-  const { user, setUser, signed, setSigned } = useContext(AuthContext)
 
+export function Login(){
+
+  const { Teacher, Student , setTeacher, setStudent,user, setUser, signed, setSigned } = useContext(AuthContext)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const navigate = useNavigate()
   
-  function signIn(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    //Buscando usuario, para depois setar no user
-    //...
+  async function signIn(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault()
-    setUser({ name: 'Jon Kleber', email: "johndoe@example.com", typeUser: 'studnet' });
-    
-    //lógica para autenticar o usuário
-    if (user?.email === 'johndoe@example.com'){
+
+    const response = await fetch(`http://localhost:3000/searchByEmail?email=${email}`);
+    const data = await response.json();   
+
+    // Mensagem de alerta se nao tiver ninguém com esse email cadastrado
+    if(!data.professor && !data.student){
+      alert(data.message)
+    }
+
+    if (data.professor != null) {
       setSigned(true)
+      setUser({
+        email: data.professor.email,
+        name: data.professor.name,
+        typeUser: 'teacher'
+      })
+
       navigate('/home')
-    }else {
-      alert('Usuario não encontrado')
+    }
+
+    if (data.student != null){
+      setSigned(true)
+      setUser({
+        email: data.student.email,
+        name: data.student.name,
+        typeUser: 'student'
+      })
+
+      navigate('/home')
     }
   }
 

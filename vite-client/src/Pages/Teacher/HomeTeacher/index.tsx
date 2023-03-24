@@ -3,7 +3,6 @@ import { Wrapper } from '../../../styles/Layout'
 import { HomePage } from '../../Home/styles'
 
 export function HomeTeacher() {
-  
   return (
     <Layout>
         <HomePage className='Home'>

@@ -14,6 +14,7 @@ import { Homeclass } from "./Pages/HomeClass";
 
 import { AuthContextProvider } from "./context/AuthProvider";
 import { HomeStudent } from "./Pages/Student/HomeStudent";
+import { HomeTeacher } from "./Pages/Teacher/HomeTeacher";
 import { Home } from "./Pages/Home";
 
 const router = createBrowserRouter([
@@ -24,10 +25,6 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <Home />
-  }, 
-  {
-    path: "/home-student",
-    element: <HomeStudent />
   }, 
   {
     path: "/form-avaliation",
