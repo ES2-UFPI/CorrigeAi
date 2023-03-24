@@ -70,3 +70,15 @@ export const AboutMenu = styled.div `
     width: 26rem;
   }
 `
+
+export const DropdownMenu = styled.ul`
+  background-color: var(--about);
+  border-radius: 3px;
+  list-style: none;
+  margin: 0;
+  padding: .5rem; 
+  
+  li {
+    cursor: pointer;
+  }
+`
