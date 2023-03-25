@@ -7,19 +7,32 @@ import { AuthContext, IUser } from '../../context/AuthContext'
 import { RedirectLogin } from '../../components/Redirect'
 
 export function Home() {
-  const { user, signed } = useContext(AuthContext)
+  const [user, setUser] = useState(getUserFromLocalStorage());
+  // const { user, signed } = useContext(AuthContext)
 
-  console.log(user, signed)
+  function getUserFromLocalStorage() {
+    const user = localStorage.getItem('user');
+    if (user) {
+      return JSON.parse(user);
+    }
+    return null;
+  }
+
+  useEffect(() => {
+    const updatedUser = getUserFromLocalStorage();
+    if (updatedUser !== user) {
+      setUser(updatedUser);
+    }
+  }, []);
+
+  console.log(user)
   return (
     <div>
-      { signed ? (
-        user?.typeUser === 'teacher' ? (
-          <HomeTeacher />
-          ) : (
-          <HomeStudent />
-        )
-        ): <RedirectLogin />
-      }
+      {user.professor ? (
+        <HomeTeacher />
+      ): (
+        <HomeStudent />
+      )}
     </div>
   )
 }
