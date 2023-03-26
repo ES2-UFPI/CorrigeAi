@@ -13,39 +13,17 @@ export const AuthContextProvider : React.FC<Props> = ({children}) => {
 
   useEffect(() => { //Recupera o user do local storage
     const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      const userData = JSON.parse(storedUser)
+    const storeSigned = localStorage.getItem('signed')
 
-      async function setValueUser(){
-        if (userData.professor){
-          const user = await userData.professor
-          setUser({
-            email: user.email,
-            name: user.name,
-            typeUser: 'teacher'
-          });
-        }else {
-          const user = await userData.student
-          setUser({
-            email: user.email,
-            name: user.name,
-            typeUser: 'student'
-          });
-        }
-      }
-      setValueUser()
+    if (storedUser) {
+      setUser(JSON.parse(storedUser))
+    }
+
+    if (storeSigned){
+      setSigned(JSON.parse(storeSigned))
     }
   }, []);
 
-  // useEffect(() => {  //Atualiza o local storage
-  //   localStorage.setItem("user", JSON.stringify(user));
-  //   console.log('alter')
-  // }, [user]);
-  // const [Teacher, setTeacher] = useState<ITeacher | null>(null)
-  // const [Student, setStudent] = useState<ITeacher | null>(null)
-
-  // const navigate = useNavigate()
-  
   async function signIn(email: string) {
     const response = await fetch(`http://localhost:3000/searchByEmail?email=${email}`);
     const data = await response.json();   
@@ -58,22 +36,13 @@ export const AuthContextProvider : React.FC<Props> = ({children}) => {
 
     if (data.professor != null) {
       localStorage.setItem("user", JSON.stringify(data));
-      // await setUser({
-      //   email: data.professor.email,
-      //   name: data.professor.name,
-      //   typeUser: 'teacher'
-      // })
+      localStorage.setItem("signed", JSON.stringify(true));
       return true
     }
 
     if (data.student != null){
       localStorage.setItem("user", JSON.stringify(data))
-      // await setUser({
-      //   email: data.student.email,
-      //   name: data.student.name,
-      //   typeUser: 'student'
-      // })
-      
+      localStorage.setItem("signed", JSON.stringify(true));
       return true
     }
     return false
@@ -81,8 +50,10 @@ export const AuthContextProvider : React.FC<Props> = ({children}) => {
 
   function signOut() {
     //lógica para deslogar o usuário
-     setUser(null);
-     setSigned(false);
+    localStorage.setItem("signed", JSON.stringify(false));
+    localStorage.setItem("user", JSON.stringify(null))
+    setUser(null);
+    setSigned(false);   
    }
 
   return (

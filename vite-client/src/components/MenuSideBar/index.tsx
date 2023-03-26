@@ -1,7 +1,8 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useContext, useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { CloseButton } from '../../assets/CloseButton'
+import { AuthContext } from '../../context/AuthContext'
 import { ButtonSideBar } from '../ButtonSideBar'
 import { AboutMenu, DropdownMenu, MenuSideBarContainer } from './styles'
 
@@ -22,6 +23,32 @@ export function MenuSideBar({
   const [avaliationOption, setAvaliationOption] = useState(false);
   const [teacherOption, setTeacherOption] = useState(false);
 
+  console.log(classOption, avaliationOption, teacherOption)
+  const { signOut, signed } = useContext(AuthContext)
+  const [user, setUser] = useState(getUserFromLocalStorage())
+
+  console.log(user)
+  function getUserFromLocalStorage() {
+    const user = localStorage.getItem('user');
+    if (user) {
+      return JSON.parse(user);
+    }
+    return null;
+  }
+
+  useEffect(() => {
+    const updatedUser = getUserFromLocalStorage();
+    if (updatedUser !== user) {
+      setUser(updatedUser);
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log('alterou')
+  }, [classOption, avaliationOption, teacherOption])
+
+  const navigate = useNavigate()
+  
   function handleClassOption() {
     setClassOption(!classOption)
   }
@@ -32,6 +59,10 @@ export function MenuSideBar({
 
   function handleTeacherOption() {
     setTeacherOption(!teacherOption)
+  }
+
+  function handleSignOut(){
+    signOut()
   }
 
   return (
@@ -56,141 +87,95 @@ export function MenuSideBar({
         </AboutMenu>
 
         <div className="content-buttons">
-          <Link to="#" onClick={handleTeacherOption}>
-            <ButtonSideBar>Professor</ButtonSideBar>
-          </Link>
-          {teacherOption && (
-            <DropdownMenu>
-              <Link to="#">
-                <li>Ver perfil</li>
-              </Link>
-            </DropdownMenu>
-          )}
-
-          <Link to="#" onClick={handleClassOption}>
-            <ButtonSideBar>Turma</ButtonSideBar>
-          </Link>
-          {classOption && (
-            <DropdownMenu>
-              <Link to="#">
-                <li>Criar turma</li>
-              </Link>
-              <Link to="#">
-                <li>Ver turmas cadastradas</li>
-              </Link>
-              <Link to="#">
-                <li>Participantes</li>
-              </Link>
-              {/* <Link to="#">
-                <li>Novo participante</li>
-              </Link>
-              <Link to="#">
-                <li>Noticias</li>
-              </Link> 
-              <Link to="#">
-                <li>Cadastrar Noticias</li>
-              </Link>
-              */}
-            </DropdownMenu>
-          )}
-
-          <Link to="#" onClick={handleAvaliationOption}>
-            <ButtonSideBar>Avaliação</ButtonSideBar>
-          </Link>
-          {avaliationOption && (
-            <DropdownMenu>
-              <Link to="#">
-                <li>Cadastrar prova ou tarefa</li>
-              </Link>
-              <Link to="#">
-                <li>Ver provas e tarefas</li>
-              </Link>
+          <div>
+            <Link to='/home'>
+              <ButtonSideBar isSelected={false} isHome={true}>
+                Home
+              </ButtonSideBar>
+            </Link>
+            {
+              user?.professor ? (
+                <Link to="#" onClick={handleTeacherOption}>
+                  <ButtonSideBar isSelected={teacherOption}>
+                    Professor
+                  </ButtonSideBar>
+                </Link>
+              ) : (
+                <Link to="#" onClick={handleTeacherOption}>
+                  <ButtonSideBar isSelected={teacherOption}>Aluno</ButtonSideBar>
+                </Link>
+              )
+            }
+            {teacherOption && (
+              <DropdownMenu>
+                <Link to="#">
+                  <li>Ver perfil</li>
+                </Link>
               </DropdownMenu>
             )}
+            <Link to="#" onClick={handleClassOption}>
+              <ButtonSideBar isSelected={classOption}>
+                Turma
+              </ButtonSideBar>
+            </Link>
+            {classOption && (
+              <DropdownMenu>
+                <Link to="#">
+                  <li>Participantes</li>
+                </Link>
+                {
+                  user?.professor ? (
+                    <>
+                      <Link to="#">
+                        <li>Novo participante</li>
+                      </Link>
+                      <Link to="/create-class">
+                        <li>Criar turma</li>
+                      </Link>
+                      <Link to="/view-classes">
+                        <li>Ver turmas cadastradas</li>
+                      </Link>
+                    </>
+                  ) : (
+                    null
+                  )
+                }
+                <Link to="#">
+                  <li>Noticias</li>
+                </Link>
+                {
+                  user?.professor ? (
+                    <Link to="#">
+                      <li>Cadastrar Noticias</li>
+                    </Link>
+                  ) : (
+                    null
+                  )
+                }
+              </DropdownMenu>
+            )}
+            <Link to="#" onClick={handleAvaliationOption}>
+              <ButtonSideBar isSelected={avaliationOption}>
+                Avaliação
+              </ButtonSideBar>
+            </Link>
+            {avaliationOption && (
+              <DropdownMenu>
+                <Link to="/create-avaliation">
+                  <li>Cadastrar prova ou tarefa</li>
+                </Link>
+                <Link to="/view-avaliations">
+                  <li>Ver provas e tarefas</li>
+                </Link>
+                </DropdownMenu>
+              )}
+          </div>
 
-          <Link to="/form-avaliation">
-            <ButtonSideBar>Cadastrar prova ou tarefa</ButtonSideBar>
-          </Link>
-
-          <Link to="/view-avaliations">
-            <ButtonSideBar>Ver provas e tarefas cadastradas</ButtonSideBar>
-          </Link>
-
-          <Link to="/create-class">
-            <ButtonSideBar>Criar nova turma</ButtonSideBar>
-          </Link>
-
-          <Link to="/view-classes">
-            <ButtonSideBar>Ver turmas cadastradas</ButtonSideBar>
+          <Link to="/login" onClick={handleSignOut}>
+            <ButtonSideBar>Sair</ButtonSideBar>
           </Link>
         </div>
       </div>
     </MenuSideBarContainer>
   )
 }
-
-// import React, { useState } from 'react';
-// import styled from 'styled-components';
-
-// const Menu = styled.div`
-//   background-color: #f2f2f2;
-//   border: 1px solid #ccc;
-//   border-radius: 3px;
-//   cursor: pointer;
-//   display: inline-block;
-//   padding: 8px;
-// `;
-
-// const DropdownMenu = styled.ul`
-//   background-color: black;
-//   border: 1px solid #ccc;
-//   border-radius: 3px;
-//   list-style: none;
-//   margin: 0;
-//   padding: 0;
-
-//   li {
-//     padding: 8px;
-//   }
-// `;
-
-// export function MenuSideBar() {
-//   const [isMenuOpen, setIsMenuOpen] = useState(false);
-//   const [isMenuOpen1, setIsMenuOpen1] = useState(false);
-
-//   const handleMenuClick = () => {
-//     setIsMenuOpen(!isMenuOpen);
-//   };
-//   const handleMenuClick1 = () => {
-//     setIsMenuOpen1(!isMenuOpen1);
-//   };
-
-//   return (
-//     <div style={{background: 'yellow'}}>
-//       <a onClick={handleMenuClick}>
-//         <ButtonSideBar>
-//           Teste
-//         </ButtonSideBar>
-//       </a>
-//       {isMenuOpen && (
-//         <DropdownMenu>
-//           <div>Item 1</div>
-//           <div>Item 1</div>
-//           <div>Item 1</div>
-//         </DropdownMenu>
-//       )}
-//       <a onClick={handleMenuClick1}>
-//       <ButtonSideBar>
-//           Teste1
-//         </ButtonSideBar>
-//       </a>
-//       {isMenuOpen1 && (
-//         <DropdownMenu>
-//           <div>Item 1</div>
-//           <div>Item 1</div>
-//           <div>Item 1</div>
-//         </DropdownMenu>
-//       )}
-//     </div>
-//   );
-// }

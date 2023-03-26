@@ -1,23 +1,33 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
-import { AuthContext } from '../../context/AuthContext'
-import { Navigate } from 'react-router-dom'
 import { HomeclassTeacher } from '../Teacher/HomeClassTeacher'
 import { HomeclassStudent } from '../Student/HomeClassStudent'
 
 export function HomeClass() {
-  const { user, signed } = useContext(AuthContext)
+  const [user, setUser] = useState(getUserFromLocalStorage());
+
+  function getUserFromLocalStorage() {
+    const user = localStorage.getItem('user');
+    if (user) {
+      return JSON.parse(user);
+    }
+    return null;
+  }
+
+  useEffect(() => {
+    const updatedUser = getUserFromLocalStorage();
+    if (updatedUser !== user) {
+      setUser(updatedUser);
+    }
+  }, []);
 
   return (
     <div>
-      { signed ? (
-        user?.typeUser === 'teacher' ? (
-          <HomeclassTeacher />
-          ) : (
-          <HomeclassStudent />
-        )
-        ): <Navigate to='/login'/>
-      }
+      {user?.professor ? (
+        <HomeclassTeacher />
+      ): ( 
+        <HomeclassStudent />
+      )}
     </div>
   )
 }

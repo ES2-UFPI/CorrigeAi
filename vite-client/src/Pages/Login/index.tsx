@@ -7,8 +7,9 @@ import { Wrapper } from "../../styles/Layout"
 import { Form, LoginForm, StyledButton, StyledLoginForm } from "./styles"
 
 export function Login(){
-  const { setUser, setSigned, user, signIn, signOut } = useContext(AuthContext)
+  const { setUser, setSigned, user, signIn, signOut, signed } = useContext(AuthContext)
 
+  console.log(user, signed)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 

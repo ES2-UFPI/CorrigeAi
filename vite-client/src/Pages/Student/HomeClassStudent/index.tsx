@@ -29,7 +29,7 @@ export function HomeclassStudent() {
     <Layout>
       <HomeClassContainer>
         <Wrapper>
-          <h1>Pagina principal Turma</h1>
+          <h1>Pagina principal Turma - Aluno</h1>
           <h2>{_class.className}</h2>
           {/* Exibir participantes da turma*/}
           <p>

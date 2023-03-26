@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     element: <Home />
   }, 
   {
-    path: "/form-avaliation",
+    path: "/create-avaliation",
     element: <CreateTaskOrExam />
   },
   {
