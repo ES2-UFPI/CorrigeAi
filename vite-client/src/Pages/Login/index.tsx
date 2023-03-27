@@ -15,6 +15,10 @@ export function Login(){
 
   const navigate = useNavigate()
 
+  useEffect(() => {
+    signOut()
+  }, [])
+
   async function handleLogin(e: React.MouseEvent<HTMLButtonElement, MouseEvent>){
     e.preventDefault()
     if (await signIn(email)){
