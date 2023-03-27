@@ -10,8 +10,8 @@ export interface IStudent extends Document {
 const studentSchema: Schema<IStudent> = new Schema({
   name: { type: String, required: true },
   password: { type: String, required: true },
-  email: { type: String, required: true },
-  user: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  user: { type: String, required: true, unique: true },
 });
 
 export const Student: Model<IStudent> = model<IStudent>('student', studentSchema);
