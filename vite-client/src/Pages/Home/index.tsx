@@ -1,18 +1,17 @@
-import { Layout } from '../../components/Layout'
-import { Wrapper } from '../../styles/Layout'
-import { HomePage } from './styles'
+import { useContext, useEffect, useState } from 'react'
+
+import { HomeTeacher } from '../Teacher/HomeTeacher'
+import { HomeStudent } from '../Student/HomeStudent'
+import { AuthContext } from '../../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 export function Home() {
-  return (
-    <Layout>
-      <HomePage className='Home'>
-        <Wrapper>
-          <h1>Página Inicial do Professor</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi deleniti quos ipsum a aut consequuntur labore numquam minus, exercitationem recusandae cupiditate nam, provident doloribus fugit voluptas repellat illum quidem aliquid?</p>
+  //User não esta sendo atualizado para renderizar o componente adequado
+  const { signed, user, signIn, signOut } = useContext(AuthContext)
 
-          <p>Infos proff: Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, aut? Quod eligendi aspernatur officia neque quasi rem accusantium provident rerum error! Iste maiores aut perferendis quaerat eveniet adipisci corporis error.</p>
-        </Wrapper>
-      </HomePage>
-    </Layout>
+  return (
+    <div>
+      {user?.professor ? <HomeTeacher /> : <HomeStudent />}
+    </div>
   )
 }

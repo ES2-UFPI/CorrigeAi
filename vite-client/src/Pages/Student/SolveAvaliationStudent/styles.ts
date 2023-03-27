@@ -27,6 +27,7 @@ export const Container = styled.div `
   }
 
   .aboutAvaliation {
+    border: 1px solid var(--secondary);
     display: flex;
     flex-direction: column;
     align-items: center;
