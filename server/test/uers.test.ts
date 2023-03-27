@@ -4,7 +4,7 @@ import { Student, IStudent } from "../src/model/Student";
 import { createProfessorController } from "../src/controllers/UsersControllers";
 
 describe("createProfessorController", () => {
-  test("should create a new professor", async () => {
+  test("should create a new Professor", async () => {
     const mockReq: Request = {
       body: {
         name: "Test Professor",
