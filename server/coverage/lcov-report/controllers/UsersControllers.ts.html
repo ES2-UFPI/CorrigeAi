@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">24.1% </span>
+                <span class="strong">39.28% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>27/112</span>
+                <span class='fraction'>44/112</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>2/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/6</span>
+                <span class='fraction'>2/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">24.1% </span>
+                <span class="strong">39.28% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>27/112</span>
+                <span class='fraction'>44/112</span>
             </div>
         
             
@@ -230,26 +230,26 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -341,26 +341,26 @@ export async function createProfessorController (req: Request, res: Response){
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >export async function createStudentController (req: Request, res: Response) {</span></span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  try {</span>
-<span class="cstat-no" title="statement not covered" >    const { name, password, email, user } = req.body;</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    const newStudent: IStudent = new Student({</span>
-<span class="cstat-no" title="statement not covered" >      name,</span>
-<span class="cstat-no" title="statement not covered" >      password,</span>
-<span class="cstat-no" title="statement not covered" >      email,</span>
-<span class="cstat-no" title="statement not covered" >      user,</span>
-<span class="cstat-no" title="statement not covered" >    });</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    const savedStudent: IStudent = await newStudent.save();</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    res.status(201).json({ message: 'Student created successfully', savedStudent});</span>
-<span class="cstat-no" title="statement not covered" >  } catch (err) {</span>
+export async function createStudentController (req: Request, res: Response) {
+&nbsp;
+  try {
+    const { name, password, email, user } = req.body;
+&nbsp;
+    const newStudent: IStudent = new Student({
+      name,
+      password,
+      email,
+      user,
+    });
+&nbsp;
+    const savedStudent: IStudent = await newStudent.save();
+&nbsp;
+    res.status(201).json({ message: 'Student created successfully', savedStudent});
+  } <span class="branch-0 cbranch-no" title="branch not covered" >catch (err) {</span>
 <span class="cstat-no" title="statement not covered" >    console.error(err);</span>
 <span class="cstat-no" title="statement not covered" >    res.status(500).send('Server error');</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
-<span class="cstat-no" title="statement not covered" >}</span>
+}
 &nbsp;
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >export async function getStudentsController (req: Request, res: Response) {</span></span>
 <span class="cstat-no" title="statement not covered" >  </span>
@@ -403,7 +403,7 @@ export async function createProfessorController (req: Request, res: Response){
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-27T21:25:38.874Z
+                at 2023-03-27T21:49:17.225Z
             </div>
         <script src="../prettify.js"></script>
         <script>
