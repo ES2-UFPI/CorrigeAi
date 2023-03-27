@@ -60,7 +60,7 @@ export const ProfileDetails = styled.div`
   }
 `;
 
-export const ProfileBio = styled.p`
+export const ProfileBio = styled.div`
   margin: 1rem;
   width: 100%;
   line-height: 1.5;

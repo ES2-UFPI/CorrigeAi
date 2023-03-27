@@ -6,8 +6,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
 import { Login } from "./Pages/Login";
 import { CreateTaskOrExam } from "./Pages/Teacher/CreateAvaliation";
-import { SolveAvaliation } from "./Pages/Student/SolveAvaliation";
 import { ViewAvaliations } from "./Pages/ViewAvaliations";
+import { SolveAvaliation } from "./Pages/Student/SolveAvaliation";
 import { CreateClass } from "./Pages/Teacher/CreateClass";
 import { ViewClasses } from "./Pages/ViewClasses";
 import { HomeClass } from "./Pages/HomeClass";
@@ -15,8 +15,13 @@ import { HomeClass } from "./Pages/HomeClass";
 import { AuthContextProvider } from "./context/AuthProvider";
 import { Home } from "./Pages/Home";
 import { ViewPerfilUser } from "./Pages/ViewPerfilUser";
+import { RedirectLogin } from "./components/Redirect";
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RedirectLogin />
+  }, 
   {
     path: "/login",
     element: <Login />

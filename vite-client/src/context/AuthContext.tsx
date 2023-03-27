@@ -11,6 +11,7 @@ export interface ITeacher {
   password: string;
   email: string;
   user: string;
+  profilePicture: string;
 }
 
 export interface IStudent {
@@ -19,6 +20,7 @@ export interface IStudent {
   password: string;
   email: string;
   user: string;
+  profilePicture: string;
 }
 
 interface AuthContextData {

@@ -34,7 +34,7 @@ export const AuthContextProvider : React.FC<Props> = ({children}) => {
       const userData = JSON.parse(storedUser)
       setUser({
         professor: userData.professor,
-        student: userData.student
+        student: userData.student,
       });
   }
 }
