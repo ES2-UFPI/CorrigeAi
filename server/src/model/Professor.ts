@@ -1,4 +1,4 @@
-import { Document, Model, model, Schema } from 'mongoose';
+import { Document, Model, model, Schema } from "mongoose";
 
 export interface IProfessor extends Document {
   _id: string;
@@ -15,4 +15,7 @@ const professorSchema: Schema<IProfessor> = new Schema({
   user: { type: String, required: true, unique: true },
 });
 
-export const Professor: Model<IProfessor> = model<IProfessor>('Professor', professorSchema);
+export const Professor: Model<IProfessor> = model<IProfessor>(
+  "Professor",
+  professorSchema
+);
