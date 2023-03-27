@@ -48,9 +48,6 @@ export function ViewAvaliationsTeacher(){
                 </AboutAvaliation>
                 
                 <ButtonsAvaliation>
-                  <Link to="/solve-avaliation" state={ form }>
-                    <ButtonGreen>Acessar</ButtonGreen>
-                  </Link>
                   <Link to="#" state={ form }>
                     <ButtonGreen>Ver prova</ButtonGreen>
                   </Link>

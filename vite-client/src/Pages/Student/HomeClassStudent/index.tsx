@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useContext, useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 import { ButtonGreen } from '../../../components/ButtonGreen'
 
@@ -16,6 +16,7 @@ import {
 } from './styles'
 import { Wrapper } from '../../../styles/Layout'
 import { Layout } from '../../../components/Layout'
+import { AuthContext } from '../../../context/AuthContext'
 
 export function HomeclassStudent() {
   const { state } = useLocation()
@@ -38,21 +39,21 @@ export function HomeclassStudent() {
           </p>
           
           <ButtonsClass>
-            <ButtonGreen>
-              Criar Prova/Tarefas
-            </ButtonGreen>
-            <ButtonGreen>
-              Provas cadastradas
-            </ButtonGreen>
-            <ButtonGreen>
-              Tarefas cadastradas
-            </ButtonGreen>
-            <ButtonGreen>
-              Cadastrar novo participante
-            </ButtonGreen>
-            <ButtonGreen>
-              Ver participantes
-            </ButtonGreen>
+            <Link to="/view-avaliations">
+              <ButtonGreen>
+                Provas e tarefas
+              </ButtonGreen>
+            </Link>
+            <Link to="#">
+              <ButtonGreen>
+                Ver participantes
+              </ButtonGreen>
+            </Link>
+            <Link to="#">
+              <ButtonGreen>
+                Frequência
+              </ButtonGreen>
+            </Link>
           </ButtonsClass>
 
           <h2>Notícias principais</h2>

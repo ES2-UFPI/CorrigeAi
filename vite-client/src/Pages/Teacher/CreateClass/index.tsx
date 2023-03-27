@@ -10,10 +10,12 @@ export function CreateClass(){
 
   const { user } = useContext(AuthContext)
   
+  const idProfessor = user?.professor?._id
   function hanldeSubmitClass(){
     const classData = {
       className,
-      classSummary
+      classSummary,
+      idProfessor
     }
     const requestOptions = {
       method: 'POST',

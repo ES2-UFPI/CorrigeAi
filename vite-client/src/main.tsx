@@ -14,6 +14,7 @@ import { HomeClass } from "./Pages/HomeClass";
 
 import { AuthContextProvider } from "./context/AuthProvider";
 import { Home } from "./Pages/Home";
+import { ViewPerfilUser } from "./Pages/ViewPerfilUser";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <Home />
+  }, 
+  {
+    path: "/perfil",
+    element: <ViewPerfilUser />
   }, 
   {
     path: "/create-avaliation",
@@ -46,7 +51,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/home-class",
-    element: <HomeClass/>
+    element: <HomeClass />
   }
 ])
 

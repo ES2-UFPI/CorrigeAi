@@ -17,6 +17,7 @@ export const ButtonsClass = styled.div `
 
   button {
     margin: 0;
+    width: 100%;
   }  
   
   margin-bottom: 2rem;

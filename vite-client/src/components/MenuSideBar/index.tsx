@@ -105,7 +105,7 @@ export function MenuSideBar({
             }
             {teacherOption && (
               <DropdownMenu>
-                <Link to="#">
+                <Link to="/perfil">
                   <li>Ver perfil</li>
                 </Link>
               </DropdownMenu>
@@ -117,8 +117,8 @@ export function MenuSideBar({
             </Link>
             {classOption && (
               <DropdownMenu>
-                <Link to="#">
-                  <li>Participantes</li>
+                <Link to="/view-classes">
+                  <li>Ver turmas</li>
                 </Link>
                 {
                   user?.professor ? (
@@ -129,14 +129,14 @@ export function MenuSideBar({
                       <Link to="/create-class">
                         <li>Criar turma</li>
                       </Link>
-                      <Link to="/view-classes">
-                        <li>Ver turmas cadastradas</li>
-                      </Link>
                     </>
                   ) : (
                     null
                   )
                 }
+                 <Link to="#">
+                  <li>Participantes</li>
+                </Link>
                 <Link to="#">
                   <li>Noticias</li>
                 </Link>
@@ -158,9 +158,15 @@ export function MenuSideBar({
             </Link>
             {avaliationOption && (
               <DropdownMenu>
-                <Link to="/create-avaliation">
-                  <li>Cadastrar prova ou tarefa</li>
-                </Link>
+                 {
+                  user?.professor ? (
+                    <Link to="/create-avaliation">
+                      <li>Cadastrar prova ou tarefa</li>
+                    </Link>
+                  ) : (
+                    null
+                  )
+                }
                 <Link to="/view-avaliations">
                   <li>Ver provas e tarefas</li>
                 </Link>
