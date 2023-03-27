@@ -23,11 +23,9 @@ export function MenuSideBar({
   const [avaliationOption, setAvaliationOption] = useState(false);
   const [teacherOption, setTeacherOption] = useState(false);
 
-  console.log(classOption, avaliationOption, teacherOption)
   const { signOut, signed } = useContext(AuthContext)
   const [user, setUser] = useState(getUserFromLocalStorage())
 
-  console.log(user)
   function getUserFromLocalStorage() {
     const user = localStorage.getItem('user');
     if (user) {
@@ -44,7 +42,6 @@ export function MenuSideBar({
   }, []);
 
   useEffect(() => {
-    console.log('alterou')
   }, [classOption, avaliationOption, teacherOption])
 
   const navigate = useNavigate()

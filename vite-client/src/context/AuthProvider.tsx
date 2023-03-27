@@ -24,6 +24,20 @@ export const AuthContextProvider : React.FC<Props> = ({children}) => {
     }
   }, []);
 
+  // useEffect(() => {
+  // }, [user])
+
+  function setUserData(){
+  //   //Buscar valor no local storage e setar no IUser
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const userData = JSON.parse(storedUser)
+      setUser({
+        professor: userData.professor,
+        student: userData.student
+      });
+  }
+}
   async function signIn(email: string) {
     const response = await fetch(`http://localhost:3000/searchByEmail?email=${email}`);
     const data = await response.json();   
@@ -37,12 +51,14 @@ export const AuthContextProvider : React.FC<Props> = ({children}) => {
     if (data.professor != null) {
       localStorage.setItem("user", JSON.stringify(data));
       localStorage.setItem("signed", JSON.stringify(true));
+      setUserData()
       return true
     }
 
     if (data.student != null){
       localStorage.setItem("user", JSON.stringify(data))
       localStorage.setItem("signed", JSON.stringify(true));
+      setUserData()
       return true
     }
     return false
@@ -60,10 +76,6 @@ export const AuthContextProvider : React.FC<Props> = ({children}) => {
     <AuthContext.Provider value={{
       user,
       setUser,
-      // Teacher,
-      // setTeacher,
-      // Student,
-      // setStudent,
       signed,
       setSigned,
       signIn,
