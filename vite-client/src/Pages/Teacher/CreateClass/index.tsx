@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Layout } from "../../../components/Layout";
 import { Wrapper } from "../../../styles/Layout";
 import { ButtonSaveClass, Class, Form } from "./styles";
-
+import { AuthContext } from "../../../context/AuthContext";
 
 export function CreateClass(){
-
   const [className, setClassName] = useState<string>('');
   const [classSummary, setClassSummary] = useState<string>('');
 
+  const { user } = useContext(AuthContext)
+  
   function hanldeSubmitClass(){
     const classData = {
       className,

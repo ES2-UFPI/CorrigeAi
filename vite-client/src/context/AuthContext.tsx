@@ -1,9 +1,8 @@
 import { createContext } from "react";
 
 export interface IUser {
-  name: string
-  typeUser: string
-  email: string
+  student: IStudent | null
+  professor: ITeacher | null
 }
 
 export interface ITeacher {
