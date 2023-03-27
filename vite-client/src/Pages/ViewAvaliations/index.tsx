@@ -1,23 +1,34 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
-import { AuthContext } from '../../context/AuthContext'
-import { Navigate } from 'react-router-dom'
 import { ViewAvaliationsTeacher } from '../Teacher/ViewAvaliationsTeacher'
 import { ViewAvaliationsStudent } from '../Student/ViewAvaliationsStudent'
 
 export function ViewAvaliations() {
-  const { user, signed } = useContext(AuthContext)
+  const [user, setUser] = useState(getUserFromLocalStorage());
+
+  function getUserFromLocalStorage() {
+    const user = localStorage.getItem('user');
+    if (user) {
+      return JSON.parse(user);
+    }
+    return null;
+  }
+
+  useEffect(() => {
+    const updatedUser = getUserFromLocalStorage();
+    if (updatedUser !== user) {
+      setUser(updatedUser);
+    }
+  }, []);
 
   return (
     <div>
-      { signed ? (
-        user?.typeUser === 'teacher' ? (
-          <ViewAvaliationsTeacher />
-          ) : (
-          <ViewAvaliationsStudent />
-        )
-        ): <Navigate to='/login'/>
-      }
+      {user?.professor ? (
+        <ViewAvaliationsTeacher />
+      ): ( 
+        <ViewAvaliationsStudent />
+      )}
     </div>
   )
 }
+

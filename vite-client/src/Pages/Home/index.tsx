@@ -2,13 +2,13 @@ import { useContext, useEffect, useState } from 'react'
 
 import { HomeTeacher } from '../Teacher/HomeTeacher'
 import { HomeStudent } from '../Student/HomeStudent'
-
-import { AuthContext, IUser } from '../../context/AuthContext'
-import { RedirectLogin } from '../../components/Redirect'
+import { AuthContext } from '../../context/AuthContext';
 
 export function Home() {
+  //User não esta sendo atualizado para renderizar o componente adequado
+  const { signed } = useContext(AuthContext)
+
   const [user, setUser] = useState(getUserFromLocalStorage());
-  // const { user, signed } = useContext(AuthContext)
 
   function getUserFromLocalStorage() {
     const user = localStorage.getItem('user');
@@ -25,12 +25,11 @@ export function Home() {
     }
   }, []);
 
-  console.log(user)
   return (
     <div>
       {user.professor ? (
         <HomeTeacher />
-      ): (
+      ): ( 
         <HomeStudent />
       )}
     </div>
