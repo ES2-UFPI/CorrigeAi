@@ -11,7 +11,7 @@ import { Student, IStudent } from './model/Student';
 import AvaliationResponseModel from './model/AvaliationResponse';
 
 import { createAvaliationController, getAvaliationsController } from './controllers/AvaliationControllers';
-import { createClassController, getClassesControler } from './controllers/ClassControlers';
+import { addStudentOnClassControler, createClassController, getProfessorClassesControler } from './controllers/ClassControlers';
 import { createProfessorController, createStudentController, getProfessorByEmailController, getProfessorsController, getStudentsController, searchByEmailController } from './controllers/UsersControllers';
 
 const app = express();
@@ -29,14 +29,14 @@ app.use(express.json());
 app.post('/createAvaliation', createAvaliationController)
 app.get('/getAvaliations', getAvaliationsController)
 app.post('/createClass', createClassController);
-app.get('/getClasses', getClassesControler);
 app.post('/createProfessor', createProfessorController);
 app.get('/getProfessors', getProfessorsController);
 app.get('/getProfessorByEmail/:email', getProfessorByEmailController)
 app.post('/createStudent', createStudentController)
 app.get('/getStudents', getStudentsController)
 app.get('/searchByEmail', searchByEmailController)
-
+app.post('/addStudentOnClass', addStudentOnClassControler)
+app.get('/getProfessorClasses/:_id', getProfessorClassesControler)
 
  
 mongoose.connect(`${process.env.MONGO_URL}`).then(() => {

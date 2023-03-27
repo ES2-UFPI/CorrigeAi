@@ -14,4 +14,4 @@ const studentSchema: Schema<IStudent> = new Schema({
   user: { type: String, required: true, unique: true },
 });
 
-export const Student: Model<IStudent> = model<IStudent>('student', studentSchema);
+export const Student: Model<IStudent> = model<IStudent>('Student', studentSchema);
