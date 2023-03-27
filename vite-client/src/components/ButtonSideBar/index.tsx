@@ -23,6 +23,10 @@ export function ButtonSideBar({children, isSelected, isHome}: IButtonSideBar){
       onMouseEnter={handleMouseEnter} 
       onMouseLeave={handleMouseLeave}
       style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '1rem',
         backgroundColor: hovered
           ? 'var(--greenHover)'
           : isSelected

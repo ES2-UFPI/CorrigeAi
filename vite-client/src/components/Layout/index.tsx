@@ -1,5 +1,10 @@
-import { useState } from "react"
-import { WrapperLayout } from "../../styles/Layout"
+import { useContext, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
+import { HomeButton } from "../../assets/HomeButton"
+import { ReturnButton } from "../../assets/ReturnButton"
+import { AuthContext } from "../../context/AuthContext"
+import { Header, Main, WrapperLayout } from "../../styles/Layout"
 
 import { MenuSideBar } from "../MenuSideBar"
 
@@ -9,7 +14,10 @@ interface ILayout {
 
 export function Layout({children}: ILayout ) {
   const [sideBar, setSideBar] = useState(true)
+  const { user } = useContext(AuthContext)
 
+  const navigate = useNavigate();
+  
   let width
   if (!sideBar){
     width = '45px'
@@ -40,7 +48,25 @@ export function Layout({children}: ILayout ) {
         width={width}
         scale={scale}
       />
-      {children}
+      <Main>
+        <Header>
+          {user?.professor ? (
+            <p>{user.professor?.name}</p>
+          ): (
+            <p>{user?.student?.name}</p>
+          )}
+
+          <div>
+            <Link to='/home'>
+              <HomeButton />
+            </Link>
+            <button onClick={ () => navigate(-1) }> 
+              <ReturnButton />
+            </button>
+          </div>
+        </Header>
+        {children}
+      </Main>
     </WrapperLayout>
   )
 }

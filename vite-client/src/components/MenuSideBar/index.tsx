@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { CloseButton } from '../../assets/CloseButton'
+import { HomeButton } from '../../assets/HomeButton'
 import { AuthContext } from '../../context/AuthContext'
 import { ButtonSideBar } from '../ButtonSideBar'
 import { AboutMenu, DropdownMenu, MenuSideBarContainer } from './styles'
@@ -87,7 +88,7 @@ export function MenuSideBar({
           <div>
             <Link to='/home'>
               <ButtonSideBar isSelected={false} isHome={true}>
-                Home
+                <HomeButton /> Home
               </ButtonSideBar>
             </Link>
             {

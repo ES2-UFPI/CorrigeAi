@@ -68,6 +68,10 @@ export const MenuSideBarContainer = styled.div<Props> `
     .content-buttons {
       opacity: 1;
       transition: 1s;
+
+      a {
+        text-decoration: none;
+      }
     }
 
     .content-buttons > a button {
