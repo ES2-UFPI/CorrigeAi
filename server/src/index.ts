@@ -11,7 +11,7 @@ import { Student, IStudent } from './model/Student';
 import AvaliationResponseModel from './model/AvaliationResponse';
 
 import { createAvaliationController, getAvaliationsController } from './controllers/AvaliationControllers';
-import { addStudentOnClassControler, createClassController, getProfessorClassesControler } from './controllers/ClassControlers';
+import { addStudentOnClassControler, createClassController, getProfessorClassesControler, getSdudentClassesControler } from './controllers/ClassControlers';
 import { createProfessorController, createStudentController, getProfessorByEmailController, getProfessorsController, getStudentsController, searchByEmailController } from './controllers/UsersControllers';
 
 const app = express();
@@ -37,7 +37,7 @@ app.get('/getStudents', getStudentsController)
 app.get('/searchByEmail', searchByEmailController)
 app.post('/addStudentOnClass', addStudentOnClassControler)
 app.get('/getProfessorClasses/:_id', getProfessorClassesControler)
-
+app.get('/getStudentClasses/:_id', getSdudentClassesControler)
  
 mongoose.connect(`${process.env.MONGO_URL}`).then(() => {
   console.log(`listening on port ${PORT}`);
