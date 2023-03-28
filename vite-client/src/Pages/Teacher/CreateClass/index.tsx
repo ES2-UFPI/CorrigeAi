@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Layout } from "../../../components/Layout";
 import { Wrapper } from "../../../styles/Layout";
 import { ButtonSaveClass, Class, Form } from "./styles";
@@ -10,19 +10,20 @@ export function CreateClass(){
 
   const { user } = useContext(AuthContext)
   
+  console.log(user?.professor?._id)
   const idProfessor = user?.professor?._id
   function hanldeSubmitClass(){
     const classData = {
       className,
       classSummary,
-      idProfessor
+      professor: idProfessor
     }
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(classData)
     };
-
+  
     fetch('http://localhost:3000/createClass', requestOptions)
       .then(response => response.json())
       .then(data => {

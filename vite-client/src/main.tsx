@@ -16,6 +16,7 @@ import { AuthContextProvider } from "./context/AuthProvider";
 import { Home } from "./Pages/Home";
 import { ViewPerfilUser } from "./Pages/ViewPerfilUser";
 import { RedirectLogin } from "./components/Redirect";
+import { Participants } from "./components/Participants";
 
 const router = createBrowserRouter([
   {
@@ -48,11 +49,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/create-class",
-    element: <CreateClass/>
+    element: <CreateClass />
   },
   {
     path: "/view-classes",
-    element: <ViewClasses/>
+    element: <ViewClasses />
+  },
+  {
+    path: "/participants",
+    element: <Participants />
   },
   {
     path: "/home-class",

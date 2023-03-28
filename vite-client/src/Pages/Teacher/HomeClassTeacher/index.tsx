@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import { ButtonGreen } from '../../../components/ButtonGreen'
 
@@ -38,21 +38,29 @@ export function HomeclassTeacher() {
           </p>
           
           <ButtonsClass>
-            <ButtonGreen>
-              Criar Prova/Tarefas
-            </ButtonGreen>
-            <ButtonGreen>
-              Provas cadastradas
-            </ButtonGreen>
-            <ButtonGreen>
-              Tarefas cadastradas
-            </ButtonGreen>
-            <ButtonGreen>
-              Cadastrar novo participante
-            </ButtonGreen>
-            <ButtonGreen>
-              Ver participantes
-            </ButtonGreen>
+            <Link to="/create-avaliation">
+              <ButtonGreen>
+                Criar Prova/Tarefas
+              </ButtonGreen>
+            </Link>          
+
+            <Link to="/view-avaliations">
+              <ButtonGreen>
+                Provas e tarefas
+              </ButtonGreen>
+            </Link>
+
+            <Link to="#">
+              <ButtonGreen>
+                Cadastrar novo participante
+              </ButtonGreen>
+            </Link>
+
+            <Link to="/participants" state={_class}>
+              <ButtonGreen>
+                Ver participantes
+              </ButtonGreen>
+            </Link>
           </ButtonsClass>
 
           <h2>Notícias principais</h2>

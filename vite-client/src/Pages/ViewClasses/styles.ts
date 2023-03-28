@@ -43,6 +43,7 @@ export const Class = styled.div `
 export const ButtonAccessClass = styled(ContainerButtonGreen) `
   background: var(--about);
   margin: 0%;
+  margin-right: 1rem;
 `
 
 export const ButtonCreateClass = styled(ContainerButtonGreen) `

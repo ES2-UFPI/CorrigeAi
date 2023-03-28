@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ButtonGreen } from '../../components/ButtonGreen'
 import { Layout } from '../../components/Layout'
+import { ITeacher, IStudent, AuthContext } from '../../context/AuthContext'
 
 import { Wrapper } from '../../styles/Layout'
 import { ButtonAccessClass, ButtonCreateClass, Class, Classes, ContainerClasses } from './styles'
@@ -10,28 +11,47 @@ export interface iClasses {
   _id: string
   className: string
   classSummary: string
+  professor: ITeacher
+  students: IStudent []
 }
 
 export function ViewClasses() {
   const [classes, setClasses] = useState<iClasses[]>([])
+  const { user } = useContext(AuthContext)
 
   useEffect(() => {
     const fetchForms = async () => {
-      const response = await fetch('http://localhost:3000/getClasses')
-      const data = await response.json()
-      console.log(data.classes)
-      setClasses(data.classes)
+      if (user?.professor){
+        console.log('professor')
+        const response = await fetch(`http://localhost:3000/getProfessorClasses/${user?.professor?._id}`)
+        const data = await response.json()
+
+        setClasses(data.findClasses)
+      }
     }
     fetchForms()
-    console.log(classes)
-  }, [])
+  }, [user])
 
+  useEffect(() => {
+    const fetchForms = async () => {
+      if (user?.student){
+        console.log('aluno')
+        const response = await fetch(`http://localhost:3000/getStudentClasses/${user?.student?._id}`)
+        const data = await response.json()
+
+        setClasses(data)
+      }
+    }
+    fetchForms()
+  }, [user])
+
+  console.log(classes, '43')
   return (
     <Layout>
       <Classes>
         <Wrapper>
           <h1>Ver turmas</h1>
-          {classes.length > 0 ? (
+          {classes ? (
             <ContainerClasses>
               {classes.map((_class, index) => {
                 return (
@@ -45,7 +65,14 @@ export function ViewClasses() {
                       <hr />
                     </div>
                     <Link to="/home-class" state={_class}>
-                      <ButtonAccessClass>Acessar turma</ButtonAccessClass>
+                      <ButtonAccessClass>
+                        Acessar turma
+                      </ButtonAccessClass>
+                    </Link>
+                    <Link to="/participants" state={_class}>
+                      <ButtonAccessClass>
+                        Ver participantes
+                      </ButtonAccessClass>
                     </Link>
                   </Class>
                 )
@@ -54,14 +81,18 @@ export function ViewClasses() {
           ) : (
             <ContainerClasses>
               <Class>
-                <strong>Não existe turmas cadastradas!</strong>
+                <strong>Não existe turmas!</strong>
               </Class>
               
-              <Link to="/create-class">
-                <ButtonCreateClass>
-                  Criar Turma
-                </ButtonCreateClass>
-              </Link>
+              {
+                user?.professor ? (
+                  <Link to="/create-class">
+                    <ButtonCreateClass>
+                      Criar Turma
+                    </ButtonCreateClass>
+                  </Link>
+                ): null
+              }
             </ContainerClasses>
           )}
         </Wrapper>

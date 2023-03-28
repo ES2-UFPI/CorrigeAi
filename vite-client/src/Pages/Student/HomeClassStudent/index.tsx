@@ -33,7 +33,7 @@ export function HomeclassStudent() {
           <h1>Pagina principal Turma - Aluno</h1>
           <h2>{_class.className}</h2>
           {/* Exibir participantes da turma*/}
-          <p>
+          <p style={{marginBottom: '2rem'}}>
             <strong>Ementa: </strong>
             {_class.classSummary}
           </p>
@@ -44,7 +44,7 @@ export function HomeclassStudent() {
                 Provas e tarefas
               </ButtonGreen>
             </Link>
-            <Link to="#">
+            <Link to="/participants" state={_class}>
               <ButtonGreen>
                 Ver participantes
               </ButtonGreen>

@@ -135,9 +135,6 @@ export function MenuSideBar({
                     null
                   )
                 }
-                 <Link to="#">
-                  <li>Participantes</li>
-                </Link>
                 <Link to="#">
                   <li>Noticias</li>
                 </Link>
