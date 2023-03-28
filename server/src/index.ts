@@ -4,7 +4,15 @@ import cors from 'cors';
 import { config } from 'dotenv'
 config();
 
-import { FormModel, FormDocument } from './model/Schemas';
+import { AvaliationModel, AvaliationDocument } from './model/Avaliation';
+import { Class, IClass } from './model/Class';
+import { Professor, IProfessor } from './model/Professor';
+import { Student, IStudent } from './model/Student';
+import AvaliationResponseModel from './model/AvaliationResponse';
+
+import { createAvaliationController, getAvaliationsController } from './controllers/AvaliationControllers';
+import { addStudentOnClassControler, createClassController, getProfessorClassesControler, getSdudentClassesControler } from './controllers/ClassControlers';
+import { createProfessorController, createStudentController, getProfessorByEmailController, getProfessorsController, getStudentsController, searchByEmailController } from './controllers/UsersControllers';
 
 const app = express();
 mongoose.set('strictQuery', false);
@@ -17,41 +25,20 @@ app.use(
 );
 app.use(express.json());
 
-  
-app.post('/createForm', async (req: Request, res: Response) => {
-  try {
-    const { typeAvaliation, themeAvaliation, questions, initialAvaliation, finalAvaliation, time, points } = req.body;
-    console.log(req.body);
-    const form = new FormModel({
-      typeAvaliation,
-      themeAvaliation,
-      questions,
-      initialAvaliation,
-      finalAvaliation,
-      time,
-      points,
-    });
 
-    const createForm = await form.save();
-
-    res.status(201).json({ message: 'Form created successfully', createForm });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error creating form' });
-  }
-}); 
-
-app.get('/getForms', async (req: Request, res: Response) => {
-  try {
-    const form = await FormModel.find();
-    res.status(200).json({ message: 'Form found successfully', form });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error finding form' });
-  }
-});
-
-
+app.post('/createAvaliation', createAvaliationController)
+app.get('/getAvaliations', getAvaliationsController)
+app.post('/createClass', createClassController);
+app.post('/createProfessor', createProfessorController);
+app.get('/getProfessors', getProfessorsController);
+app.get('/getProfessorByEmail/:email', getProfessorByEmailController)
+app.post('/createStudent', createStudentController)
+app.get('/getStudents', getStudentsController)
+app.get('/searchByEmail', searchByEmailController)
+app.post('/addStudentOnClass', addStudentOnClassControler)
+app.get('/getProfessorClasses/:_id', getProfessorClassesControler)
+app.get('/getStudentClasses/:_id', getSdudentClassesControler)
+ 
 mongoose.connect(`${process.env.MONGO_URL}`).then(() => {
   console.log(`listening on port ${PORT}`);
   app.listen(PORT);

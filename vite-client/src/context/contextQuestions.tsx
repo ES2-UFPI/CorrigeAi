@@ -1,12 +1,11 @@
 import { createContext, useState } from "react";
 import { PropsQuestions } from "../components/GenerateQuestions";
 
-import { AlternativeProvider } from "./contextAlternatives";
-
 interface IContextQuestionsProps {
   questions: PropsQuestions[]  
   setQuestions: React.Dispatch<React.SetStateAction<PropsQuestions[]>>
   contQuestions: number
+  setContQuestions: React.Dispatch<React.SetStateAction<number>>
   handleNewQuestion: () => void
 }
 
@@ -17,13 +16,24 @@ interface Props {
 export const ContextQuestions = createContext({} as IContextQuestionsProps)
 
 export const ContextQuestionsProvider : React.FC<Props> = ({children}) => {
+  const usedIds: number[] = [];
+
+  function generateUniqueId(): number {
+    let newId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+    while (usedIds.includes(newId)) {
+      newId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER);
+    }
+    usedIds.push(newId);
+    return newId;
+  }
+
   const [contQuestions, setContQuestions] = useState(0)
   const [questions, setQuestions] = useState<PropsQuestions[]>([])
 
   function handleNewQuestion() {
     setContQuestions(contQuestions + 1); 
     setQuestions(current => [...current, {
-      id: contQuestions,
+      id: generateUniqueId(),
       numberQuestion: contQuestions + 1,
       typeQuestion: '',
       description: '',
@@ -35,12 +45,11 @@ export const ContextQuestionsProvider : React.FC<Props> = ({children}) => {
     <ContextQuestions.Provider value={{
       questions: questions,
       contQuestions: contQuestions,
+      setContQuestions: setContQuestions,
       setQuestions: setQuestions,
       handleNewQuestion: handleNewQuestion
     }}>
-      <AlternativeProvider>
-        {children}
-      </AlternativeProvider>
+      {children}
     </ContextQuestions.Provider>
   )
 }

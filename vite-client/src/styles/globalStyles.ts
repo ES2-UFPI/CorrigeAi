@@ -2,17 +2,16 @@ import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle `
   :root {
-    --primary: #000000;
-    --secondary: #15181C;
-    --search: #202327;
+    --primary: #C9D5FF;
+    --secondary: #272643;
+    --about: rgb(72,61,139,.30);
+    --menuSideBar: #F2CF0C;
     --white: #D9D9D9;
     --gray: #7A7A7A;
-    --outline: #2F3336;
-    --retwitte: #00C06B;
+    --greenHover: #76DC28;
     --twitter: #33A1F2;
-    --twitter-ligth-hover: #2C8ED6;
-    --twitter-dark-hover: #011017;
-    --favorite: #E8265E;
+    --redButton: #B8282A;
+    --redButtonHover: #8E1F21;
     font-size: 62.5%;
   }
 
@@ -29,10 +28,11 @@ export default createGlobalStyle `
     height: 100%;
     color: white;
     font-size: 1.6rem;
+    background-color: var(--secondary);
   }
 
-  html { 
-    background: var(--primary)
+  html {
+    height: 100vh;
   }
 
   *, button, input {
