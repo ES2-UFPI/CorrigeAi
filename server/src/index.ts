@@ -10,6 +10,10 @@ import { Professor, IProfessor } from './model/Professor';
 import { Student, IStudent } from './model/Student';
 import AvaliationResponseModel from './model/AvaliationResponse';
 
+import { createAvaliationController, getAvaliationsController } from './controllers/AvaliationControllers';
+import { addStudentOnClassControler, createClassController, getProfessorClassesControler, getSdudentClassesControler } from './controllers/ClassControlers';
+import { createProfessorController, createStudentController, getProfessorByEmailController, getProfessorsController, getStudentsController, searchByEmailController } from './controllers/UsersControllers';
+
 const app = express();
 mongoose.set('strictQuery', false);
 const PORT = 3000;
@@ -21,147 +25,19 @@ app.use(
 );
 app.use(express.json());
 
-           
-app.post('/createAvaliation', async (req: Request, res: Response) => {
-  try {
-    const { typeAvaliation, themeAvaliation, questions, initialAvaliation, finalAvaliation, time, points } = req.body;
-    console.log(req.body);
-    const NewAvaliation = new AvaliationModel({
-      typeAvaliation,
-      themeAvaliation,
-      questions,
-      initialAvaliation,
-      finalAvaliation,
-      time,
-      points,
-    });
 
-    const createAvaliation = await NewAvaliation.save();
-
-    res.status(201).json({ message: 'Form created successfully', createAvaliation });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error creating form' });
-  }
-}); 
-
-app.get('/getAvaliations', async (req: Request, res: Response) => {
-  try {
-    const Avaliations = await AvaliationModel.find();
-    res.status(200).json({ message: 'Avaliations found successfully', Avaliations });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error finding Avaliations' });
-  }
-});  
-
-app.post('/getResponseAvaliation/:id}', async (req: Request, res: Response) => {
-  try {
-    const { _id, questions } = req.body;
-    const form = new AvaliationResponseModel({
-      _id, 
-      questions
-    });
-
-    const createResponseAvaliation = await form.save();
-    res.status(201).json({ message: 'Form created successfully', createResponseAvaliation });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error finding form' });
-  }
-});
-
-app.post('/createClass', async (req: Request, res: Response) => {
-  try {
-    const { className, classSummary } = req.body;
-
-    const newClass: IClass = new Class({
-      className,
-      classSummary,
-    });
-
-    const savedClass: IClass = await newClass.save();
-
-    res.status(201).json({ message: 'Form created successfully', savedClass});
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Server error');
-  }
-});
-
-app.get('/getClasses', async (req: Request, res: Response) => {
-  try {
-    const classes: IClass[] = await Class.find({});
-    res.status(200).json({ classes });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Server error');
-  }
-});
-
-
-
-app.post('/createProfessor', async (req: Request, res: Response) => {
-  try {
-    const { name, password, email, user } = req.body;
-
-    const newProfessor: IProfessor = new Professor({
-      name,
-      password,
-      email,
-      user,
-    });
-
-    const savedProfessor: IProfessor = await newProfessor.save();
-
-    res.status(201).json({ message: 'Professor created successfully', savedProfessor});
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Server error');
-  }
-});
-
-app.post('/createStudent', async (req: Request, res: Response) => {
-  try {
-    const { name, password, email, user } = req.body;
-
-    const newStudent: IStudent = new Student({
-      name,
-      password,
-      email,
-      user,
-    });
-
-    const savedStudent: IStudent = await newStudent.save();
-
-    res.status(201).json({ message: 'Student created successfully', savedStudent});
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Server error');
-  }
-});
-
-app.get('/getProfessors', async (req: Request, res: Response) => {
-  try {
-    const Professors: IProfessor[] = await Professor.find({});
-    res.status(200).json({ Professors });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Server error');
-  }
-});
-
-
-app.get('/getStudents', async (req: Request, res: Response) => {
-  try {
-    const Students: IClass[] = await Student.find({});
-    res.status(200).json({ Students });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Server error');
-  }
-});
-
+app.post('/createAvaliation', createAvaliationController)
+app.get('/getAvaliations', getAvaliationsController)
+app.post('/createClass', createClassController);
+app.post('/createProfessor', createProfessorController);
+app.get('/getProfessors', getProfessorsController);
+app.get('/getProfessorByEmail/:email', getProfessorByEmailController)
+app.post('/createStudent', createStudentController)
+app.get('/getStudents', getStudentsController)
+app.get('/searchByEmail', searchByEmailController)
+app.post('/addStudentOnClass', addStudentOnClassControler)
+app.get('/getProfessorClasses/:_id', getProfessorClassesControler)
+app.get('/getStudentClasses/:_id', getSdudentClassesControler)
  
 mongoose.connect(`${process.env.MONGO_URL}`).then(() => {
   console.log(`listening on port ${PORT}`);

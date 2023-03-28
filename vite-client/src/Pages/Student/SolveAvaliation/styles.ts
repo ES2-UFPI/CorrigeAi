@@ -4,7 +4,7 @@ export const Avaliation = styled.div`
   width: 100%; 
   min-height: 100vh;
   padding: 1rem 1rem;
-  background: #c9d5ff;
+  background: var(--about);
 
   color: #1b1f2f;
 
@@ -12,7 +12,6 @@ export const Avaliation = styled.div`
     display: flex; 
     flex-direction: column;
     align-items: center;
-    
     > * {
       width: 100%;
     }
@@ -22,15 +21,17 @@ export const Avaliation = styled.div`
 export const Container = styled.div `
   width: 100%;
   h3 {
+    color: var(--primary);
     margin-top: 1.5rem;
     font-size: 2.2rem;
   }
 
   .aboutAvaliation {
+    border: 1px solid var(--secondary);
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(72,61,139,.30);
+    background-color: var(--primary);
     padding: 1rem;
     border-radius: 2rem;
   }
@@ -42,6 +43,7 @@ export const QuestionStyle = styled.div`
   padding: 2rem;
   color: #fff;
   border-radius: 20px;
+  border: 1px solid var(--primary);
   margin-top: 2rem;
 
   textarea {

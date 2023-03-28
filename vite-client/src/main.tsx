@@ -1,25 +1,42 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
 import GlobalStyles from "./styles/globalStyles";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
-import { Home } from "./Pages/Home";
-import { CreateTaskOrExam } from "./Pages/CreateAvaliation";
+import { Login } from "./Pages/Login";
+import { CreateTaskOrExam } from "./Pages/Teacher/CreateAvaliation";
 import { ViewAvaliations } from "./Pages/ViewAvaliations";
-import { SolveAvaliation } from "./Pages/SolveAvaliation";
-import { CreateClass } from "./Pages/CreateClass";
+import { SolveAvaliation } from "./Pages/Student/SolveAvaliation";
+import { CreateClass } from "./Pages/Teacher/CreateClass";
 import { ViewClasses } from "./Pages/ViewClasses";
-import { Homeclass } from "./Pages/HomeClass";
+import { HomeClass } from "./Pages/HomeClass";
+
+import { AuthContextProvider } from "./context/AuthProvider";
+import { Home } from "./Pages/Home";
+import { ViewPerfilUser } from "./Pages/ViewPerfilUser";
+import { RedirectLogin } from "./components/Redirect";
+import { Participants } from "./components/Participants";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <RedirectLogin />
+  }, 
+  {
+    path: "/login",
+    element: <Login />
+  }, 
+  {
+    path: "/home",
     element: <Home />
   }, 
   {
-    path: "/form-avaliation",
+    path: "/perfil",
+    element: <ViewPerfilUser />
+  }, 
+  {
+    path: "/create-avaliation",
     element: <CreateTaskOrExam />
   },
   {
@@ -28,26 +45,31 @@ const router = createBrowserRouter([
   },
   {
     path: "/solve-avaliation",
-    element: <SolveAvaliation/>
+    element: <SolveAvaliation />
   },
   {
     path: "/create-class",
-    element: <CreateClass/>
+    element: <CreateClass />
   },
   {
     path: "/view-classes",
-    element: <ViewClasses/>
+    element: <ViewClasses />
+  },
+  {
+    path: "/participants",
+    element: <Participants />
   },
   {
     path: "/home-class",
-    element: <Homeclass/>
+    element: <HomeClass />
   }
 ])
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    {/* <App /> */}
-    <RouterProvider router={router}/>
-    <GlobalStyles />
+    <AuthContextProvider>
+      <RouterProvider router={router}/>
+      <GlobalStyles />
+    </AuthContextProvider>
   </React.StrictMode>
 );

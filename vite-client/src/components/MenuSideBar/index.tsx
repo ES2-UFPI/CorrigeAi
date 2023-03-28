@@ -1,8 +1,11 @@
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
-import { CloseButton } from "../../assets/CloseButton";
-import { ButtonSideBar } from "../ButtonSideBar";
-import { AboutMenu, MenuSideBarContainer } from "./styles";
+import { CloseButton } from '../../assets/CloseButton'
+import { HomeButton } from '../../assets/HomeButton'
+import { AuthContext } from '../../context/AuthContext'
+import { ButtonSideBar } from '../ButtonSideBar'
+import { AboutMenu, DropdownMenu, MenuSideBarContainer } from './styles'
 
 interface IMenuSideBar {
   sideBar: boolean
@@ -11,12 +14,58 @@ interface IMenuSideBar {
   scale: string
 }
 
-export function MenuSideBar({sideBar, width, handleCloseBar, scale}: IMenuSideBar){
+export function MenuSideBar({
+  sideBar,
+  width,
+  handleCloseBar,
+  scale
+}: IMenuSideBar) {
+  const [classOption, setClassOption] = useState(false);
+  const [avaliationOption, setAvaliationOption] = useState(false);
+  const [teacherOption, setTeacherOption] = useState(false);
+
+  const { signOut, signed } = useContext(AuthContext)
+  const [user, setUser] = useState(getUserFromLocalStorage())
+
+  function getUserFromLocalStorage() {
+    const user = localStorage.getItem('user');
+    if (user) {
+      return JSON.parse(user);
+    }
+    return null;
+  }
+
+  useEffect(() => {
+    const updatedUser = getUserFromLocalStorage();
+    if (updatedUser !== user) {
+      setUser(updatedUser);
+    }
+  }, []);
+
+  useEffect(() => {
+  }, [classOption, avaliationOption, teacherOption])
+
+  const navigate = useNavigate()
+  
+  function handleClassOption() {
+    setClassOption(!classOption)
+  }
+
+  function handleAvaliationOption() {
+    setAvaliationOption(!avaliationOption)
+  }
+
+  function handleTeacherOption() {
+    setTeacherOption(!teacherOption)
+  }
+
+  function handleSignOut(){
+    signOut()
+  }
+
   return (
-    <MenuSideBarContainer
-      width={width}
-    >
-      <div className={`contentMenu ${sideBar ? 'visible' : ''}`} >
+    <MenuSideBarContainer width={width}>
+      <div className={`contentMenu ${sideBar ? 'visible' : ''}`}>
         <AboutMenu className={`about ${sideBar ? 'visible' : ''}`}>
           {sideBar && <h2>Menu: </h2>}
           <button
@@ -29,39 +78,102 @@ export function MenuSideBar({sideBar, width, handleCloseBar, scale}: IMenuSideBa
               height: '25px',
               transform: `${scale}`,
               transition: '1s'
-            }}>
+            }}
+          >
             <CloseButton />
           </button>
         </AboutMenu>
-       
+
         <div className="content-buttons">
-          <Link
-            to="/form-avaliation"
-          >
-            <ButtonSideBar>
-              Cadastrar prova ou tarefa
-            </ButtonSideBar>
-          </Link>
-          <Link
-            to="/view-avaliations"
-          >
-            <ButtonSideBar>
-              Ver provas e tarefas cadastradas
-            </ButtonSideBar>
-          </Link>
-          <Link
-            to="/create-class"
-          >
-            <ButtonSideBar>
-              Criar nova turma
-            </ButtonSideBar>
-          </Link>
-          <Link
-            to="/view-classes"
-          >
-            <ButtonSideBar>
-              Ver turmas cadastradas
-            </ButtonSideBar>
+          <div>
+            <Link to='/home'>
+              <ButtonSideBar isSelected={false} isHome={true}>
+                <HomeButton /> Home
+              </ButtonSideBar>
+            </Link>
+            {
+              user?.professor ? (
+                <Link to="#" onClick={handleTeacherOption}>
+                  <ButtonSideBar isSelected={teacherOption}>
+                    Professor
+                  </ButtonSideBar>
+                </Link>
+              ) : (
+                <Link to="#" onClick={handleTeacherOption}>
+                  <ButtonSideBar isSelected={teacherOption}>Aluno</ButtonSideBar>
+                </Link>
+              )
+            }
+            {teacherOption && (
+              <DropdownMenu>
+                <Link to="/perfil">
+                  <li>Ver perfil</li>
+                </Link>
+              </DropdownMenu>
+            )}
+            <Link to="#" onClick={handleClassOption}>
+              <ButtonSideBar isSelected={classOption}>
+                Turma
+              </ButtonSideBar>
+            </Link>
+            {classOption && (
+              <DropdownMenu>
+                <Link to="/view-classes">
+                  <li>Ver turmas</li>
+                </Link>
+                {
+                  user?.professor ? (
+                    <>
+                      <Link to="#">
+                        <li>Novo participante</li>
+                      </Link>
+                      <Link to="/create-class">
+                        <li>Criar turma</li>
+                      </Link>
+                    </>
+                  ) : (
+                    null
+                  )
+                }
+                <Link to="#">
+                  <li>Noticias</li>
+                </Link>
+                {
+                  user?.professor ? (
+                    <Link to="#">
+                      <li>Cadastrar Noticias</li>
+                    </Link>
+                  ) : (
+                    null
+                  )
+                }
+              </DropdownMenu>
+            )}
+            <Link to="#" onClick={handleAvaliationOption}>
+              <ButtonSideBar isSelected={avaliationOption}>
+                Avaliação
+              </ButtonSideBar>
+            </Link>
+            {avaliationOption && (
+              <DropdownMenu>
+                 {
+                  user?.professor ? (
+                    <Link to="/create-avaliation">
+                      <li>Cadastrar prova ou tarefa</li>
+                    </Link>
+                  ) : (
+                    null
+                  )
+                }
+                <Link to="/view-avaliations">
+                  <li>Ver provas e tarefas</li>
+                </Link>
+                </DropdownMenu>
+              )}
+          </div>
+
+          <Link to="/login" onClick={handleSignOut}>
+            <ButtonSideBar>Sair</ButtonSideBar>
           </Link>
         </div>
       </div>

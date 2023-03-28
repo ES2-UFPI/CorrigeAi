@@ -9,6 +9,10 @@ export const HomePage = styled.div`
   flex-direction: column;
   align-items: center;
   color: #fff;
+
+  h1 {
+    margin-bottom: 1rem;
+  }
 `
 
 export const link = styled.a`

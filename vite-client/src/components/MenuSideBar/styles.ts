@@ -11,14 +11,15 @@ export const MenuSideBarContainer = styled.div<Props> `
   border-radius: 0 .8rem .8rem 0;
   display: flex; 
   flex-direction: column;
-  max-width: 30rem;
+  max-width: 28rem;
   width: ${ props => props.width };
   padding: 1rem;
   
   transition: 1s;
   position: relative;
-  
+
   .contentMenu {
+    border-right: 1px solid black;
     position: fixed;
     background: var(--menuSideBar);
     padding: 1rem;
@@ -29,6 +30,22 @@ export const MenuSideBarContainer = styled.div<Props> `
     left: 0rem;
     width: 4rem;
 
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    ::-webkit-scrollbar {
+      width: .5rem;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--primary);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: var(--about);
+    }
+    
     transition: 1s;
 
     .content-buttons {
@@ -51,6 +68,20 @@ export const MenuSideBarContainer = styled.div<Props> `
     .content-buttons {
       opacity: 1;
       transition: 1s;
+
+      a {
+        text-decoration: none;
+      }
+    }
+
+    .content-buttons > a button {
+      background-color: var(--redButton) !important;
+      color: white;
+      width: 10rem;
+
+      &:hover {
+        background: var(--redButtonHover);
+      }
     }
   } 
 `
@@ -67,5 +98,30 @@ export const AboutMenu = styled.div `
 
   &.about.visible {
     width: 26rem;
+  }
+`
+
+export const DropdownMenu = styled.ul`
+  background-color: var(--about);
+  border-radius: .8rem;
+  list-style: none;
+  margin: 0;
+  padding: 1rem; 
+  
+  a {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
+    text-shadow: 1px 1px 2px black;
+    
+    &:hover {
+      color: var(--secondary);
+      text-shadow: 1px 1px 2px var(--primary);
+    }
+  }
+
+  li {
+    cursor: pointer;
   }
 `

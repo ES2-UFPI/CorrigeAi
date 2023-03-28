@@ -1,8 +1,8 @@
 import styled from "styled-components";
+import { IButtonSideBar } from ".";
 
-export const ButtonSideBarContainer = styled.button `
+export const ButtonSideBarContainer = styled.button<IButtonSideBar>`
   width: 100%;
-  background: var(--about);
   color: var(--secondary);
   
   padding: 1rem;
@@ -18,4 +18,5 @@ export const ButtonSideBarContainer = styled.button `
     color: var(--secondary);
     cursor: pointer;
   }
+  
 `

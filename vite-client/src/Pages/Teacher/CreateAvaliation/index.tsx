@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
 //Components da aplicação
-import { FormAvaliation } from '../../components/FormAvaliation'
-import { Layout } from '../../components/Layout'
-import { ContextQuestionsProvider } from '../../context/contextQuestions'
-import { Wrapper } from '../../styles/Layout'
+import { FormAvaliation } from '../../../components/FormAvaliation'
+import { Layout } from '../../../components/Layout'
+import { ContextQuestionsProvider } from '../../../context/contextQuestions'
+import { Wrapper } from '../../../styles/Layout'
 
 //Components de estilização
 import { CreateTaskOrExamStyled } from './styles'
@@ -25,7 +25,7 @@ export function CreateTaskOrExam() {
           <Wrapper>
             <h1>Criar avaliação {
               selectValue == 'none' ?
-                '' : selectValue === 'exam' ? 'Prova' : 'Tarefa'}
+                '' : selectValue === 'exam' ? '- Prova' : '- Tarefa'}
             </h1>
             <label htmlFor="avaliation">Escolha a avaliação: </label>
             <select
