@@ -48,6 +48,22 @@ export async function getProfessorClassesControler(req: Request, res: Response) 
   }
 }
 
+export async function getSdudentClassesControler(req: Request, res: Response) {
+  
+  const { _id } = req.params;
+
+  try {
+    const classes: IClass[] = await Class.find({ students: _id })
+      .populate({path: 'professor', select: '-password'})
+      .populate({path: 'students', select: '-password'});
+      console.log(classes);
+    res.json(classes);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+}
+
 export async function addStudentOnClassControler(req: Request, res: Response) {
   
   try {
