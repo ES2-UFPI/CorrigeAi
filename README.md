@@ -8,3 +8,6 @@ Nosso projeto visa auxiliar professsores e alunos que desejam obter através de 
 * React
 * MongoDb
 * Mongoose
+* 
+## Apresentação do CorrigeAi
+* [Video de apresentação](https://drive.google.com/file/d/1Re5peR9Zs-rJWiHbkQoV6C6nS4Tejlcq/view)
